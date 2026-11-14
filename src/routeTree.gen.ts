@@ -11,25 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MoPhongRouteImport } from './routes/mo-phong'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-1-lam-quen-voi-mon-vat-ly_.1-ly-thuyet-lam-quen-voi-mon-vat-ly'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-1-lam-quen-voi-mon-vat-ly_.2-vd1-vat-ly-trong-cac-linh-vuc'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-1-lam-quen-voi-mon-vat-ly_.2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-1-lam-quen-voi-mon-vat-ly_.3-bai-tap-lam-quen-voi-mon-vat-ly'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-2-an-toan-trong-thuc-hanh-vat-ly_.1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-2-an-toan-trong-thuc-hanh-vat-ly_.3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.1-ly-thuyet-sai-so-trong-phep-do'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd1-nguyen-nhan-gay-sai-so'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd2-sai-so-dung-cu-cua-hai-thuoc'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd3-sai-so-khi-can-tui-trai-cay'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd4-do-khoi-luong-tui-trai-cay'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd6-do-chu-ki-con-lac-don'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd7-ai-do-chinh-xac-hon'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.2-vd8-do-thoi-gian-roi-tu-do'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.3-bai-tap-sai-so-trong-phep-do'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu'
-import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu'
+import { Route as MoPhongSplatRouteImport } from './routes/mo-phong_.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,323 +23,40 @@ const MoPhongRoute = MoPhongRouteImport.update({
   path: '/mo-phong',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/1-ly-thuyet-lam-quen-voi-mon-vat-ly',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd1-vat-ly-trong-cac-linh-vuc',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd1-vat-ly-trong-cac-linh-vuc',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/3-bai-tap-lam-quen-voi-mon-vat-ly',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd1-nguyen-nhan-gay-sai-so',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd1-nguyen-nhan-gay-sai-so',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd2-sai-so-dung-cu-cua-hai-thuoc',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd2-sai-so-dung-cu-cua-hai-thuoc',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd3-sai-so-khi-can-tui-trai-cay',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd3-sai-so-khi-can-tui-trai-cay',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd4-do-khoi-luong-tui-trai-cay',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd4-do-khoi-luong-tui-trai-cay',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd6-do-chu-ki-con-lac-don',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd6-do-chu-ki-con-lac-don',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd7-ai-do-chinh-xac-hon',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd7-ai-do-chinh-xac-hon',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd8-do-thoi-gian-roi-tu-do',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd8-do-thoi-gian-roi-tu-do',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/3-bai-tap-sai-so-trong-phep-do',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/3-bai-tap-sai-so-trong-phep-do',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute =
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRouteImport.update(
-    {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu',
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
+const MoPhongSplatRoute = MoPhongSplatRouteImport.update({
+  id: '/mo-phong_/$',
+  path: '/mo-phong/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mo-phong': typeof MoPhongRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd1-vat-ly-trong-cac-linh-vuc': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd1-nguyen-nhan-gay-sai-so': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd2-sai-so-dung-cu-cua-hai-thuoc': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd3-sai-so-khi-can-tui-trai-cay': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd4-do-khoi-luong-tui-trai-cay': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd6-do-chu-ki-con-lac-don': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd7-ai-do-chinh-xac-hon': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd8-do-thoi-gian-roi-tu-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/3-bai-tap-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute
+  '/mo-phong/$': typeof MoPhongSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mo-phong': typeof MoPhongRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd1-vat-ly-trong-cac-linh-vuc': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd1-nguyen-nhan-gay-sai-so': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd2-sai-so-dung-cu-cua-hai-thuoc': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd3-sai-so-khi-can-tui-trai-cay': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd4-do-khoi-luong-tui-trai-cay': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd6-do-chu-ki-con-lac-don': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd7-ai-do-chinh-xac-hon': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd8-do-thoi-gian-roi-tu-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/3-bai-tap-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute
-  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute
+  '/mo-phong/$': typeof MoPhongSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/mo-phong': typeof MoPhongRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/1-ly-thuyet-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd1-vat-ly-trong-cac-linh-vuc': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/3-bai-tap-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd1-nguyen-nhan-gay-sai-so': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd2-sai-so-dung-cu-cua-hai-thuoc': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd3-sai-so-khi-can-tui-trai-cay': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd4-do-khoi-luong-tui-trai-cay': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd6-do-chu-ki-con-lac-don': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd7-ai-do-chinh-xac-hon': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd8-do-thoi-gian-roi-tu-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/3-bai-tap-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute
-  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute
+  '/mo-phong_/$': typeof MoPhongSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/mo-phong'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd1-vat-ly-trong-cac-linh-vuc'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd1-nguyen-nhan-gay-sai-so'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd2-sai-so-dung-cu-cua-hai-thuoc'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd3-sai-so-khi-can-tui-trai-cay'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd4-do-khoi-luong-tui-trai-cay'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd6-do-chu-ki-con-lac-don'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd7-ai-do-chinh-xac-hon'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd8-do-thoi-gian-roi-tu-do'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/3-bai-tap-sai-so-trong-phep-do'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu'
+  fullPaths: '/' | '/mo-phong' | '/mo-phong/$'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/mo-phong'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd1-vat-ly-trong-cac-linh-vuc'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd1-nguyen-nhan-gay-sai-so'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd2-sai-so-dung-cu-cua-hai-thuoc'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd3-sai-so-khi-can-tui-trai-cay'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd4-do-khoi-luong-tui-trai-cay'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd6-do-chu-ki-con-lac-don'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd7-ai-do-chinh-xac-hon'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd8-do-thoi-gian-roi-tu-do'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/3-bai-tap-sai-so-trong-phep-do'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu'
-    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu'
-  id:
-    | '__root__'
-    | '/'
-    | '/mo-phong'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/1-ly-thuyet-lam-quen-voi-mon-vat-ly'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd1-vat-ly-trong-cac-linh-vuc'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/3-bai-tap-lam-quen-voi-mon-vat-ly'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd1-nguyen-nhan-gay-sai-so'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd2-sai-so-dung-cu-cua-hai-thuoc'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd3-sai-so-khi-can-tui-trai-cay'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd4-do-khoi-luong-tui-trai-cay'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd6-do-chu-ki-con-lac-don'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd7-ai-do-chinh-xac-hon'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd8-do-thoi-gian-roi-tu-do'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/3-bai-tap-sai-so-trong-phep-do'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu'
-    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu'
+  to: '/' | '/mo-phong' | '/mo-phong/$'
+  id: '__root__' | '/' | '/mo-phong' | '/mo-phong_/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MoPhongRoute: typeof MoPhongRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute
+  MoPhongSplatRoute: typeof MoPhongSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -376,137 +75,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoPhongRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/1-ly-thuyet-lam-quen-voi-mon-vat-ly': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/1-ly-thuyet-lam-quen-voi-mon-vat-ly'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd1-vat-ly-trong-cac-linh-vuc': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd1-vat-ly-trong-cac-linh-vuc'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd1-vat-ly-trong-cac-linh-vuc'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd1-vat-ly-trong-cac-linh-vuc'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/3-bai-tap-lam-quen-voi-mon-vat-ly': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/3-bai-tap-lam-quen-voi-mon-vat-ly'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd1-nguyen-nhan-gay-sai-so': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd1-nguyen-nhan-gay-sai-so'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd1-nguyen-nhan-gay-sai-so'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd1-nguyen-nhan-gay-sai-so'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd2-sai-so-dung-cu-cua-hai-thuoc': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd2-sai-so-dung-cu-cua-hai-thuoc'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd2-sai-so-dung-cu-cua-hai-thuoc'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd2-sai-so-dung-cu-cua-hai-thuoc'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd3-sai-so-khi-can-tui-trai-cay': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd3-sai-so-khi-can-tui-trai-cay'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd3-sai-so-khi-can-tui-trai-cay'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd3-sai-so-khi-can-tui-trai-cay'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd4-do-khoi-luong-tui-trai-cay': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd4-do-khoi-luong-tui-trai-cay'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd4-do-khoi-luong-tui-trai-cay'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd4-do-khoi-luong-tui-trai-cay'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd5-do-duong-kinh-vien-bi-bang-thuoc-kep'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd6-do-chu-ki-con-lac-don': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd6-do-chu-ki-con-lac-don'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd6-do-chu-ki-con-lac-don'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd6-do-chu-ki-con-lac-don'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd7-ai-do-chinh-xac-hon': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd7-ai-do-chinh-xac-hon'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd7-ai-do-chinh-xac-hon'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd7-ai-do-chinh-xac-hon'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd8-do-thoi-gian-roi-tu-do': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/2-vd8-do-thoi-gian-roi-tu-do'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd8-do-thoi-gian-roi-tu-do'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/2-vd8-do-thoi-gian-roi-tu-do'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/3-bai-tap-sai-so-trong-phep-do': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/3-bai-tap-sai-so-trong-phep-do'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/3-bai-tap-sai-so-trong-phep-do'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/3-bai-tap-sai-so-trong-phep-do'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-2-tinh-sai-so-tu-bang-so-lieu'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-4-tinh-sai-so-tu-bang-so-lieu'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu': {
-      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu'
-      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu'
-      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/4-p3-cau-6-tinh-sai-so-tu-bang-so-lieu'
-      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRouteImport
+    '/mo-phong_/$': {
+      id: '/mo-phong_/$'
+      path: '/mo-phong/$'
+      fullPath: '/mo-phong/$'
+      preLoaderRoute: typeof MoPhongSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -515,44 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MoPhongRoute: MoPhongRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy1LyThuyetLamQuenVoiMonVatLyRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd1VatLyTrongCacLinhVucRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd1NguyenNhanGaySaiSoRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd2SaiSoDungCuCuaHaiThuocRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd3SaiSoKhiCanTuiTraiCayRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd4DoKhoiLuongTuiTraiCayRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd5DoDuongKinhVienBiBangThuocKepRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd6DoChuKiConLacDonRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd7AiDoChinhXacHonRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo2Vd8DoThoiGianRoiTuDoRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo3BaiTapSaiSoTrongPhepDoRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau2TinhSaiSoTuBangSoLieuRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau4TinhSaiSoTuBangSoLieuRoute,
-  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute:
-    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo4P3Cau6TinhSaiSoTuBangSoLieuRoute,
+  MoPhongSplatRoute: MoPhongSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
