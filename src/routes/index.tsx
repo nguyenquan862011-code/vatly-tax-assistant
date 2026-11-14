@@ -732,6 +732,8 @@ function ImportedSectionNgHCThu() {
   const draggingSource = useRef<"first" | "second" | null>(null);
   const sourceDistance = Math.hypot(sources.second.x - sources.first.x, sources.second.y - sources.first.y);
   const maximaCount = calculateInterferenceMaxima(sourceDistance, wavelength);
+  const formattedWavelength = wavelength.toFixed(1).replace(".", ",");
+  const formattedDistance = sourceDistance.toFixed(1).replace(".", ",");
   return (
     <section className={"relative overflow-hidden \x62order-b \x62order-lab-line"} aria-labelledby="hero-title">
       <div className="lab-grid absolute inset-0 [mask-image:radial-gradient(80%_70%_at_50%_40%,rgb(0,0,0)_40%,rgba(0,0,0,0)_100%)]" aria-hidden="true" />
