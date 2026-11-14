@@ -11,4 +11,12 @@ export const APP_CONFIG = {
   googleDriveEmbedUrl:
     "https://drive.google.com/embeddedfolderview?id=1-80QRozdGMChyMQTfzu7IJoj5jSosztG#grid",
   totalLessons: 777,
+  backgroundAudio: {
+    src: "/audio/background-music.mp3",
+    trackName: "The Moment",
+    defaultVolume: 0.25,
+    storageKeyEnabled: "tamgiang_audio_enabled",
+    storageKeyVolume: "tamgiang_audio_volume",
+    storageKeyTheme: "tamgiang_theme",
+  },
 };

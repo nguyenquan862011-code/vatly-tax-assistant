@@ -13,9 +13,9 @@ export function Logo({
 }: LogoProps) {
   const sizeMap = {
     sm: { icon: 30, text: "text-base", sub: "text-[9px]" },
-    md: { icon: 38, text: "text-lg", sub: "text-[10px]" },
-    lg: { icon: 50, text: "text-2xl", sub: "text-xs" },
-    xl: { icon: 64, text: "text-3xl", sub: "text-sm" },
+    md: { icon: 36, text: "text-lg", sub: "text-[10px]" },
+    lg: { icon: 48, text: "text-2xl", sub: "text-xs" },
+    xl: { icon: 60, text: "text-3xl", sub: "text-sm" },
   };
 
   const currentSize = sizeMap[size];
@@ -25,7 +25,7 @@ export function Logo({
       {/* Official THPT Tam Giang Emblem Badge */}
       <div className="relative shrink-0 flex items-center justify-center">
         <div
-          className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#36D9E8]/40 to-[#48D597]/40 blur-[5px] -z-10"
+          className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#16845A]/40 to-[#C8ED78]/30 blur-[4px] -z-10"
           aria-hidden="true"
         />
         <img
@@ -34,7 +34,7 @@ export function Logo({
           width={currentSize.icon}
           height={currentSize.icon}
           style={{ width: `${currentSize.icon}px`, height: `${currentSize.icon}px` }}
-          className="rounded-full object-contain ring-2 ring-[#36D9E8]/50 shadow-[0_0_12px_rgba(54,217,232,0.35)] transition-transform duration-300 hover:scale-105 bg-white"
+          className="rounded-full object-contain ring-1.5 ring-[#38A875]/60 shadow-[0_0_10px_rgba(56,168,117,0.3)] transition-transform duration-300 hover:scale-105 bg-white"
           loading="eager"
         />
       </div>
@@ -42,18 +42,18 @@ export function Logo({
       {/* Brand Wordmark */}
       {variant !== "icon" && (
         <div className="flex flex-col leading-none">
-          <div className={`font-semibold tracking-tight ${currentSize.text} text-[#F4F8FC]`}>
+          <div className={`font-semibold tracking-tight ${currentSize.text} text-inherit`}>
             <span>TamGiang</span>
-            <span className="bg-gradient-to-r from-[#48D597] to-[#36D9E8] bg-clip-text text-transparent font-bold">
+            <span className="text-[#38A875] dark:text-[#72CF91] font-bold ml-0.5">
               Physics
             </span>
           </div>
           {showTagline ? (
-            <span className={`font-mono tracking-wider text-[#36D9E8]/90 uppercase mt-1 ${currentSize.sub}`}>
+            <span className={`font-mono tracking-wider text-[#63B77A] dark:text-[#72CF91] uppercase mt-1 ${currentSize.sub}`}>
               THPT Tam Giang · Digital Science Lab
             </span>
           ) : (
-            <span className={`text-[#F4F8FC]/60 text-[10px] mt-0.5 font-medium tracking-tight`}>
+            <span className={`text-inherit opacity-65 text-[10px] mt-0.5 font-medium tracking-tight`}>
               Trường THPT Tam Giang
             </span>
           )}

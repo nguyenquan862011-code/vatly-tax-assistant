@@ -5,7 +5,7 @@ import capturedCSS from "../styles/pages/mo-phong.css?raw";
 
 export const Route = createFileRoute("/mo-phong")({
   head: () => ({ meta: [{ title: "Mô phỏng Vật Lý | TamGiangPhysics" }] }),
-  staticData: { importedDocument: { html: { "className": "light", "lang": "vi-VN", "style": { colorScheme: "light" } as import("react").CSSProperties }, body: { "className": "geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable \x66lex \x6din-h-screen \x77-full \x66lex-col \x61ntialiased", "data-site-import-popup-incomplete": "limit" } } },
+  staticData: { importedDocument: { html: { "lang": "vi-VN", "style": { colorScheme: "light" } as import("react").CSSProperties }, body: { "className": "geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable \x66lex \x6din-h-screen \x77-full \x66lex-col \x61ntialiased", "data-site-import-popup-incomplete": "limit" } } },
   component: Index,
 });
 

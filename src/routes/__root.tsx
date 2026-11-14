@@ -1,4 +1,4 @@
-import { useMatches as useImportedMatches } from "@tanstack/react-router";
+import { useMatches as useImportedMatches, useRouterState } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -13,22 +13,25 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { audioManager } from "../lib/audio-manager";
+import { AutoplayPromptBanner } from "../components/audio-controller";
+import { APP_CONFIG } from "../lib/config";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Trang không tồn tại</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          Đường dẫn bạn yêu cầu không tồn tại hoặc đã được di chuyển.
         </p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90"
           >
-            Go home
+            Về trang chủ
           </Link>
         </div>
       </div>
@@ -47,10 +50,10 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Không thể tải trang
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Đã xảy ra lỗi trong quá trình xử lý. Bạn có thể tải lại trang hoặc quay về trang chủ.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -58,15 +61,15 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90"
           >
-            Try again
+            Thử lại
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
           >
-            Go home
+            Về trang chủ
           </a>
         </div>
       </div>
@@ -76,20 +79,24 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    // Replace these placeholders with the app's name and description when first building the app.
-    // Each content route, / included, must still set its own head(). Never add og:image or
-    // twitter:image here: every page without its own would inherit the root's preview image.
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại" },
-      { name: "description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số." },
+      {
+        name: "description",
+        content:
+          "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số.",
+      },
       { name: "author", content: "Trần Đình Nguyên Quân" },
       { property: "og:title", content: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại" },
-      { property: "og:description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số." },
+      {
+        property: "og:description",
+        content:
+          "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -117,14 +124,33 @@ declare module "@tanstack/react-router" {
 }
 
 function RootShell({ children }: { children: ReactNode }) {
-  const importedDocument = useImportedMatches({ select: matches => matches.at(-1)?.staticData.importedDocument });
+  const importedDocument = useImportedMatches({
+    select: (matches) => matches.at(-1)?.staticData.importedDocument,
+  });
+
   return (
     <html lang="vi" {...importedDocument?.html}>
       <head>
-        <style href="site-import-inline" precedence="imported-inline">{"@layer imported-inline;"}</style>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var theme = localStorage.getItem('tamgiang_theme');
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else if (theme === 'light') {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+        <style href="site-import-inline" precedence="imported-inline">
+          {"@layer imported-inline;"}
+        </style>
         <HeadContent />
       </head>
-      <body {...importedDocument?.body}>
+      <body {...importedDocument?.body} className="min-h-screen bg-background text-foreground antialiased selection:bg-[#16845A]/20 selection:text-[#075C40] dark:selection:bg-[#38A875]/30 dark:selection:text-[#72CF91]">
         {children}
         <Scripts />
       </body>
@@ -134,11 +160,30 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  // Intelligent Background Audio Synchronization with route changes
+  useEffect(() => {
+    audioManager.onRouteChanged(pathname);
+  }, [pathname]);
+
+  // Attempt gentle autoplay when visiting homepage initially (if not disabled by user)
+  useEffect(() => {
+    if (pathname === "/" && typeof window !== "undefined") {
+      try {
+        const isExplicitlyDisabled =
+          localStorage.getItem(APP_CONFIG.backgroundAudio.storageKeyEnabled) === "false";
+        if (!isExplicitlyDisabled) {
+          audioManager.play().catch(() => {});
+        }
+      } catch {}
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <AutoplayPromptBanner />
     </QueryClientProvider>
   );
 }

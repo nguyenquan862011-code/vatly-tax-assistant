@@ -13,7 +13,7 @@ const SPECTRUM_COLORS: SpectrumColor[] = [
   { name: "Cam", color: "#FF8822", glow: "rgba(255, 136, 34, 0.6)", n: 1.516 },
   { name: "Vàng", color: "#FFDD22", glow: "rgba(255, 221, 34, 0.6)", n: 1.519 },
   { name: "Lục", color: "#33DD66", glow: "rgba(51, 221, 102, 0.6)", n: 1.524 },
-  { name: "Lam", color: "#36D9E8", glow: "rgba(54, 217, 232, 0.6)", n: 1.529 },
+  { name: "Lam", color: "#38A875", glow: "rgba(56, 168, 117, 0.6)", n: 1.529 },
   { name: "Chàm", color: "#3366FF", glow: "rgba(51, 102, 255, 0.6)", n: 1.535 },
   { name: "Tím", color: "#AA33FF", glow: "rgba(170, 51, 255, 0.6)", n: 1.543 },
 ];
@@ -66,13 +66,7 @@ export function PrismDispersionExperiment() {
     };
   };
 
-  const redPhysics = calculatePrismPhysics(1.512, angleDeg);
-  const violetPhysics = calculatePrismPhysics(1.543, angleDeg);
-  const dispersionAngle =
-    violetPhysics && redPhysics
-      ? Math.abs(violetPhysics.deviationDeg - redPhysics.deviationDeg).toFixed(2)
-      : "1.85";
-
+  // Main Canvas Rendering Loop
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -85,7 +79,7 @@ export function PrismDispersionExperiment() {
       if (!running) return;
       timeRef.current += 0.02;
 
-      // Handle HiDPI
+      // Handle High DPI canvas
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       const width = rect.width;
@@ -100,12 +94,12 @@ export function PrismDispersionExperiment() {
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Background Grid & Scientific Ambiance
-      ctx.fillStyle = "#050B18";
+      // 1. Dark Optical Chamber Background (constant physics environment)
+      ctx.fillStyle = "#070E0B";
       ctx.fillRect(0, 0, width, height);
 
-      // Subtle coordinate grid
-      ctx.strokeStyle = "rgba(54, 217, 232, 0.04)";
+      // Subtle laboratory optical grid
+      ctx.strokeStyle = "rgba(56, 168, 117, 0.05)";
       ctx.lineWidth = 1;
       const gridSize = 24;
       for (let x = 0; x < width; x += gridSize) {
@@ -121,31 +115,26 @@ export function PrismDispersionExperiment() {
         ctx.stroke();
       }
 
-      // 2. Prism Geometry (Centered Equilateral Triangle)
-      const prismSide = Math.min(width, height) * 0.46;
-      const prismH = (prismSide * Math.sqrt(3)) / 2;
-      const cx = width * 0.44;
+      // 2. Prism Geometry (Centered in the viewport)
+      const cx = width * 0.48;
       const cy = height * 0.52;
+      const prismSide = Math.min(width * 0.38, height * 0.65, 180);
+      const hPrism = (prismSide * Math.sqrt(3)) / 2;
 
-      const pTop = { x: cx, y: cy - (2 / 3) * prismH };
-      const pLeft = { x: cx - prismSide / 2, y: cy + (1 / 3) * prismH };
-      const pRight = { x: cx + prismSide / 2, y: cy + (1 / 3) * prismH };
+      // Vertices of the equilateral triangle
+      const pTop = { x: cx, y: cy - hPrism * 0.62 };
+      const pLeft = { x: cx - prismSide / 2, y: cy + hPrism * 0.38 };
+      const pRight = { x: cx + prismSide / 2, y: cy + hPrism * 0.38 };
 
-      // Normal vectors
-      // Face 1 (pLeft to pTop): Vector (pTop.x - pLeft.x, pTop.y - pLeft.y)
-      // Normal 1 points outward (up-left)
-      const f1Vec = { x: pTop.x - pLeft.x, y: pTop.y - pLeft.y };
+      // Normal vector of Face 1 (pTop to pLeft)
+      const f1Vec = { x: pLeft.x - pTop.x, y: pLeft.y - pTop.y };
       const f1Len = Math.hypot(f1Vec.x, f1Vec.y);
-      const f1Unit = { x: f1Vec.x / f1Len, y: f1Vec.y / f1Len };
-      // Outward normal to face 1: rotate f1Unit by -90 deg
-      const n1 = { x: -f1Unit.y, y: f1Unit.x };
+      const n1 = { x: -f1Vec.y / f1Len, y: f1Vec.x / f1Len }; // normal pointing outward/left
 
-      // Face 2 (pTop to pRight):
+      // Normal vector of Face 2 (pTop to pRight)
       const f2Vec = { x: pRight.x - pTop.x, y: pRight.y - pTop.y };
       const f2Len = Math.hypot(f2Vec.x, f2Vec.y);
-      const f2Unit = { x: f2Vec.x / f2Len, y: f2Vec.y / f2Len };
-      // Outward normal to face 2
-      const n2 = { x: -f2Unit.y, y: f2Unit.x };
+      const n2 = { x: f2Vec.y / f2Len, y: -f2Vec.x / f2Len }; // normal pointing outward/right
 
       // Incident point on Face 1: around 55% from pTop down to pLeft
       const incidentPoint = {
@@ -155,9 +144,9 @@ export function PrismDispersionExperiment() {
 
       // Draw Glass Prism Background & Glow
       const prismGrad = ctx.createLinearGradient(pTop.x, pTop.y, pRight.x, pRight.y);
-      prismGrad.addColorStop(0, "rgba(54, 217, 232, 0.12)");
-      prismGrad.addColorStop(0.5, "rgba(72, 213, 151, 0.08)");
-      prismGrad.addColorStop(1, "rgba(9, 20, 38, 0.4)");
+      prismGrad.addColorStop(0, "rgba(56, 168, 117, 0.15)");
+      prismGrad.addColorStop(0.5, "rgba(200, 237, 120, 0.08)");
+      prismGrad.addColorStop(1, "rgba(11, 21, 17, 0.4)");
 
       ctx.save();
       ctx.beginPath();
@@ -169,10 +158,10 @@ export function PrismDispersionExperiment() {
       ctx.fill();
 
       // Prism glowing edge
-      ctx.strokeStyle = "rgba(54, 217, 232, 0.6)";
+      ctx.strokeStyle = "rgba(56, 168, 117, 0.6)";
       ctx.lineWidth = 1.5;
-      ctx.shadowColor = "#36D9E8";
-      ctx.shadowBlur = 10;
+      ctx.shadowColor = "#38A875";
+      ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.restore();
 
@@ -180,7 +169,7 @@ export function PrismDispersionExperiment() {
       if (showLabels) {
         ctx.save();
         ctx.setLineDash([4, 4]);
-        ctx.strokeStyle = "rgba(244, 248, 252, 0.25)";
+        ctx.strokeStyle = "rgba(237, 245, 237, 0.25)";
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(incidentPoint.x - n1.x * 45, incidentPoint.y - n1.y * 45);
@@ -191,12 +180,9 @@ export function PrismDispersionExperiment() {
 
       if (isBeamOn) {
         // 3. Incident White Beam
-        // Angle of incidence i1 relative to inward normal
         const i1Rad = (angleDeg * Math.PI) / 180;
-        // Inward normal is -n1
-        // Rotate inward normal by -i1Rad (clockwise/counter-clockwise depending on face tilt)
-        const face1Angle = Math.atan2(f1Vec.y, f1Vec.x); // face direction
-        const normal1Angle = face1Angle - Math.PI / 2; // outward normal angle
+        const face1Angle = Math.atan2(f1Vec.y, f1Vec.x);
+        const normal1Angle = face1Angle - Math.PI / 2;
         const incidentAngle = normal1Angle + Math.PI - i1Rad;
 
         const beamLen = width * 0.38;
@@ -205,10 +191,10 @@ export function PrismDispersionExperiment() {
           y: incidentPoint.y - Math.sin(incidentAngle) * beamLen,
         };
 
-        // Draw incoming intense white/cyan beam with glow
+        // Draw incoming intense white/green beam with glow
         ctx.save();
-        ctx.shadowColor = "#36D9E8";
-        ctx.shadowBlur = 12;
+        ctx.shadowColor = "#C8ED78";
+        ctx.shadowBlur = 10;
         ctx.strokeStyle = "#FFFFFF";
         ctx.lineWidth = 3.5;
         ctx.beginPath();
@@ -216,127 +202,88 @@ export function PrismDispersionExperiment() {
         ctx.lineTo(incidentPoint.x, incidentPoint.y);
         ctx.stroke();
 
-        // Inner core of beam
-        ctx.strokeStyle = "#36D9E8";
+        ctx.strokeStyle = "#C8ED78";
         ctx.lineWidth = 1.5;
         ctx.stroke();
-
-        // Animated photon particles along incident ray
-        const pulseOffset = (timeRef.current * 40) % 30;
-        for (let d = pulseOffset; d < beamLen; d += 30) {
-          const px = sourcePoint.x + Math.cos(incidentAngle) * d;
-          const py = sourcePoint.y + Math.sin(incidentAngle) * d;
-          ctx.fillStyle = "#36D9E8";
-          ctx.beginPath();
-          ctx.arc(px, py, 2, 0, Math.PI * 2);
-          ctx.fill();
-        }
         ctx.restore();
 
-        // 4. Refraction Inside Prism and Exit Dispersion
-        SPECTRUM_COLORS.forEach((colorItem, idx) => {
-          const physics = calculatePrismPhysics(colorItem.n, angleDeg);
-          if (!physics) return;
+        // 4. Refraction inside prism & Emergent Spectrum
+        SPECTRUM_COLORS.forEach((item, index) => {
+          const phys = calculatePrismPhysics(item.n, angleDeg);
+          if (!phys) return;
 
-          // Inside prism ray angle
-          // r1 is angle with normal. Ray vector angle inside:
-          const rayInsideAngle = normal1Angle + Math.PI - physics.r1;
+          const r1Rad = phys.r1;
+          const refractedAngle = normal1Angle + r1Rad;
 
-          // Find intersection with Face 2 (line pTop to pRight)
-          // Line 1: incidentPoint + t * dir
-          // Line 2: pTop + s * f2Unit
-          const dx = Math.cos(rayInsideAngle);
-          const dy = Math.sin(rayInsideAngle);
-
-          // 2D line intersection between ray and face 2
-          const x1 = incidentPoint.x;
-          const y1 = incidentPoint.y;
-          const x2 = incidentPoint.x + dx * 300;
-          const y2 = incidentPoint.y + dy * 300;
-          const x3 = pTop.x;
-          const y3 = pTop.y;
-          const x4 = pRight.x;
-          const y4 = pRight.y;
-
-          const denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-          if (Math.abs(denom) < 0.001) return;
-
-          const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denom;
+          // Ray path inside prism to Face 2
+          const rayLenInside = prismSide * 0.65;
           const exitPoint = {
-            x: x1 + t * (x2 - x1),
-            y: y1 + t * (y2 - y1),
+            x: incidentPoint.x + Math.cos(refractedAngle) * rayLenInside,
+            y: incidentPoint.y + Math.sin(refractedAngle) * rayLenInside,
           };
 
           // Draw ray inside prism
           ctx.save();
-          ctx.strokeStyle = colorItem.color;
-          ctx.lineWidth = 1.8;
-          ctx.shadowColor = colorItem.color;
-          ctx.shadowBlur = 6;
+          ctx.strokeStyle = item.color;
+          ctx.lineWidth = 1.5;
+          ctx.globalAlpha = 0.85;
           ctx.beginPath();
           ctx.moveTo(incidentPoint.x, incidentPoint.y);
           ctx.lineTo(exitPoint.x, exitPoint.y);
           ctx.stroke();
           ctx.restore();
 
-          // Exit refraction angle at Face 2
+          // Emergent ray from Face 2
           const face2Angle = Math.atan2(f2Vec.y, f2Vec.x);
-          const normal2Angle = face2Angle - Math.PI / 2; // outward normal of face 2
-          // Exit ray bends away from normal by i2
-          const exitRayAngle = normal2Angle + physics.i2;
+          const normal2Angle = face2Angle + Math.PI / 2;
+          const i2Rad = phys.i2;
+          const emergentAngle = normal2Angle - i2Rad;
 
-          const exitLen = width * 0.42;
-          const endPoint = {
-            x: exitPoint.x + Math.cos(exitRayAngle) * exitLen,
-            y: exitPoint.y + Math.sin(exitRayAngle) * exitLen,
+          const emergentLen = width * 0.45;
+          const targetPoint = {
+            x: exitPoint.x + Math.cos(emergentAngle) * emergentLen,
+            y: exitPoint.y + Math.sin(emergentAngle) * emergentLen,
           };
 
-          // Draw dispersing spectrum ray
+          // Draw emergent spectral fan ray with optical glow
           ctx.save();
-          ctx.strokeStyle = colorItem.color;
-          ctx.lineWidth = 2.2;
-          ctx.shadowColor = colorItem.color;
+          ctx.shadowColor = item.color;
           ctx.shadowBlur = 8;
+          ctx.strokeStyle = item.color;
+          ctx.lineWidth = 2.2;
           ctx.beginPath();
           ctx.moveTo(exitPoint.x, exitPoint.y);
-          ctx.lineTo(endPoint.x, endPoint.y);
+          ctx.lineTo(targetPoint.x, targetPoint.y);
           ctx.stroke();
-
-          // Small spectral color tag at ray terminus if labels on
-          if (showLabels && (idx === 0 || idx === SPECTRUM_COLORS.length - 1)) {
-            ctx.fillStyle = colorItem.color;
-            ctx.font = "10px var(--font-geist-mono, monospace)";
-            ctx.fillText(
-              idx === 0 ? "Tia Đỏ (D = " + physics.deviationDeg.toFixed(1) + "°)" : "Tia Tím (D = " + physics.deviationDeg.toFixed(1) + "°)",
-              endPoint.x + 8,
-              endPoint.y + (idx === 0 ? -4 : 8)
-            );
-          }
           ctx.restore();
+
+          // Label color at screen edge
+          if (showLabels && (index === 0 || index === 3 || index === 6)) {
+            ctx.save();
+            ctx.font = "10px JetBrains Mono, monospace";
+            ctx.fillStyle = item.color;
+            ctx.fillText(`${item.name} (${item.n.toFixed(3)})`, targetPoint.x - 10, targetPoint.y + 4);
+            ctx.restore();
+          }
         });
 
-        // 5. Annotations & Visual Badges
+        // 5. Annotations
         if (showLabels) {
           ctx.save();
-          ctx.font = "11px var(--font-geist-mono, monospace)";
-          ctx.fillStyle = "#36D9E8";
+          ctx.font = "11px Inter, sans-serif";
+          ctx.fillStyle = "#EDF5ED";
+          ctx.fillText("Tia sáng trắng", sourcePoint.x + 10, sourcePoint.y - 10);
 
-          // Label incident beam
-          ctx.fillText("Tia sáng trắng tới", sourcePoint.x + 10, sourcePoint.y - 12);
-          ctx.fillStyle = "#F4F8FC";
-          ctx.fillText(`Góc tới i₁ = ${angleDeg}°`, sourcePoint.x + 10, sourcePoint.y + 4);
-
-          // Label apex angle
-          ctx.fillStyle = "#48D597";
+          ctx.fillStyle = "#38A875";
           ctx.fillText("Lăng kính A = 60°", pTop.x - 48, pTop.y - 12);
 
-          // Label spectrum
-          ctx.fillStyle = "#36D9E8";
-          ctx.fillText("Quang phổ tán sắc", width * 0.72, cy - 60);
+          ctx.fillStyle = "#C8ED78";
+          ctx.fillText("Quang phổ tán sắc", width * 0.70, cy - 60);
           ctx.restore();
         }
       }
 
+      ctx.restore();
       animFrameRef.current = requestAnimationFrame(render);
     };
 
@@ -348,13 +295,18 @@ export function PrismDispersionExperiment() {
     };
   }, [angleDeg, isBeamOn, showLabels]);
 
+  const redPhys = calculatePrismPhysics(1.512, angleDeg);
+  const violetPhys = calculatePrismPhysics(1.543, angleDeg);
+  const dispersionAngle =
+    redPhys && violetPhys ? Math.abs(violetPhys.deviationDeg - redPhys.deviationDeg).toFixed(2) : "0.00";
+
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-[#091426] bg-[#050B18]/90 p-4 sm:p-5 shadow-2xl backdrop-blur-xl">
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-lg transition-colors">
       {/* Top Header & Telemetry */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#091426] pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <span className="flex size-2 rounded-full bg-[#48D597] animate-pulse" />
-          <h3 className="font-mono text-xs font-semibold tracking-wider text-[#F4F8FC] uppercase">
+          <span className="flex size-2 rounded-full bg-[#16845A] dark:bg-[#38A875] animate-pulse" />
+          <h3 className="font-mono text-xs font-semibold tracking-wider text-foreground uppercase">
             Mô phỏng: Tán sắc ánh sáng qua lăng kính
           </h3>
         </div>
@@ -365,8 +317,8 @@ export function PrismDispersionExperiment() {
             onClick={() => setIsBeamOn(!isBeamOn)}
             className={`inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
               isBeamOn
-                ? "bg-[#36D9E8]/20 text-[#36D9E8] border border-[#36D9E8]/40"
-                : "bg-[#091426] text-[#F4F8FC]/50 hover:text-[#F4F8FC]"
+                ? "bg-[#16845A]/15 dark:bg-[#38A875]/20 text-[#16845A] dark:text-[#72CF91] border border-[#16845A]/30 dark:border-[#38A875]/40"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
             title="Bật/Tắt chùm sáng"
           >
@@ -379,8 +331,8 @@ export function PrismDispersionExperiment() {
             onClick={() => setShowLabels(!showLabels)}
             className={`inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
               showLabels
-                ? "bg-[#48D597]/20 text-[#48D597] border border-[#48D597]/40"
-                : "bg-[#091426] text-[#F4F8FC]/50 hover:text-[#F4F8FC]"
+                ? "bg-[#C8ED78]/30 dark:bg-[#C8ED78]/20 text-[#075C40] dark:text-[#C8ED78] border border-[#C8ED78]/60 dark:border-[#C8ED78]/30 font-semibold"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
             title="Bật/Tắt nhãn chú thích"
           >
@@ -390,7 +342,7 @@ export function PrismDispersionExperiment() {
           <button
             type="button"
             onClick={resetSimulation}
-            className="inline-flex items-center justify-center rounded-md bg-[#091426] p-1.5 text-[#F4F8FC]/70 hover:text-[#F4F8FC] hover:bg-[#091426]/80 transition-colors"
+            className="inline-flex items-center justify-center rounded-md bg-muted p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
             title="Đặt lại mô phỏng"
           >
             <RotateCcw className="size-3.5" />
@@ -398,83 +350,76 @@ export function PrismDispersionExperiment() {
         </div>
       </div>
 
-      {/* Main Interactive Canvas */}
-      <div className="relative mt-3 h-[280px] sm:h-[320px] w-full overflow-hidden rounded-xl border border-[#091426] bg-[#050B18]">
+      {/* Main Interactive Canvas in Dark Optical Chamber (preserves raw physics) */}
+      <div className="relative mt-3 h-[280px] sm:h-[320px] w-full overflow-hidden rounded-xl border border-black/20 bg-[#070E0B]">
         <canvas ref={canvasRef} className="size-full block" />
 
         {/* Live Physics Measurement Overlay */}
         <div className="absolute bottom-3 left-3 flex flex-wrap gap-2 pointer-events-none">
-          <div className="rounded-lg border border-[#091426] bg-[#050B18]/80 px-2.5 py-1 backdrop-blur-md">
-            <span className="font-mono text-[10px] text-[#F4F8FC]/60">Góc tới: </span>
-            <span className="font-mono text-xs font-semibold text-[#36D9E8]">{angleDeg}°</span>
+          <div className="rounded-lg border border-white/10 bg-black/70 px-2.5 py-1 backdrop-blur-md">
+            <span className="font-mono text-[10px] text-white/60">Góc tới: </span>
+            <span className="font-mono text-xs font-semibold text-[#C8ED78]">{angleDeg}°</span>
           </div>
-          <div className="rounded-lg border border-[#091426] bg-[#050B18]/80 px-2.5 py-1 backdrop-blur-md">
-            <span className="font-mono text-[10px] text-[#F4F8FC]/60">Góc tán sắc (ΔD): </span>
-            <span className="font-mono text-xs font-semibold text-[#48D597]">~{dispersionAngle}°</span>
+          <div className="rounded-lg border border-white/10 bg-black/70 px-2.5 py-1 backdrop-blur-md">
+            <span className="font-mono text-[10px] text-white/60">Góc tán sắc (ΔD): </span>
+            <span className="font-mono text-xs font-semibold text-[#72CF91]">~{dispersionAngle}°</span>
           </div>
-          <div className="hidden sm:block rounded-lg border border-[#091426] bg-[#050B18]/80 px-2.5 py-1 backdrop-blur-md">
-            <span className="font-mono text-[10px] text-[#F4F8FC]/60">Thủy tinh Crown: </span>
-            <span className="font-mono text-xs text-[#F4F8FC]">n = 1.512 - 1.543</span>
+          <div className="hidden sm:block rounded-lg border border-white/10 bg-black/70 px-2.5 py-1 backdrop-blur-md">
+            <span className="font-mono text-[10px] text-white/60">Thủy tinh Crown: </span>
+            <span className="font-mono text-xs text-white">n = 1.512 - 1.543</span>
           </div>
         </div>
       </div>
 
-      {/* Angle Slider Control */}
-      <div className="mt-4 space-y-2">
-        <div className="flex items-center justify-between text-xs">
-          <label htmlFor="prism-angle" className="flex items-center gap-1.5 font-medium text-[#F4F8FC]">
-            <Sliders className="size-3.5 text-[#36D9E8]" />
-            <span>Điều chỉnh góc tới tia sáng (i₁)</span>
-          </label>
-          <span className="font-mono font-semibold text-[#36D9E8]">{angleDeg}°</span>
+      {/* Controls: Slider for Angle of incidence i1 */}
+      <div className="mt-4 flex flex-col gap-2 rounded-xl bg-secondary p-3 border border-border">
+        <div className="flex items-center justify-between text-xs font-medium">
+          <span className="flex items-center gap-1.5 text-foreground">
+            <Sliders className="size-3.5 text-[#16845A] dark:text-[#38A875]" />
+            Điều chỉnh góc tới chùm sáng (i₁):
+          </span>
+          <span className="font-mono font-bold text-[#16845A] dark:text-[#72CF91]">{angleDeg}°</span>
         </div>
+
         <input
-          id="prism-angle"
           type="range"
-          min="30"
-          max="62"
+          min="32"
+          max="68"
           step="1"
           value={angleDeg}
-          onChange={(e) => setAngleDeg(Number(e.target.value))}
-          className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-[#091426] accent-[#36D9E8]"
+          onChange={(e) => setAngleDeg(parseInt(e.target.value, 10))}
+          className="w-full accent-[#16845A] dark:accent-[#38A875] cursor-pointer"
         />
-        <div className="flex justify-between font-mono text-[10px] text-[#F4F8FC]/40">
-          <span>30° (Tán sắc góc rộng)</span>
-          <span>48° (Góc tiêu chuẩn)</span>
-          <span>62° (Cận phản xạ)</span>
+
+        <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+          <span>32° (Góc hẹp)</span>
+          <span className="font-mono text-[10px]">Định luật khúc xạ: sin(i₁) = n · sin(r₁)</span>
+          <span>68° (Góc rộng)</span>
         </div>
       </div>
 
-      {/* Physics Explanation Accordion */}
-      <div className="mt-3 pt-3 border-t border-[#091426]">
+      {/* Physics Explanation Dropdown */}
+      <div className="mt-3">
         <button
           type="button"
           onClick={() => setShowExplanation(!showExplanation)}
-          className="flex w-full items-center justify-between text-xs text-[#36D9E8] hover:text-[#48D597] transition-colors"
+          className="flex w-full items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium text-foreground hover:bg-muted transition-colors"
         >
-          <span className="inline-flex items-center gap-1.5 font-medium">
-            <Info className="size-3.5" />
-            <span>Giải thích hiện tượng tán sắc ánh sáng</span>
+          <span className="flex items-center gap-1.5">
+            <Info className="size-3.5 text-[#16845A] dark:text-[#38A875]" />
+            Bản chất vật lý: Vì sao ánh sáng trắng bị tách màu?
           </span>
-          <span className="font-mono text-[11px]">{showExplanation ? "Thu gọn ▲" : "Xem thêm ▼"}</span>
+          <span className="text-[11px] text-muted-foreground">{showExplanation ? "Ẩn bớt" : "Xem chi tiết"}</span>
         </button>
 
         {showExplanation && (
-          <div className="mt-2.5 rounded-lg border border-[#091426] bg-[#091426]/50 p-3 text-xs leading-relaxed text-[#F4F8FC]/80 animate-in fade-in duration-300">
-            <p className="mb-1.5 font-medium text-[#F4F8FC]">
-              Hiện tượng tán sắc ánh sáng qua lăng kính:
+          <div className="mt-2 space-y-2 rounded-lg border border-border bg-secondary p-3 text-xs leading-relaxed text-muted-foreground animate-in fade-in">
+            <p>
+              • <strong className="text-foreground">Chiết suất phụ thuộc bước sóng:</strong> Với cùng một môi trường trong suốt (thủy tinh Crown), chiết suất biến thiên tăng dần từ ánh sáng Đỏ (bước sóng dài nhất, n = 1.512) đến Tím (bước sóng ngắn nhất, n = 1.543).
             </p>
-            <ul className="list-disc pl-4 space-y-1 text-[#F4F8FC]/70">
-              <li>
-                <strong>Ánh sáng trắng</strong> là hỗn hợp của vô số ánh sáng đơn sắc có màu biến thiên liên tục từ đỏ đến tím.
-              </li>
-              <li>
-                <strong>Chiết suất môi trường trong suốt</strong> biến thiên theo bước sóng: chiết suất lớn nhất đối với tia tím (n<sub>tím</sub> ≈ 1.543) và nhỏ nhất đối với tia đỏ (n<sub>đỏ</sub> ≈ 1.512).
-              </li>
-              <li>
-                Theo định luật khúc xạ ánh sáng, tia tím bị bẻ cong lệch nhiều nhất về phía đáy lăng kính, còn tia đỏ bị lệch ít nhất, tạo thành dải màu cầu vồng liên tục.
-              </li>
-            </ul>
+            <p>
+              • <strong className="text-foreground">Góc lệch D:</strong> Theo công thức lăng kính D = i₁ + i₂ - A, vì n(tím) &gt; n(đỏ) nên tia Tím bị lệch nhiều nhất về phía đáy lăng kính, tia Đỏ bị lệch ít nhất, tạo nên dải màu cầu vồng liên tục.
+            </p>
           </div>
         )}
       </div>

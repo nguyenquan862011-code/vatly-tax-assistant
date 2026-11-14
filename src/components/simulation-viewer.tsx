@@ -63,28 +63,13 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
     return () => document.removeEventListener("fullscreenchange", handleFsChange);
   }, []);
 
-  // Listen for submission events posted from iframe bridge
-  useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      if (e.data && e.data.type === "TAMGIANG_SUBMISSION_RESULT" && e.data.payload) {
-        const payload = e.data.payload as SubmissionPayload;
-        const saved = saveSubmission(payload);
-        setSubmissions(getSubmissionsHistory(lesson.fullPath));
-        setActiveResult(saved);
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [lesson.fullPath]);
-
-  // Keyboard shortcuts: [, ], F, R, B
+  // Keyboard navigation shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement ||
-        e.target instanceof HTMLSelectElement
+        (e.target as HTMLElement)?.isContentEditable
       ) {
         return;
       }
@@ -95,15 +80,15 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
       } else if (e.key === "]" && lesson.nextLessonPath) {
         e.preventDefault();
         navigate({ to: "/mo-phong/$", params: { _splat: lesson.nextLessonPath } });
-      } else if (e.key.toLowerCase() === "r") {
+      } else if (e.key === "b" || e.key === "B") {
+        e.preventDefault();
+        onToggleSidebar?.();
+      } else if (e.key === "r" || e.key === "R") {
         e.preventDefault();
         setReloadKey((k) => k + 1);
-      } else if (e.key.toLowerCase() === "f") {
+      } else if (e.key === "f" || e.key === "F") {
         e.preventDefault();
         toggleFullscreen();
-      } else if (e.key.toLowerCase() === "b" && onToggleSidebar) {
-        e.preventDefault();
-        onToggleSidebar();
       }
     };
 
@@ -111,36 +96,58 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lesson, navigate, onToggleSidebar]);
 
+  // Message listener for auto-grading bridge from iframe simulation
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (!e.data || typeof e.data !== "object") return;
+
+      if (e.data.type === "VATLY_SUBMIT_RESULT" || e.data.type === "EXAM_SUBMISSION_RESULT") {
+        const payload = e.data.payload as SubmissionPayload;
+        if (payload) {
+          const stored = saveSubmission(lesson.fullPath, payload);
+          setSubmissions((prev) => [stored, ...prev.filter((s) => s.id !== stored.id)]);
+          setActiveResult(stored);
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [lesson.fullPath]);
+
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
     if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().catch((err) => {
+      containerRef.current.requestFullscreen?.().catch((err) => {
         console.error("Fullscreen error:", err);
       });
     } else {
-      document.exitFullscreen().catch((err) => {
+      document.exitFullscreen?.().catch((err) => {
         console.error("Exit fullscreen error:", err);
       });
     }
   };
 
-  // Route iframe through our own same-origin server proxy with TamGiang branding & bridge
-  const proxiedSimulationUrl = `/api/mo-phong/${lesson.fullPath}`;
-
+  const proxiedSimulationUrl = `/api/mo-phong/${encodeURIComponent(lesson.simulationUrl)}`;
   const latestAttempt = submissions[0];
 
   return (
     <div
       ref={containerRef}
-      className="relative flex h-full min-h-0 flex-1 flex-col bg-[#141a18] text-foreground select-none"
+      className={`relative flex min-h-0 flex-1 flex-col bg-[#070E0B] text-[#EDF5ED] ${
+        isFullscreen ? "h-screen w-screen" : "h-full"
+      }`}
     >
-      {/* Simulation Frame Container */}
-      <div className="relative flex-1 overflow-hidden bg-[#141a18]">
-        {/* Loading overlay */}
+      {/* Simulation Iframe viewport */}
+      <div className="relative min-h-0 flex-1 overflow-hidden">
         {isLoading && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#141a18]/90 text-white/80">
-            <Loader2 className="size-7 animate-spin text-[#36D9E8]" />
-            <span className="text-xs font-medium tracking-wide">Đang tải phòng thí nghiệm tương tác...</span>
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#070E0B]/90 backdrop-blur-sm">
+            <div className="flex flex-col items-center gap-3">
+              <Loader2 className="size-8 animate-spin text-[#38A875]" />
+              <p className="font-mono text-xs text-[#EDF5ED]/70">
+                Đang khởi tạo mô phỏng Vật lý...
+              </p>
+            </div>
           </div>
         )}
 
@@ -156,14 +163,14 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
       </div>
 
       {/* Bottom control toolbar */}
-      <footer className="flex h-11 shrink-0 items-center justify-between border-t border-white/10 bg-[#091426] px-3 text-xs text-white/80 shadow-md">
+      <footer className="flex h-11 shrink-0 items-center justify-between border-t border-[#153325] dark:border-[#12261C] bg-[#091A13] dark:bg-[#06120D] px-3 text-xs text-[#EDF5ED]/80 shadow-md">
         {/* Left: Navigation previous / next */}
         <div className="flex items-center gap-1">
           {lesson.prevLessonPath ? (
             <Link
               to="/mo-phong/$"
               params={{ _splat: lesson.prevLessonPath }}
-              className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 font-medium text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+              className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 font-medium text-[#EDF5ED]/90 hover:bg-white/10 hover:text-white transition-colors"
               title="Bài trước (Phím [)"
             >
               <ChevronLeft className="size-4" />
@@ -183,7 +190,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
             <Link
               to="/mo-phong/$"
               params={{ _splat: lesson.nextLessonPath }}
-              className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 font-medium text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+              className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 font-medium text-[#EDF5ED]/90 hover:bg-white/10 hover:text-white transition-colors"
               title="Bài sau (Phím ])"
             >
               <span className="hidden sm:inline">Bài sau</span>
@@ -206,14 +213,14 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
         </div>
 
         {/* Center: Submission and Lesson index info */}
-        <div className="flex items-center gap-2 text-white/80">
+        <div className="flex items-center gap-2 text-[#EDF5ED]">
           {latestAttempt ? (
             <button
               type="button"
               onClick={() => setActiveResult(latestAttempt)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-[#48D597]/40 bg-[#48D597]/10 px-2.5 py-1 text-[11px] font-semibold text-[#48D597] hover:bg-[#48D597]/20 transition-all"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#38A875]/40 bg-[#16845A]/20 px-2.5 py-1 text-[11px] font-semibold text-[#72CF91] hover:bg-[#16845A]/30 transition-all"
             >
-              <Trophy className="size-3" />
+              <Trophy className="size-3 text-[#C8ED78]" />
               <span>Điểm gần nhất: {latestAttempt.score.toFixed(1)}/10</span>
             </button>
           ) : (
@@ -228,13 +235,13 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
           <button
             type="button"
             onClick={() => setShowHistoryModal(true)}
-            className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[#36D9E8] hover:bg-[#36D9E8]/10 transition-colors"
+            className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[#72CF91] hover:bg-white/10 transition-colors"
             title="Xem lịch sử bài làm"
           >
             <History className="size-3.5" />
-            <span className="hidden sm:inline text-xs font-medium">Lịch sử bài làm</span>
+            <span className="hidden sm:inline text-xs font-medium">Lịch sử</span>
             {submissions.length > 0 && (
-              <span className="rounded-full bg-[#36D9E8] px-1.5 py-0.2 text-[10px] font-bold text-[#050B18]">
+              <span className="rounded-full bg-[#38A875] px-1.5 py-0.2 text-[10px] font-bold text-white">
                 {submissions.length}
               </span>
             )}
@@ -242,7 +249,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
 
           <button
             onClick={() => setReloadKey((k) => k + 1)}
-            className="flex h-8 items-center gap-1.5 rounded-md px-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+            className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[#EDF5ED]/80 hover:bg-white/10 hover:text-white transition-colors"
             title="Tải lại (Phím R)"
           >
             <RotateCcw className="size-3.5" />
@@ -251,7 +258,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
 
           <button
             onClick={toggleFullscreen}
-            className="flex h-8 items-center gap-1.5 rounded-md px-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+            className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[#EDF5ED]/80 hover:bg-white/10 hover:text-white transition-colors"
             title={isFullscreen ? "Thu nhỏ (Phím F)" : "Toàn màn hình (Phím F)"}
           >
             {isFullscreen ? <Minimize2 className="size-3.5" /> : <Maximize2 className="size-3.5" />}
@@ -275,17 +282,17 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
       {/* Submission Success & Result Modal */}
       {activeResult && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
-          <div className="w-full max-w-lg rounded-2xl border border-[#48D597]/40 bg-[#050B18] p-6 text-[#F4F8FC] shadow-2xl space-y-5 animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-start justify-between border-b border-[#091426] pb-3">
+          <div className="w-full max-w-lg rounded-2xl border border-[#38A875]/40 bg-[#0B1511] p-6 text-[#EDF5ED] shadow-2xl space-y-5 animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-start justify-between border-b border-[#2B4033] pb-3">
               <div className="flex items-center gap-2">
-                <div className="flex size-8 items-center justify-center rounded-full bg-[#48D597]/20 text-[#48D597]">
+                <div className="flex size-8 items-center justify-center rounded-full bg-[#16845A]/20 text-[#72CF91]">
                   <CheckCircle2 className="size-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[#F4F8FC]">
+                  <h3 className="text-base font-bold text-[#EDF5ED]">
                     NỘP BÀI THÀNH CÔNG & ĐÃ CHẤM ĐIỂM
                   </h3>
-                  <p className="text-xs text-[#36D9E8] font-mono">
+                  <p className="text-xs text-[#72CF91] font-mono">
                     Hệ thống TamGiangPhysics đã ghi nhận bài làm
                   </p>
                 </div>
@@ -293,23 +300,23 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
               <button
                 type="button"
                 onClick={() => setActiveResult(null)}
-                className="text-[#F4F8FC]/60 hover:text-[#F4F8FC] p-1"
+                className="text-[#EDF5ED]/60 hover:text-white p-1"
               >
                 <X className="size-5" />
               </button>
             </div>
 
             {/* Score Big Display */}
-            <div className="rounded-xl border border-[#48D597]/30 bg-gradient-to-br from-[#48D597]/10 to-[#36D9E8]/10 p-5 text-center space-y-1">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#48D597]">
+            <div className="rounded-xl border border-[#38A875]/30 bg-gradient-to-br from-[#16845A]/15 to-[#38A875]/10 p-5 text-center space-y-1">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#72CF91]">
                 KẾT QUẢ ĐẠT ĐƯỢC
               </span>
-              <div className="text-4xl font-extrabold text-[#F4F8FC]">
-                {activeResult.score.toFixed(1)} <span className="text-xl text-[#36D9E8]">/ 10</span>
+              <div className="text-4xl font-extrabold text-[#EDF5ED]">
+                {activeResult.score.toFixed(1)} <span className="text-xl text-[#C8ED78]">/ 10</span>
               </div>
-              <p className="text-xs text-[#F4F8FC]/70">
+              <p className="text-xs text-[#EDF5ED]/70">
                 Thang điểm 10 chuẩn THPT · Chế độ:{" "}
-                <strong className="text-[#F4F8FC]">
+                <strong className="text-white">
                   {activeResult.mode === "thi" ? "Thi thật có bấm giờ" : "Ôn luyện"}
                 </strong>
               </p>
@@ -317,21 +324,21 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
 
             {/* Metrics Breakdown */}
             <div className="grid grid-cols-3 gap-2.5 text-center text-xs">
-              <div className="rounded-lg border border-[#091426] bg-[#091426]/60 p-3">
-                <span className="text-[#F4F8FC]/50 block text-[11px]">Số câu đúng</span>
-                <span className="text-base font-bold text-[#48D597]">
+              <div className="rounded-lg border border-[#2B4033] bg-[#15271E] p-3">
+                <span className="text-[#A5B7A8] block text-[11px]">Số câu đúng</span>
+                <span className="text-base font-bold text-[#72CF91]">
                   {activeResult.correctCount}
                 </span>
               </div>
-              <div className="rounded-lg border border-[#091426] bg-[#091426]/60 p-3">
-                <span className="text-[#F4F8FC]/50 block text-[11px]">Tổng số câu</span>
-                <span className="text-base font-bold text-[#F4F8FC]">
+              <div className="rounded-lg border border-[#2B4033] bg-[#15271E] p-3">
+                <span className="text-[#A5B7A8] block text-[11px]">Tổng số câu</span>
+                <span className="text-base font-bold text-[#EDF5ED]">
                   {activeResult.totalQuestions}
                 </span>
               </div>
-              <div className="rounded-lg border border-[#091426] bg-[#091426]/60 p-3">
-                <span className="text-[#F4F8FC]/50 block text-[11px]">Thời gian làm</span>
-                <span className="text-base font-bold text-[#36D9E8] font-mono">
+              <div className="rounded-lg border border-[#2B4033] bg-[#15271E] p-3">
+                <span className="text-[#A5B7A8] block text-[11px]">Thời gian làm</span>
+                <span className="text-base font-bold text-[#C8ED78] font-mono">
                   {activeResult.timeSpent || "00:00"}
                 </span>
               </div>
@@ -339,12 +346,12 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
 
             {/* Detailed sections breakdown if present */}
             {(activeResult.p1 || activeResult.p2 || activeResult.p3) && (
-              <div className="rounded-lg border border-[#091426] bg-[#091426]/40 p-3 text-xs space-y-1.5">
-                <span className="text-[11px] font-semibold text-[#36D9E8] block uppercase">
+              <div className="rounded-lg border border-[#2B4033] bg-[#15271E]/60 p-3 text-xs space-y-1.5">
+                <span className="text-[11px] font-semibold text-[#72CF91] block uppercase">
                   Chi tiết từng phần:
                 </span>
                 {activeResult.p1 && (
-                  <div className="flex justify-between text-[#F4F8FC]/80">
+                  <div className="flex justify-between text-[#EDF5ED]/80">
                     <span>Phần I: Trắc nghiệm</span>
                     <span className="font-mono">
                       {activeResult.p1.correct} / {activeResult.p1.total} câu
@@ -352,7 +359,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
                   </div>
                 )}
                 {activeResult.p2 && (
-                  <div className="flex justify-between text-[#F4F8FC]/80">
+                  <div className="flex justify-between text-[#EDF5ED]/80">
                     <span>Phần II: Đúng / Sai</span>
                     <span className="font-mono">
                       {activeResult.p2.correct} / {activeResult.p2.total} ý
@@ -360,7 +367,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
                   </div>
                 )}
                 {activeResult.p3 && (
-                  <div className="flex justify-between text-[#F4F8FC]/80">
+                  <div className="flex justify-between text-[#EDF5ED]/80">
                     <span>Phần III: Trả lời ngắn</span>
                     <span className="font-mono">
                       {activeResult.p3.correct} / {activeResult.p3.total} câu
@@ -370,15 +377,15 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
               </div>
             )}
 
-            <div className="flex items-center justify-between border-t border-[#091426] pt-4 text-xs">
-              <span className="text-[#F4F8FC]/40 text-[11px]">
+            <div className="flex items-center justify-between border-t border-[#2B4033] pt-4 text-xs">
+              <span className="text-[#A5B7A8] text-[11px]">
                 Mã bài nộp: <span className="font-mono">{activeResult.id}</span>
               </span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setActiveResult(null)}
-                  className="rounded-lg border border-[#091426] bg-[#091426] px-4 py-2 font-medium text-[#F4F8FC] hover:bg-[#091426]/80"
+                  className="rounded-lg border border-[#2B4033] bg-[#15271E] px-4 py-2 font-medium text-white hover:bg-[#1B3025] transition-colors"
                 >
                   Đóng & Xem đáp án
                 </button>
@@ -391,28 +398,28 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
       {/* Submissions History Dialog */}
       {showHistoryModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
-          <div className="w-full max-w-xl rounded-2xl border border-[#091426] bg-[#050B18] p-6 text-[#F4F8FC] shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-[#091426] pb-3">
+          <div className="w-full max-w-xl rounded-2xl border border-[#2B4033] bg-[#0B1511] p-6 text-[#EDF5ED] shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-[#2B4033] pb-3">
               <div className="flex items-center gap-2">
-                <History className="size-5 text-[#36D9E8]" />
-                <h3 className="text-base font-bold text-[#F4F8FC]">
+                <History className="size-5 text-[#72CF91]" />
+                <h3 className="text-base font-bold text-[#EDF5ED]">
                   Lịch sử làm bài: {lesson.name}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setShowHistoryModal(false)}
-                className="text-[#F4F8FC]/60 hover:text-[#F4F8FC] p-1"
+                className="text-white/60 hover:text-white p-1"
               >
                 <X className="size-5" />
               </button>
             </div>
 
             {submissions.length === 0 ? (
-              <div className="rounded-xl border border-[#091426] bg-[#091426]/30 p-8 text-center space-y-2">
-                <FileCheck className="mx-auto size-8 text-[#36D9E8]/40" />
-                <p className="text-sm font-semibold text-[#F4F8FC]">Chưa có bài nộp nào cho bài học này</p>
-                <p className="text-xs text-[#F4F8FC]/60">
+              <div className="rounded-xl border border-[#2B4033] bg-[#15271E]/50 p-8 text-center space-y-2">
+                <FileCheck className="mx-auto size-8 text-[#72CF91]/40" />
+                <p className="text-sm font-semibold text-white">Chưa có bài nộp nào cho bài học này</p>
+                <p className="text-xs text-[#A5B7A8]">
                   Hãy hoàn thành các câu hỏi trong mô phỏng bài tập và nhấn &ldquo;Nộp bài&rdquo; để lưu kết quả.
                 </p>
               </div>
@@ -421,14 +428,14 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
                 {submissions.map((sub, idx) => (
                   <div
                     key={sub.id}
-                    className="flex items-center justify-between rounded-xl border border-[#091426] bg-[#091426]/50 p-3.5 transition-colors hover:border-[#36D9E8]/40"
+                    className="flex items-center justify-between rounded-xl border border-[#2B4033] bg-[#15271E] p-3.5 transition-colors hover:border-[#38A875]/40"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs font-bold text-[#48D597]">
+                        <span className="font-mono text-xs font-bold text-[#72CF91]">
                           Lần #{submissions.length - idx}
                         </span>
-                        <span className="text-[11px] text-[#F4F8FC]/50">
+                        <span className="text-[11px] text-[#A5B7A8]">
                           {new Date(sub.submittedAt).toLocaleTimeString("vi-VN", {
                             hour: "2-digit",
                             minute: "2-digit",
@@ -441,13 +448,13 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
                           })}
                         </span>
                       </div>
-                      <p className="text-xs text-[#F4F8FC]/70">
+                      <p className="text-xs text-[#EDF5ED]/70">
                         Đúng {sub.correctCount} / {sub.totalQuestions} câu · Thời gian làm: {sub.timeSpent}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="rounded-lg border border-[#48D597]/30 bg-[#48D597]/10 px-2.5 py-1 text-sm font-extrabold text-[#48D597]">
+                      <span className="rounded-lg border border-[#38A875]/30 bg-[#16845A]/20 px-2.5 py-1 text-sm font-extrabold text-[#72CF91]">
                         {sub.score.toFixed(1)}/10
                       </span>
                       <button
@@ -456,7 +463,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
                           setShowHistoryModal(false);
                           setActiveResult(sub);
                         }}
-                        className="text-xs text-[#36D9E8] hover:underline"
+                        className="text-xs text-[#C8ED78] hover:underline"
                       >
                         Chi tiết
                       </button>
@@ -466,8 +473,8 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
               </div>
             )}
 
-            <div className="flex items-center justify-between border-t border-[#091426] pt-3 text-xs">
-              <span className="text-[#F4F8FC]/40 text-[11px]">
+            <div className="flex items-center justify-between border-t border-[#2B4033] pt-3 text-xs">
+              <span className="text-[#A5B7A8] text-[11px]">
                 Tổng cộng {submissions.length} lần nộp bài được lưu
               </span>
               <button
@@ -478,10 +485,10 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
                     setSubmissions([]);
                   }
                 }}
-                className="inline-flex items-center gap-1 text-[11px] text-red-400 hover:underline"
+                className="text-xs text-red-400 hover:text-red-300 hover:underline flex items-center gap-1"
               >
                 <Trash2 className="size-3" />
-                <span>Xóa lịch sử</span>
+                Xóa lịch sử bài học này
               </button>
             </div>
           </div>
