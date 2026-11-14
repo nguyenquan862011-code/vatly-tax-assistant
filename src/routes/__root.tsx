@@ -76,17 +76,14 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    // Replace these placeholders with the app's name and description when first building the app.
-    // Each content route, / included, must still set its own head(). Never add og:image or
-    // twitter:image here: every page without its own would inherit the root's preview image.
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại" },
-      { name: "description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số." },
+      { name: "description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách Bright Academic." },
       { name: "author", content: "Trần Đình Nguyên Quân" },
       { property: "og:title", content: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại" },
-      { property: "og:description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số." },
+      { property: "og:description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách Bright Academic." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -118,9 +115,18 @@ declare module "@tanstack/react-router" {
 
 function RootShell({ children }: { children: ReactNode }) {
   const importedDocument = useImportedMatches({ select: matches => matches.at(-1)?.staticData.importedDocument });
+  const htmlProps = importedDocument?.html ? { ...importedDocument.html } : undefined;
+  if (htmlProps) {
+    delete htmlProps.className;
+  }
   return (
-    <html lang="vi" {...importedDocument?.html}>
+    <html lang="vi" {...htmlProps}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('tamgiang_theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
+          }}
+        />
         <style href="site-import-inline" precedence="imported-inline">{"@layer imported-inline;"}</style>
         <HeadContent />
       </head>
@@ -137,7 +143,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );
