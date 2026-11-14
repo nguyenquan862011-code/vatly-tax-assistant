@@ -240,7 +240,7 @@ export function CurriculumSidebar({ currentPath, isOpen, onToggle }: CurriculumS
                     {part.children?.map((chude) => {
                       const isTopicOpen =
                         openSections[chude.slug] ??
-                        (currentLesson?.topicSlug === chude.slug || true);
+                        (currentLesson ? currentLesson.topicSlug === chude.slug : false);
 
                       return (
                         <div key={chude.slug} className="rounded-lg border border-sidebar-border/60 bg-sidebar-accent/20">
