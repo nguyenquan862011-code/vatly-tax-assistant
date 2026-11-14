@@ -30,10 +30,6 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [activeSlide0, setActiveSlide0] = useState(0);
   const [sampleLessonOpen, setSampleLessonOpen] = useState(false);
-  const [wavePlaying, setWavePlaying] = useState(true);
-  const [wavelength, setWavelength] = useState(1.6);
-  const [sources, setSources] = useState({ first: { x: 9, y: 9 }, second: { x: 15, y: 9 } });
-  const draggingSource = useRef<"first" | "second" | null>(null);
   const carouselContent0 = (<>
 {activeSlide0 === 0 && <Fragment key={0}>
 <div className={"-mx-5 flex \x73nap-x gap-2 overflow-x-auto px-5 pb-2 lg:mx-0 lg:max-h-[38rem] \x6cg:\x66lex-col lg:overflow-y-auto lg:px-0 lg:pr-2"} role="tablist" aria-label="Chuyên đề" aria-orientation="vertical">
@@ -729,6 +725,12 @@ function ImportedHeader() {
 }
 
 function ImportedSectionNgHCThu() {
+  const [wavePlaying, setWavePlaying] = useState(true);
+  const [wavelength, setWavelength] = useState(1.6);
+  const [sources, setSources] = useState({ first: { x: 9, y: 9 }, second: { x: 15, y: 9 } });
+  const draggingSource = useRef<"first" | "second" | null>(null);
+  const sourceDistance = Math.hypot(sources.second.x - sources.first.x, sources.second.y - sources.first.y);
+  const maximaCount = Math.floor(sourceDistance / wavelength) * 2 + 1;
   return (
     <section className={"relative overflow-hidden \x62order-b \x62order-lab-line"} aria-labelledby="hero-title">
       <div className="lab-grid absolute inset-0 [mask-image:radial-gradient(80%_70%_at_50%_40%,rgb(0,0,0)_40%,rgba(0,0,0,0)_100%)]" aria-hidden="true" />
@@ -866,8 +868,8 @@ function ImportedSectionNgHCThu() {
             </div>
             <div className={"grid gap-3 \x62order-t \x62order-lab-line px-5 py-4 text-xs sm:grid-cols-[auto_1fr] \x73m:\x69tems-center"}>
               <p className={"flex items-baseline gap-2 rounded-xl \x62g-lab-tint px-3 py-2"}>
-                <span className={"\x66ont-mono text-2xl font-semibold text-lab-green"}>7</span>
-                <span className="leading-tight text-lab-subtle">cực đại trên S₁S₂<span className={"block \x66ont-mono text-[10px]"}>S₁S₂ = 6,0 cm · λ = 1,6 cm</span></span>
+                <span className={"\x66ont-mono text-2xl font-semibold text-lab-green"}>{maximaCount}</span>
+                <span className="leading-tight text-lab-subtle">cực đại trên S₁S₂<span className={"block \x66ont-mono text-[10px]"}>S₁S₂ = {sourceDistance.toFixed(1).replace(".", ",")} cm · λ = {wavelength.toFixed(1).replace(".", ",")} cm</span></span>
               </p>
               <p className="min-h-10 leading-5 text-lab-subtle" aria-live="polite">Rê chuột hoặc chạm vào mặt nước để phân tích điểm M. Cực đại khi <span className={"\x66ont-mono"}>d₂ − d₁ = kλ</span>.</p>
             </div>
