@@ -564,6 +564,8 @@ function Index() {
 function ImportedHeader() {
   const [accountOpen, setAccountOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const accountOpenRef = useRef(false);
+  const navOpenRef = useRef(false);
   const [themeDark, setThemeDark] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const accountTriggerRef = useRef<HTMLButtonElement>(null);
@@ -579,6 +581,8 @@ function ImportedHeader() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
+      accountOpenRef.current = false;
+      navOpenRef.current = false;
       setAccountOpen(false);
       setNavOpen(false);
       if (navOpen) navTriggerRef.current?.focus();
@@ -586,6 +590,8 @@ function ImportedHeader() {
     };
     const handlePointerDown = (event: PointerEvent) => {
       if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+        accountOpenRef.current = false;
+        navOpenRef.current = false;
         setAccountOpen(false);
         setNavOpen(false);
       }
@@ -600,16 +606,24 @@ function ImportedHeader() {
   }, [accountOpen, navOpen]);
 
   const openAccountMenu = () => {
+    const next = !accountOpenRef.current;
+    accountOpenRef.current = next;
+    navOpenRef.current = false;
+    setAccountOpen(next);
     setNavOpen(false);
-    setAccountOpen((open) => !open);
   };
 
   const openNavigationMenu = () => {
+    const next = !navOpenRef.current;
+    navOpenRef.current = next;
+    accountOpenRef.current = false;
+    setNavOpen(next);
     setAccountOpen(false);
-    setNavOpen((open) => !open);
   };
 
   const closeMenus = () => {
+    accountOpenRef.current = false;
+    navOpenRef.current = false;
     setAccountOpen(false);
     setNavOpen(false);
   };
