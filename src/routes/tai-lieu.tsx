@@ -2,23 +2,24 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Logo } from "@/components/logo";
 import { Footer } from "@/components/footer";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { APP_CONFIG } from "@/lib/config";
 import {
   Search,
   BookOpen,
+  Sparkles,
   ExternalLink,
   ChevronRight,
   FolderOpen,
   FileText,
   GraduationCap,
   ShieldCheck,
+  Download,
+  Eye,
   CheckCircle2,
   RefreshCw,
   Info,
   Menu,
   X,
-  Compass,
 } from "lucide-react";
 
 export const Route = createFileRoute("/tai-lieu")({
@@ -79,51 +80,27 @@ const DRIVE_CATEGORIES: DriveCategory[] = [
     driveFolderUrl: APP_CONFIG.googleDriveFolderUrl,
   },
   {
-    id: "cat-de-thi",
-    name: "ĐỀ THI & BÀI TẬP ÔN LUYỆN",
-    code: "DT-ONLUYEN",
+    id: "cat-de-kiem-tra",
+    name: "ĐỀ KIỂM TRA & ÔN TẬP",
+    code: "KT-THPT",
     description:
-      "Tuyển tập đề kiểm tra học kỳ, đề thi tốt nghiệp THPT, bài tập phân loại mức độ nhận biết - thông hiểu - vận dụng - vận dụng cao kèm lời giải chi tiết.",
-    topics: ["Đề thi học kỳ 1 & 2", "Đề tham khảo tốt nghiệp THPT", "Bài tập trắc nghiệm đúng/sai", "Bài tập điền số ngắn"],
-    status: "active",
-    grade: "all",
-    gradeLabel: "Các khối lớp",
-    driveFolderUrl: APP_CONFIG.googleDriveFolderUrl,
-  },
-  {
-    id: "cat-lop-10",
-    name: "CHUYÊN ĐỀ VẬT LÝ LỚP 10",
-    code: "CD-LOP10",
-    description:
-      "Trọn bộ tài liệu Vật lý 10: Động học, Động lực học Newton, Mômen lực, Năng lượng, Công - Công suất, Định luật bảo toàn động lượng và Năng lượng.",
-    topics: ["Chuyển động thẳng & Biến đổi", "3 Định luật Newton", "Công & Năng lượng", "Chuyển động tròn đều"],
-    status: "active",
-    grade: "10",
-    gradeLabel: "Khối 10",
-    driveFolderUrl: APP_CONFIG.googleDriveFolderUrl,
-  },
-  {
-    id: "cat-lop-11",
-    name: "CHUYÊN ĐỀ VẬT LÝ LỚP 11",
-    code: "CD-LOP11",
-    description:
-      "Trọn bộ tài liệu Vật lý 11: Dao động điều hòa, Sóng cơ & Sóng âm, Giao thoa sóng, Sóng dừng, Điện trường, Điện thế, Tụ điện & Dòng điện không đổi.",
-    topics: ["Con lắc lò xo & Con lắc đơn", "Giao thoa & Tán sắc ánh sáng", "Điện tích & Định luật Coulomb", "Mạch điện một chiều"],
-    status: "active",
-    grade: "11",
-    gradeLabel: "Khối 11",
-    driveFolderUrl: APP_CONFIG.googleDriveFolderUrl,
-  },
-  {
-    id: "cat-lop-12",
-    name: "CHUYÊN ĐỀ VẬT LÝ LỚP 12",
-    code: "CD-LOP12",
-    description:
-      "Trọn bộ tài liệu Vật lý 12: Thuyết động học phân tử, Nhiệt động lực học, Từ trường, Cảm ứng điện từ, Vật lý hạt nhân và Năng lượng liên kết.",
-    topics: ["Các định luật chất khí", "Lực từ & Cảm ứng điện từ", "Hiện tượng phóng xạ", "Phản ứng phân hạch & Nhiệt hạch"],
+      "Bộ đề trắc nghiệm chuẩn cấu trúc mới: trắc nghiệm nhiều lựa chọn, đúng/sai và câu trả lời ngắn kèm lời giải chi tiết phục vụ kiểm tra định kỳ.",
+    topics: ["Đề giữa kỳ & cuối kỳ", "Luyện thi tốt nghiệp THPT", "Đề khảo sát năng lực"],
     status: "active",
     grade: "12",
-    gradeLabel: "Khối 12",
+    gradeLabel: "Lớp 12 & Luyện thi",
+    driveFolderUrl: APP_CONFIG.googleDriveFolderUrl,
+  },
+  {
+    id: "cat-thi-nghiem",
+    name: "TÀI LIỆU THỰC HÀNH & SAI SỐ",
+    code: "TN-SS",
+    description:
+      "Cẩm nang hướng dẫn an toàn phòng thí nghiệm, phương pháp đo lường, quy tắc làm tròn và phương pháp xử lý sai số ngẫu nhiên, sai số dụng cụ.",
+    topics: ["Quy tắc an toàn Lab", "Đo thời gian rơi tự do", "Khảo sát con lắc đơn", "Khúc xạ & Tán sắc lăng kính"],
+    status: "active",
+    grade: "10",
+    gradeLabel: "Lớp 10 & 11",
     driveFolderUrl: APP_CONFIG.googleDriveFolderUrl,
   },
 ];
@@ -132,16 +109,14 @@ function TaiLieuPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGrade, setSelectedGrade] = useState<string>("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showDriveEmbed, setShowDriveEmbed] = useState(false);
+  const [showEmbedPreview, setShowEmbedPreview] = useState(false);
 
   const filteredCategories = DRIVE_CATEGORIES.filter((cat) => {
-    const q = searchQuery.toLowerCase().trim();
     const matchSearch =
-      !q ||
-      cat.name.toLowerCase().includes(q) ||
-      cat.code.toLowerCase().includes(q) ||
-      cat.description.toLowerCase().includes(q) ||
-      cat.topics.some((t) => t.toLowerCase().includes(q));
+      searchQuery === "" ||
+      cat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cat.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cat.topics.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const matchGrade =
       selectedGrade === "all" || cat.grade === "all" || cat.grade === selectedGrade;
@@ -150,301 +125,308 @@ function TaiLieuPage() {
   });
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-200">
-      {/* 1. Header Navbar */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
+    <div className="flex min-h-screen flex-col bg-[#050B18] text-[#F4F8FC]">
+      {/* Navbar */}
+      <header className="sticky top-0 z-40 border-b border-[#091426] bg-[#050B18]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-          <a href="/" className="inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded-lg">
+          <a href="/" className="inline-flex items-center gap-2">
             <Logo size="md" />
           </a>
 
-          <nav className="hidden items-center gap-6 md:flex text-xs font-semibold text-muted-foreground">
-            <a href="/#phuong-phap" className="hover:text-[#1558C9] dark:hover:text-[#60A5FA] transition-colors">
+          <nav className="hidden items-center gap-6 md:flex text-sm font-medium">
+            <a href="/#phuong-phap" className="text-[#F4F8FC]/70 hover:text-[#48D597] transition-colors">
               Phương pháp học
             </a>
-            <a href="/#phong-thi-nghiem" className="hover:text-[#1558C9] dark:hover:text-[#60A5FA] transition-colors">
-              Phòng thí nghiệm
+            <a href="/#cach-hoc" className="text-[#F4F8FC]/70 hover:text-[#48D597] transition-colors">
+              Cách học
             </a>
-            <a href="/#cach-hoc" className="hover:text-[#1558C9] dark:hover:text-[#60A5FA] transition-colors">
-              Khối kiến thức
+            <a href="/#mo-phong-tieu-bieu" className="text-[#F4F8FC]/70 hover:text-[#48D597] transition-colors">
+              Ví dụ mô phỏng
             </a>
-            <a href="/tai-lieu" className="text-[#1558C9] dark:text-[#60A5FA] font-bold border-b-2 border-[#1558C9] dark:border-[#60A5FA] pb-1">
+            <a href="/tai-lieu" className="text-[#48D597] font-semibold border-b-2 border-[#48D597] pb-1">
               Kho tài liệu Vật lý
             </a>
           </nav>
 
-          <div className="hidden md:flex items-center gap-2.5">
-            <ThemeToggle />
+          <div className="hidden md:flex items-center gap-3">
             <a
               href="/mo-phong"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3.5 py-2 text-xs font-semibold text-foreground transition-all hover:bg-muted"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#36D9E8]/40 bg-[#36D9E8]/10 px-4 py-2 text-xs font-semibold text-[#36D9E8] transition-all hover:bg-[#36D9E8]/20 hover:border-[#36D9E8]"
             >
-              <Compass className="size-3.5 text-[#1558C9] dark:text-[#60A5FA]" />
               <span>Vào phòng Lab</span>
-              <ExternalLink className="size-3 opacity-60" />
+              <ExternalLink className="size-3" />
             </a>
           </div>
 
-          <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
-            <button
-              type="button"
-              className="p-2 text-foreground"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="md:hidden text-[#F4F8FC] p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
         </div>
 
         {/* Mobile dropdown */}
         {mobileMenuOpen && (
-          <div className="border-b border-border bg-card px-5 py-4 md:hidden space-y-3 animate-in fade-in duration-150">
-            <a href="/#phuong-phap" className="block text-sm font-medium text-foreground py-1" onClick={() => setMobileMenuOpen(false)}>
+          <div className="border-b border-[#091426] bg-[#050B18] px-5 py-4 md:hidden space-y-3">
+            <a href="/#phuong-phap" className="block text-sm text-[#F4F8FC]/80 py-1" onClick={() => setMobileMenuOpen(false)}>
               Phương pháp học
             </a>
-            <a href="/#phong-thi-nghiem" className="block text-sm font-medium text-foreground py-1" onClick={() => setMobileMenuOpen(false)}>
-              Phòng thí nghiệm
+            <a href="/#cach-hoc" className="block text-sm text-[#F4F8FC]/80 py-1" onClick={() => setMobileMenuOpen(false)}>
+              Cách học
             </a>
-            <a href="/#cach-hoc" className="block text-sm font-medium text-foreground py-1" onClick={() => setMobileMenuOpen(false)}>
-              Khối kiến thức
+            <a href="/#mo-phong-tieu-bieu" className="block text-sm text-[#F4F8FC]/80 py-1" onClick={() => setMobileMenuOpen(false)}>
+              Ví dụ mô phỏng
             </a>
-            <a href="/tai-lieu" className="block text-sm font-bold text-[#1558C9] dark:text-[#60A5FA] py-1" onClick={() => setMobileMenuOpen(false)}>
+            <a href="/tai-lieu" className="block text-sm text-[#48D597] font-semibold py-1" onClick={() => setMobileMenuOpen(false)}>
               Kho tài liệu Vật lý
             </a>
             <a
               href="/mo-phong"
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#1558C9] py-2.5 text-xs font-bold text-white shadow-sm"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#36D9E8] pt-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <span>Vào phòng Lab ({APP_CONFIG.totalLessons} bài)</span>
-              <ExternalLink className="size-3.5" />
+              Vào phòng Lab ↗
             </a>
           </div>
         )}
       </header>
 
       <main className="flex-1 pb-20">
-        {/* 2. Hero Section: Bright Academic */}
-        <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-[#F6F9FE] via-[#FFFFFF] to-[#FFFFFF] dark:from-[#182235]/40 dark:via-[#101827] dark:to-[#101827] px-5 py-12 sm:px-8 sm:py-16 transition-colors duration-200">
-          <div className="mx-auto max-w-4xl text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#2563EB]/20 bg-[#EAF2FF] dark:bg-[#1E2D42] px-4 py-1.5 text-xs font-bold text-[#1558C9] dark:text-[#60A5FA]">
-              <BookOpen className="size-3.5 text-[#0F766E] dark:text-[#2DD4BF]" />
+        {/* Prominent Google Drive Hero Section as strictly specified in prompt */}
+        <section className="relative overflow-hidden border-b border-[#091426] bg-gradient-to-b from-[#091426]/70 via-[#050B18] to-[#050B18] px-5 py-14 sm:px-8 sm:py-20">
+          <div className="mx-auto max-w-4xl text-center space-y-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#48D597]/30 bg-[#48D597]/10 px-4 py-1.5 text-xs font-medium text-[#48D597]">
+              <BookOpen className="size-3.5" />
               <span>GOOGLE DRIVE · THƯ VIỆN KHOA HỌC SỐ</span>
             </div>
 
-            <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl text-[#172033] dark:text-white">
-              THƯ VIỆN TÀI LIỆU VẬT LÍ THPT
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl text-[#F4F8FC]">
+              THƯ VIỆN TÀI LIỆU VẬT LÝ THPT
             </h1>
 
-            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-[#1558C9] dark:text-[#60A5FA] font-bold sm:text-base">
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#36D9E8] font-semibold sm:text-lg">
               Kho tài liệu tổng hợp kiến thức, lý thuyết và công thức Vật lí THPT phục vụ quá trình học tập và ôn luyện.
             </p>
 
-            <p className="mx-auto max-w-xl text-xs leading-relaxed text-muted-foreground">
-              Toàn bộ tài liệu chính thức được lưu trữ tập trung trên Google Drive của TamGiangPhysics. Bạn có thể mở trực tiếp thư mục công khai để xem và tải về tài liệu chuẩn định dạng PDF.
+            <p className="mx-auto max-w-xl text-xs leading-relaxed text-[#F4F8FC]/70">
+              Tri thức được hệ thống hóa – Kiến thức được kết nối – Tư duy được khai mở. Toàn bộ tài liệu chính thức được lưu trữ tập trung trên Google Drive của TamGiangPhysics, truy cập công khai và tải về nhanh chóng.
             </p>
 
-            {/* Prominent Google Drive CTA Buttons */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            {/* Prominent Google Drive CTA Button */}
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
               <a
                 href={APP_CONFIG.googleDriveFolderUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 rounded-xl bg-[#1558C9] px-6 py-3.5 text-sm font-bold text-white shadow-md shadow-[#1558C9]/25 transition-all hover:bg-[#1146a1] hover:scale-[1.02]"
+                className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-[#48D597] to-[#36D9E8] px-6 py-3.5 text-sm font-bold text-[#050B18] shadow-lg shadow-[#48D597]/20 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#36D9E8]/30 focus:outline-none focus:ring-2 focus:ring-[#36D9E8]"
               >
-                <FolderOpen className="size-4" />
-                <span>Mở toàn bộ Kho Google Drive</span>
+                <FolderOpen className="size-4.5" />
+                <span>MỞ KHO TÀI LIỆU GOOGLE DRIVE</span>
                 <ExternalLink className="size-4" />
               </a>
 
               <button
                 type="button"
-                onClick={() => setShowDriveEmbed(!showDriveEmbed)}
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+                onClick={() => setShowEmbedPreview(!showEmbedPreview)}
+                className="inline-flex items-center gap-2 rounded-xl border border-[#36D9E8]/40 bg-[#091426]/80 px-5 py-3.5 text-xs font-semibold text-[#36D9E8] hover:bg-[#36D9E8]/10 transition-colors"
               >
-                <FileText className="size-4 text-[#0F766E] dark:text-[#2DD4BF]" />
-                <span>{showDriveEmbed ? "Ẩn khung xem Google Drive" : "Xem trước trong trang (Embed)"}</span>
+                <Eye className="size-4" />
+                <span>{showEmbedPreview ? "Ẩn khung xem trực tiếp" : "Xem trực tiếp trên trang"}</span>
               </button>
             </div>
 
-            <div className="pt-2 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <ShieldCheck className="size-4 text-[#0F766E] dark:text-[#2DD4BF]" />
-              <span>Kho tài liệu chính thức của Trường THPT Tam Giang</span>
+            {/* Drive Permission info */}
+            <div className="mx-auto flex max-w-md items-center justify-center gap-2 text-[11px] text-[#F4F8FC]/60">
+              <ShieldCheck className="size-3.5 text-[#48D597]" />
+              <span>Quyền truy cập: <strong>Anyone with the link – Viewer</strong> (Xem và tải về miễn phí)</span>
+            </div>
+
+            {/* Search Input */}
+            <div className="mx-auto mt-6 max-w-xl">
+              <div className="relative flex items-center">
+                <Search className="absolute left-4 size-4 text-[#36D9E8]" />
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm danh mục: công thức, lý thuyết, đề thi, sai số..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full rounded-xl border border-[#091426] bg-[#091426]/70 py-3.5 pl-11 pr-4 text-sm text-[#F4F8FC] placeholder-[#F4F8FC]/40 outline-none transition-all focus:border-[#36D9E8] focus:ring-1 focus:ring-[#36D9E8]"
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* 3. Search and Grade Filter Bar */}
-        <section className="mx-auto max-w-6xl px-5 pt-10 sm:px-8 space-y-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            {/* Search Input */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Tìm công thức, chuyên đề, lớp 10, 11, 12..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl border border-border bg-card py-2.5 pl-10 pr-4 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none transition-all focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]"
-              />
-            </div>
-
-            {/* Grade Tabs */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-              {[
-                { id: "all", label: "Tất cả chuyên đề" },
-                { id: "10", label: "Lớp 10" },
-                { id: "11", label: "Lớp 11" },
-                { id: "12", label: "Lớp 12" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setSelectedGrade(tab.id)}
-                  className={`rounded-lg px-3.5 py-2 font-semibold transition-colors whitespace-nowrap ${
-                    selectedGrade === tab.id
-                      ? "bg-[#1558C9] text-white shadow-xs"
-                      : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Optional Google Drive Embed Preview */}
-          {showDriveEmbed && (
-            <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 space-y-3 shadow-sm animate-in fade-in duration-200">
+        {/* Embedded Google Drive Preview (if user toggles) */}
+        {showEmbedPreview && (
+          <section className="mx-auto max-w-6xl px-5 pt-8 sm:px-8">
+            <div className="rounded-2xl border border-[#36D9E8]/30 bg-[#091426]/80 p-4 sm:p-6 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <FolderOpen className="size-4 text-[#1558C9] dark:text-[#60A5FA]" />
-                  <h3 className="text-sm font-bold text-foreground">
-                    Khung xem trực tiếp Google Drive
+                  <FolderOpen className="size-4 text-[#36D9E8]" />
+                  <h3 className="text-sm font-semibold text-[#F4F8FC]">
+                    Khung duyệt thư mục Google Drive trực tiếp
                   </h3>
                 </div>
                 <a
                   href={APP_CONFIG.googleDriveFolderUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#1558C9] dark:text-[#60A5FA] hover:underline"
+                  className="text-xs text-[#48D597] hover:underline flex items-center gap-1"
                 >
-                  <span>Mở tab mới</span>
+                  <span>Mở toàn màn hình</span>
                   <ExternalLink className="size-3" />
                 </a>
               </div>
-
-              <div className="relative h-[480px] w-full overflow-hidden rounded-xl border border-border bg-secondary">
+              <div className="relative h-[480px] w-full overflow-hidden rounded-xl border border-[#091426] bg-[#050B18]">
                 <iframe
                   src={APP_CONFIG.googleDriveEmbedUrl}
-                  title="Google Drive Folder TamGiangPhysics"
+                  title="Google Drive TamGiangPhysics"
                   className="size-full border-0"
-                  loading="lazy"
+                  allow="fullscreen"
                 />
               </div>
-              <p className="text-[11px] text-muted-foreground">
-                Lưu ý: Nếu Google Drive yêu cầu đăng nhập hoặc không hiển thị do chính sách bảo mật trình duyệt, vui lòng bấm nút "Mở toàn bộ Kho Google Drive" ở trên để truy cập trực tiếp.
-              </p>
             </div>
-          )}
+          </section>
+        )}
 
-          {/* Results Summary */}
-          <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-b border-border pb-3">
-            <span>Hiển thị <strong>{filteredCategories.length}</strong> danh mục tài liệu</span>
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="text-[#1558C9] dark:text-[#60A5FA] font-semibold hover:underline"
-              >
-                Xóa bộ lọc tìm kiếm
-              </button>
-            )}
+        {/* Filters & Content Area */}
+        <section className="mx-auto max-w-6xl px-5 pt-10 sm:px-8">
+          {/* Grade Filter */}
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#091426] bg-[#091426]/40 p-4 backdrop-blur-sm">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-medium text-[#F4F8FC]/60 mr-1 flex items-center gap-1">
+                <GraduationCap className="size-3.5" /> Lọc theo khối lớp:
+              </span>
+              {[
+                { id: "all", label: "Tất cả khối lớp" },
+                { id: "10", label: "Lớp 10" },
+                { id: "11", label: "Lớp 11" },
+                { id: "12", label: "Lớp 12" },
+              ].map((grade) => (
+                <button
+                  key={grade.id}
+                  type="button"
+                  onClick={() => setSelectedGrade(grade.id)}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                    selectedGrade === grade.id
+                      ? "bg-[#48D597] text-[#050B18] font-semibold"
+                      : "bg-[#050B18] text-[#F4F8FC]/70 hover:text-[#F4F8FC] hover:bg-[#050B18]/80 border border-[#091426]"
+                  }`}
+                >
+                  {grade.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-1.5 text-xs text-[#36D9E8]">
+              <Sparkles className="size-3.5" />
+              <span>Đang cập nhật liên tục</span>
+            </div>
           </div>
 
-          {/* Category Cards Grid */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredCategories.map((cat) => (
-              <div
-                key={cat.id}
-                className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-xs transition-all hover:border-[#1558C9]/40 hover:shadow-md group"
-              >
-                <div className="space-y-3.5">
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-md bg-[#EAF2FF] dark:bg-[#1E2D42] px-2.5 py-1 font-mono text-xs font-bold text-[#1558C9] dark:text-[#60A5FA] border border-[#2563EB]/20">
-                      {cat.code}
-                    </span>
-                    <span className="rounded-full bg-[#F0FDF4] dark:bg-[#064E3B]/40 px-2 py-0.5 text-[11px] font-semibold text-[#0F766E] dark:text-[#2DD4BF] border border-[#0F766E]/20">
-                      {cat.gradeLabel}
-                    </span>
+          {/* Drive Folders Grid */}
+          <div className="mt-8 space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-[#36D9E8]">
+                Danh mục kho tài liệu Google Drive
+              </h2>
+              <span className="font-mono text-xs text-[#F4F8FC]/50">
+                {filteredCategories.length} phân loại tài liệu
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {filteredCategories.map((cat) => (
+                <div
+                  key={cat.id}
+                  className="flex flex-col justify-between rounded-2xl border border-[#091426] bg-[#091426]/40 p-6 transition-all hover:border-[#36D9E8]/50 hover:bg-[#091426]/60 group"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#36D9E8]/30 bg-[#36D9E8]/10 px-2.5 py-1 font-mono text-[11px] font-bold text-[#36D9E8]">
+                        <FolderOpen className="size-3.5" />
+                        {cat.code}
+                      </span>
+                      <span className="rounded-md border border-[#48D597]/30 bg-[#48D597]/10 px-2 py-0.5 text-[10px] font-medium text-[#48D597]">
+                        {cat.gradeLabel}
+                      </span>
+                    </div>
+
+                    <h3 className="text-base font-bold text-[#F4F8FC] group-hover:text-[#36D9E8] transition-colors">
+                      {cat.name}
+                    </h3>
+
+                    <p className="text-xs leading-relaxed text-[#F4F8FC]/75">
+                      {cat.description}
+                    </p>
+
+                    <div className="pt-2 border-t border-[#091426]">
+                      <span className="text-[11px] font-medium text-[#F4F8FC]/50 block mb-1.5">
+                        Tài liệu tiêu biểu:
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {cat.topics.map((t) => (
+                          <span
+                            key={t}
+                            className="rounded-md bg-[#050B18] px-2 py-1 text-[11px] text-[#F4F8FC]/80 border border-[#091426]"
+                          >
+                            • {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="text-base font-bold text-foreground group-hover:text-[#1558C9] dark:group-hover:text-[#60A5FA] transition-colors">
-                    {cat.name}
-                  </h3>
+                  <div className="mt-6 flex items-center justify-between border-t border-[#091426] pt-4">
+                    <span className="text-[11px] text-[#48D597] flex items-center gap-1 font-medium">
+                      <CheckCircle2 className="size-3.5" />
+                      Thư mục Google Drive chính thức
+                    </span>
 
-                  <p className="text-xs leading-relaxed text-muted-foreground">
-                    {cat.description}
-                  </p>
-
-                  <div className="pt-2 border-t border-border">
-                    <div className="text-[11px] font-semibold text-foreground mb-1.5">
-                      Chủ đề chính trong thư mục:
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {cat.topics.map((topic, i) => (
-                        <span
-                          key={i}
-                          className="rounded-md bg-secondary px-2 py-1 text-[11px] text-muted-foreground border border-border"
-                        >
-                          {topic}
-                        </span>
-                      ))}
-                    </div>
+                    <a
+                      href={cat.driveFolderUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#36D9E8]/10 border border-[#36D9E8]/40 px-3.5 py-1.5 text-xs font-semibold text-[#36D9E8] hover:bg-[#36D9E8]/20 transition-all"
+                    >
+                      <span>Mở thư mục</span>
+                      <ExternalLink className="size-3" />
+                    </a>
                   </div>
                 </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
-                  <a
-                    href={cat.driveFolderUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1558C9] dark:text-[#60A5FA] hover:underline"
-                  >
-                    <span>Mở thư mục Drive</span>
-                    <ExternalLink className="size-3.5" />
-                  </a>
-
-                  <a
-                    href={cat.driveFolderUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-lg bg-[#1558C9] hover:bg-[#1146a1] text-white px-3 py-1.5 text-xs font-semibold shadow-xs"
-                  >
-                    Tải tài liệu ↗
-                  </a>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          {/* Academic Transparency Note as strictly required */}
-          <div className="mt-12 rounded-2xl border border-border bg-[#F0FDF4] dark:bg-[#064E3B]/30 p-6 sm:p-8 space-y-2">
-            <div className="flex items-center gap-2 text-[#0F766E] dark:text-[#2DD4BF]">
-              <Info className="size-4 shrink-0" />
-              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider">
-                THÔNG TIN KHO LƯU TRỮ VẬT LÝ TAMGIANGPHYSICS
-              </h4>
+          {/* Drive Sync Explanation Notice as required in Section VIII */}
+          <div className="mt-12 rounded-2xl border border-[#091426] bg-[#091426]/30 p-6 sm:p-8 space-y-3">
+            <div className="flex items-center gap-2 text-sm font-semibold text-[#48D597]">
+              <Info className="size-4.5" />
+              <span>Cơ chế cập nhật tài liệu qua Google Drive</span>
             </div>
-            <p className="text-xs leading-relaxed text-foreground">
-              Toàn bộ bài giảng, tài liệu tóm tắt và ngân hàng đề thi được lưu trữ trực tiếp trên thư mục Google Drive chính thức do ban biên soạn môn Vật lý trường THPT Tam Giang quản lý. Khi giáo viên cập nhật thêm bài giảng mới trên Google Drive, bạn chỉ cần mở link thư mục để xem ngay phiên bản mới nhất.
+            <p className="text-xs leading-relaxed text-[#F4F8FC]/70 max-w-3xl">
+              Kho tài liệu TamGiangPhysics hiện được kết nối trực tiếp với thư mục Google Drive chính thức được cung cấp. Mọi tài liệu mới được tải lên thư mục này sẽ hiển thị ngay cho học sinh khi mở liên kết Drive. Website không sử dụng đường dẫn tệp giả hoặc nút tải giả.
             </p>
+            <div className="pt-2">
+              <a
+                href={APP_CONFIG.googleDriveFolderUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#36D9E8] hover:underline"
+              >
+                <span>Mở thư mục tổng hợp trên Google Drive</span>
+                <ChevronRight className="size-3" />
+              </a>
+            </div>
           </div>
         </section>
       </main>
 
+      {/* Footer */}
       <Footer />
     </div>
   );

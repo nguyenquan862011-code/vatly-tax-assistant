@@ -1,6 +1,4 @@
 import { describe, expect, it } from "vitest";
-import * as fs from "node:fs";
-import * as path from "node:path";
 
 describe("TamGiangPhysics Brand and Physics Logic", () => {
   it("verifies Cauchy prism dispersion physics", () => {
@@ -29,41 +27,11 @@ describe("TamGiangPhysics Brand and Physics Logic", () => {
   });
 
   it("verifies presence of official Tam Giang logo assets", () => {
+    const fs = require("fs");
+    const path = require("path");
     const logoPath = path.resolve(__dirname, "../../public/logo-tamgiang.png");
     const faviconPath = path.resolve(__dirname, "../../public/favicon.ico");
     expect(fs.existsSync(logoPath)).toBe(true);
     expect(fs.existsSync(faviconPath)).toBe(true);
-  });
-
-  it("verifies Bright Academic palette tokens exist in styles.css", () => {
-    const cssPath = path.resolve(__dirname, "../styles.css");
-    const cssContent = fs.readFileSync(cssPath, "utf-8");
-
-    // Light theme palette required by prompt
-    expect(cssContent).toContain("#FFFFFF"); // Pure White
-    expect(cssContent).toContain("#F6F9FE"); // Ice White
-    expect(cssContent).toContain("#EAF2FF"); // Soft Blue
-    expect(cssContent).toContain("#2563EB"); // Academic Blue
-    expect(cssContent).toContain("#1558C9"); // Deep Blue
-    expect(cssContent).toContain("#0F766E"); // Science Teal
-    expect(cssContent).toContain("#D9F99D"); // Soft Lime
-    expect(cssContent).toContain("#172033"); // Academic Dark
-
-    // Dark theme palette required by prompt
-    expect(cssContent).toContain("#101827"); // Dark background
-    expect(cssContent).toContain("#182235"); // Dark card
-    expect(cssContent).toContain("#243248"); // Dark secondary
-    expect(cssContent).toContain("#DCE5F2"); // Dark body text
-    expect(cssContent).toContain("#AAB6C8"); // Dark muted
-    expect(cssContent).toContain("#60A5FA"); // Dark link blue
-    expect(cssContent).toContain("#2DD4BF"); // Dark teal accent
-  });
-
-  it("verifies ThemeToggle component exists and exports ThemeToggle", () => {
-    const togglePath = path.resolve(__dirname, "../components/theme-toggle.tsx");
-    expect(fs.existsSync(togglePath)).toBe(true);
-    const content = fs.readFileSync(togglePath, "utf-8");
-    expect(content).toContain("export function ThemeToggle");
-    expect(content).toContain("tamgiang_theme");
   });
 });

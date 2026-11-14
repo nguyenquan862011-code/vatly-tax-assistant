@@ -5,7 +5,7 @@ import capturedCSS from "../styles/pages/mo-phong.css?raw";
 
 export const Route = createFileRoute("/mo-phong")({
   head: () => ({ meta: [{ title: "Mô phỏng Vật Lý | TamGiangPhysics" }] }),
-  staticData: { importedDocument: { html: { "lang": "vi-VN" }, body: { "className": "geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable \x66lex \x6din-h-screen \x77-full \x66lex-col \x61ntialiased", "data-site-import-popup-incomplete": "limit" } } },
+  staticData: { importedDocument: { html: { "className": "light", "lang": "vi-VN", "style": { colorScheme: "light" } as import("react").CSSProperties }, body: { "className": "geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable \x66lex \x6din-h-screen \x77-full \x66lex-col \x61ntialiased", "data-site-import-popup-incomplete": "limit" } } },
   component: Index,
 });
 
@@ -746,19 +746,19 @@ function ImportedSectionLTrNh4() {
 
 function ImportedAsideMuNCTh() {
   return (
-    <aside className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 text-foreground shadow-xs" aria-labelledby="lab-guide-title">
+    <aside className="relative overflow-hidden rounded-3xl border border-[#091426] bg-[#050B18] p-8 text-[#F4F8FC] shadow-xl" aria-labelledby="lab-guide-title">
       <div className="relative max-w-xl space-y-3">
-        <p className="text-[10px] font-bold tracking-[0.2em] text-[#1558C9] dark:text-[#60A5FA] uppercase">Phòng Thí Nghiệm Số TamGiangPhysics</p>
-        <h2 className="text-xl font-bold tracking-tight text-foreground md:text-2xl" id="lab-guide-title">Học thông qua quan sát và tương tác</h2>
-        <p className="text-xs leading-relaxed text-muted-foreground">
+        <p className="text-[10px] font-semibold tracking-[0.2em] text-[#36D9E8] uppercase">Phòng Thí Nghiệm Số TamGiangPhysics</p>
+        <h2 className="text-xl font-bold tracking-tight text-[#F4F8FC] md:text-2xl" id="lab-guide-title">Học thông qua quan sát và tương tác</h2>
+        <p className="text-xs leading-relaxed text-[#F4F8FC]/70">
           Toàn bộ 777 bài học và mô phỏng được biên soạn bám sát chương trình giáo dục phổ thông mới, giúp học sinh nhìn thấy chuyển động, sóng và trường lực một cách sống động.
         </p>
         <div className="pt-2 flex flex-wrap gap-3">
-          <a href="/tai-lieu" className="inline-flex items-center gap-1.5 rounded-xl bg-[#1558C9] hover:bg-[#1146a1] px-4 py-2 text-xs font-semibold text-white shadow-xs transition-colors">
+          <a href="/tai-lieu" className="inline-flex items-center gap-1.5 rounded-full bg-[#48D597] px-4 py-2 text-xs font-semibold text-[#050B18] hover:bg-[#48D597]/90 transition-colors">
             <span>Mở Kho tài liệu Vật lý</span>
             <span>↗</span>
           </a>
-          <a href="/#phuong-phap" className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-secondary px-4 py-2 text-xs font-semibold text-foreground hover:bg-muted transition-colors">
+          <a href="/#phuong-phap" className="inline-flex items-center gap-1.5 rounded-full border border-[#091426] bg-[#091426] px-4 py-2 text-xs font-medium text-[#F4F8FC] hover:border-[#36D9E8]/40 transition-colors">
             <span>Tìm hiểu phương pháp học</span>
           </a>
         </div>

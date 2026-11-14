@@ -24,13 +24,17 @@ export function Logo({
     <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
       {/* Official THPT Tam Giang Emblem Badge */}
       <div className="relative shrink-0 flex items-center justify-center">
+        <div
+          className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#36D9E8]/40 to-[#48D597]/40 blur-[5px] -z-10"
+          aria-hidden="true"
+        />
         <img
           src="/logo-tamgiang.png"
-          alt="Biểu trưng Trường THPT Tam Giang"
+          alt="Logo Trường THPT Tam Giang"
           width={currentSize.icon}
           height={currentSize.icon}
           style={{ width: `${currentSize.icon}px`, height: `${currentSize.icon}px` }}
-          className="rounded-full object-contain border border-[#E2E8F0] dark:border-[#243248] shadow-xs bg-white transition-transform duration-200 hover:scale-105"
+          className="rounded-full object-contain ring-2 ring-[#36D9E8]/50 shadow-[0_0_12px_rgba(54,217,232,0.35)] transition-transform duration-300 hover:scale-105 bg-white"
           loading="eager"
         />
       </div>
@@ -38,19 +42,19 @@ export function Logo({
       {/* Brand Wordmark */}
       {variant !== "icon" && (
         <div className="flex flex-col leading-none">
-          <div className={`font-bold tracking-tight ${currentSize.text} text-[#172033] dark:text-white`}>
+          <div className={`font-semibold tracking-tight ${currentSize.text} text-[#F4F8FC]`}>
             <span>TamGiang</span>
-            <span className="text-[#1558C9] dark:text-[#60A5FA] ml-0.5">
+            <span className="bg-gradient-to-r from-[#48D597] to-[#36D9E8] bg-clip-text text-transparent font-bold">
               Physics
             </span>
           </div>
           {showTagline ? (
-            <span className={`font-mono tracking-wider text-[#0F766E] dark:text-[#2DD4BF] uppercase mt-1 font-semibold ${currentSize.sub}`}>
+            <span className={`font-mono tracking-wider text-[#36D9E8]/90 uppercase mt-1 ${currentSize.sub}`}>
               THPT Tam Giang · Digital Science Lab
             </span>
           ) : (
-            <span className={`text-[#526176] dark:text-[#AAB6C8] text-[10px] mt-0.5 font-medium tracking-tight`}>
-              Trường THPT Tam Giang • 1976
+            <span className={`text-[#F4F8FC]/60 text-[10px] mt-0.5 font-medium tracking-tight`}>
+              Trường THPT Tam Giang
             </span>
           )}
         </div>
