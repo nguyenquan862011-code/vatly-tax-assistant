@@ -552,9 +552,15 @@ function Index() {
 function ImportedHeader() {
   const [accountOpen, setAccountOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const [themeDark, setThemeDark] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const accountTriggerRef = useRef<HTMLButtonElement>(null);
   const navTriggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", themeDark);
+    document.documentElement.classList.toggle("light", !themeDark);
+  }, [themeDark]);
 
   useEffect(() => {
     if (!accountOpen && !navOpen) return;
@@ -609,7 +615,7 @@ function ImportedHeader() {
         <div className="ml-auto flex items-center gap-2 lg:ml-3">
           <div className={"hidden \x73m:\x62lock"}>
             <div className={"flex flex-wrap items-center justify-center gap-2 \x6dd:\x66lex-row"}>
-              <button className={"inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all \x6futline-none \x66ocus-visible:\x62order-ring \x66ocus-visible:\x72ing-[\x33px] \x66ocus-visible:\x72ing-ring/\x350 \x64isabled:\x70ointer-events-none disabled:opacity-50 \x61ria-invalid:\x62order-destructive \x61ria-invalid:\x72ing-destructive/\x320 \x64ark:\x61ria-invalid:\x72ing-destructive/\x340 [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 [&\x5fsvg:\x6eot([\x63lass*='\x73ize-'])]:\x73ize-4 \x62order \x62g-background \x73hadow-xs \x68over:\x62g-accent hover:text-accent-foreground \x64ark:\x62order-input \x64ark:\x62g-input/\x330 \x64ark:\x68over:\x62g-input/\x350 size-9"}>
+              <button onClick={() => setThemeDark((dark) => !dark)} aria-label="Toggle theme" title="Toggle theme" className={"inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all \x6futline-none \x66ocus-visible:\x62order-ring \x66ocus-visible:\x72ing-[\x33px] \x66ocus-visible:\x72ing-ring/\x350 \x64isabled:\x70ointer-events-none disabled:opacity-50 \x61ria-invalid:\x62order-destructive \x61ria-invalid:\x72ing-destructive/\x320 \x64ark:\x61ria-invalid:\x62order-destructive \x64ark:\x61ria-invalid:\x72ing-destructive/\x340 [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 [&\x5fsvg:\x6eot([\x63lass*='\x73ize-'])]:\x73ize-4 \x62order \x62g-background \x73hadow-xs \x68over:\x62g-accent hover:text-accent-foreground \x64ark:\x62order-input \x64ark:\x62g-input/\x330 \x64ark:\x68over:\x62g-input/\x350 size-9"}>
                 <svg className={"hidden [\x68tml.\x64ark_&]:\x62lock"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="4" />
                   <path d="M12 2v2" />
@@ -624,7 +630,6 @@ function ImportedHeader() {
                 <svg className={"hidden [\x68tml.\x6cight_&]:\x62lock"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
                 </svg>
-                <span className={"\x73r-only"}>Toggle theme</span>
               </button>
             </div>
           </div>
@@ -688,6 +693,17 @@ function ImportedHeader() {
                 <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/#giao-trinh" onClick={closeMenus}>Ví dụ mô phỏng</a>
                 <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/#vat-ly-sieu-nham" onClick={closeMenus}>Học cùng VLSN</a>
                 <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/mo-phong" onClick={closeMenus}>Vào phòng lab</a>
+                <div className="mt-1 border-t px-2 pt-2">
+                  <span className="block px-2 py-1.5 text-sm font-medium">Giao diện</span>
+                  <button onClick={() => setThemeDark((dark) => !dark)} aria-label="Toggle theme" title="Toggle theme" className="mx-auto inline-flex size-9 items-center justify-center rounded-md border bg-background shadow-xs transition-colors hover:bg-accent">
+                    <svg className={"hidden [\x68tml.\x64ark_&]:\x62lock size-4"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+                    </svg>
+                    <svg className={"hidden [\x68tml.\x6cight_&]:\x62lock size-4"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+                    </svg>
+                  </button>
+                </div>
               </nav>
             )}
           </div>
