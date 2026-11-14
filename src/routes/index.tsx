@@ -1,11 +1,28 @@
 import type { CSSProperties } from "react";
 import { Fragment } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/site.css?raw";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "VatLy.ai — Nhìn thấy để hiểu sâu hơn" }] }),
+  head: () => ({
+    meta: [
+      { title: "VatLy.ai — Nhìn thấy để hiểu sâu hơn" },
+      {
+        name: "description",
+        content:
+          "Khám phá Vật Lý Phân Tích qua mô phỏng tương tác, bài học trực quan và các chuyên đề dành cho học sinh.",
+      },
+      { property: "og:title", content: "VatLy.ai — Nhìn thấy để hiểu sâu hơn" },
+      {
+        property: "og:description",
+        content:
+          "Khám phá Vật Lý Phân Tích qua mô phỏng tương tác, bài học trực quan và các chuyên đề dành cho học sinh.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   staticData: { importedDocument: { html: { "className": "light", "lang": "vi-VN", "style": { colorScheme: "light" } as import("react").CSSProperties }, body: { "className": "geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable \x66lex \x6din-h-screen \x77-full \x66lex-col \x61ntialiased", "data-site-import-popup-incomplete": "limit" } } },
   component: Index,
 });
@@ -533,9 +550,45 @@ function Index() {
 }
 
 function ImportedHeader() {
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const accountTriggerRef = useRef<HTMLButtonElement>(null);
+  const navTriggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!accountOpen && !navOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setAccountOpen(false);
+      setNavOpen(false);
+      if (navOpen) navTriggerRef.current?.focus();
+      else accountTriggerRef.current?.focus();
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+        setAccountOpen(false);
+        setNavOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [accountOpen, navOpen]);
+
+  const closeMenus = () => {
+    setAccountOpen(false);
+    setNavOpen(false);
+  };
+
   return (
-    <header className={"sticky top-0 z-40 \x62order-b \x62order-lab-line \x62g-lab-paper/\x375 \x62ackdrop-blur-xl \x62ackdrop-saturate-150"}>
-      <div className="mx-auto flex h-18 max-w-6xl items-center gap-3 px-5 sm:px-8">
+    <header ref={headerRef} className={"sticky top-0 z-40 \x62order-b \x62order-lab-line \x62g-lab-paper/\x375 \x62ackdrop-blur-xl \x62ackdrop-saturate-150"}>
+      <div className="relative mx-auto flex h-18 max-w-6xl items-center gap-3 px-5 sm:px-8">
         <a className={"group flex shrink-0 items-center gap-2.5 rounded-lg \x66ocus-visible:\x6futline-2 \x66ocus-visible:\x6futline-offset-4 \x66ocus-visible:\x6futline-lab-green"} aria-label="VatLy.ai — Trang chủ" href="/">
           <div className="inline-flex items-center gap-2.5">
             <span className={"flex shrink-0 items-center justify-center \x62g-[#\x66bfaf6] \x73hadow-xs \x72ing-1 \x72ing-lab-line/\x340 transition-transform duration-200 \x67roup-hover:\x73cale-105 size-10 rounded-xl p-1.5"}>
@@ -575,21 +628,69 @@ function ImportedHeader() {
               </button>
             </div>
           </div>
-          <button className={"inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all \x6futline-none \x66ocus-visible:\x62order-ring \x66ocus-visible:\x72ing-[\x33px] \x66ocus-visible:\x72ing-ring/\x350 \x64isabled:\x70ointer-events-none disabled:opacity-50 \x61ria-invalid:\x62order-destructive \x61ria-invalid:\x72ing-destructive/\x320 \x64ark:\x61ria-invalid:\x72ing-destructive/\x340 [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 [&\x5fsvg:\x6eot([\x63lass*='\x73ize-'])]:\x73ize-4 \x62order \x62g-background \x73hadow-xs \x68over:\x62g-accent hover:text-accent-foreground \x64ark:\x62order-input \x64ark:\x62g-input/\x330 \x64ark:\x68over:\x62g-input/\x350 size-11 rounded-full"} aria-label="Mở menu tài khoản" type="button" id="radix-_r_0_" aria-haspopup="menu" aria-expanded="false" data-state="closed">
-            <svg className="size-5 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M18 20a6 6 0 0 0-12 0" />
-              <circle cx="12" cy="10" r="4" />
-              <circle cx="12" cy="12" r="10" />
-            </svg>
-          </button>
+          <div className="relative" data-import-header-menu>
+            <button
+              ref={accountTriggerRef}
+              className={"inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all \x6futline-none \x66ocus-visible:\x62order-ring \x66ocus-visible:\x72ing-[\x33px] \x66ocus-visible:\x72ing-ring/\x350 \x64isabled:\x70ointer-events-none disabled:opacity-50 \x61ria-invalid:\x62order-destructive \x61ria-invalid:\x72ing-destructive/\x320 \x64ark:\x61ria-invalid:\x72ing-destructive/\x340 [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 [&\x5fsvg:\x6eot([\x63lass*='\x73ize-'])]:\x73ize-4 \x62order \x62g-background \x73hadow-xs \x68over:\x62g-accent hover:text-accent-foreground \x64ark:\x62order-input \x64ark:\x62g-input/\x330 \x64ark:\x68over:\x62g-input/\x350 size-11 rounded-full"}
+              aria-label="Mở menu tài khoản"
+              type="button"
+              aria-haspopup="menu"
+              aria-expanded={accountOpen}
+              aria-controls="account-menu"
+              data-state={accountOpen ? "open" : "closed"}
+              onClick={() => {
+                setAccountOpen((open) => !open);
+                setNavOpen(false);
+              }}
+            >
+              <svg className="size-5 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M18 20a6 6 0 0 0-12 0" />
+                <circle cx="12" cy="10" r="4" />
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            </button>
+            {accountOpen && (
+              <div id="account-menu" className="absolute right-0 top-full z-50 mt-1 w-40 rounded-md border bg-popover p-1 text-popover-foreground shadow-md" role="menu" aria-label="Tài khoản">
+                <a className="relative flex min-h-8 items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent focus:text-accent-foreground" role="menuitem" href="/sign-in?next=%2F" onClick={closeMenus}>
+                  Đăng nhập
+                </a>
+              </div>
+            )}
+          </div>
           <a className={"shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap \x6futline-none \x66ocus-visible:\x62order-ring \x66ocus-visible:\x72ing-[\x33px] \x66ocus-visible:\x72ing-ring/\x350 \x64isabled:\x70ointer-events-none disabled:opacity-50 \x61ria-invalid:\x62order-destructive \x61ria-invalid:\x72ing-destructive/\x320 \x64ark:\x61ria-invalid:\x72ing-destructive/\x340 [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 [&\x5fsvg:\x6eot([\x63lass*='\x73ize-'])]:\x73ize-4 py-2 \x68as-[>\x73vg]:\x70x-3 hidden h-11 rounded-full \x62g-lab-green px-5 text-lab-on-green transition-colors \x68over:\x62g-lab-green/\x390 \x6cg:\x69nline-flex"} href="/mo-phong">Vào phòng lab <svg className="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg></a>
-          <button className={"inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all \x6futline-none \x66ocus-visible:\x62order-ring \x66ocus-visible:\x72ing-[\x33px] \x66ocus-visible:\x72ing-ring/\x350 \x64isabled:\x70ointer-events-none disabled:opacity-50 \x61ria-invalid:\x62order-destructive \x61ria-invalid:\x72ing-destructive/\x320 \x64ark:\x61ria-invalid:\x72ing-destructive/\x340 [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 [&\x5fsvg:\x6eot([\x63lass*='\x73ize-'])]:\x73ize-4 hover:text-accent-foreground \x64ark:\x68over:\x62g-accent/\x350 size-11 text-lab-ink \x68over:\x62g-lab-tint \x6cg:\x68idden"} aria-label="Mở menu điều hướng" type="button" id="radix-_R_4qiuplb_" aria-haspopup="menu" aria-expanded="false" data-state="closed">
-            <svg className="size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M4 5h16" />
-              <path d="M4 12h16" />
-              <path d="M4 19h16" />
-            </svg>
-          </button>
+          <div className="relative lg:hidden" data-import-header-menu>
+            <button
+              ref={navTriggerRef}
+              className={"inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all \x6futline-none \x66ocus-visible:\x62order-ring \x66ocus-visible:\x72ing-[\x33px] \x66ocus-visible:\x72ing-ring/\x350 \x64isabled:\x70ointer-events-none disabled:opacity-50 \x61ria-invalid:\x62order-destructive \x61ria-invalid:\x72ing-destructive/\x320 \x64ark:\x61ria-invalid:\x72ing-destructive/\x340 [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 [&\x5fsvg:\x6eot([\x63lass*='\x73ize-'])]:\x73ize-4 hover:text-accent-foreground \x64ark:\x68over:\x62g-accent/\x350 size-11 text-lab-ink \x68over:\x62g-lab-tint"}
+              aria-label="Mở menu điều hướng"
+              type="button"
+              aria-haspopup="menu"
+              aria-expanded={navOpen}
+              aria-controls="navigation-menu"
+              data-state={navOpen ? "open" : "closed"}
+              onClick={() => {
+                setNavOpen((open) => !open);
+                setAccountOpen(false);
+              }}
+            >
+              <svg className="size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M4 5h16" />
+                <path d="M4 12h16" />
+                <path d="M4 19h16" />
+              </svg>
+            </button>
+            {navOpen && (
+              <nav id="navigation-menu" className="absolute right-0 top-full z-50 mt-2 w-56 rounded-md border bg-popover p-1 text-popover-foreground shadow-md" aria-label="Khám phá Vật Lý">
+                <div className="px-2 py-1.5 text-sm font-medium">Khám phá Vật Lý</div>
+                <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/" onClick={closeMenus}>Trang chủ</a>
+                <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/#phuong-phap" onClick={closeMenus}>Phương pháp</a>
+                <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/#cach-hoc" onClick={closeMenus}>Cách học</a>
+                <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/#giao-trinh" onClick={closeMenus}>Ví dụ mô phỏng</a>
+                <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/#vat-ly-sieu-nham" onClick={closeMenus}>Học cùng VLSN</a>
+                <a className="flex min-h-11 items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent focus:bg-accent" href="/mo-phong" onClick={closeMenus}>Vào phòng lab</a>
+              </nav>
+            )}
+          </div>
         </div>
       </div>
     </header>
