@@ -1,4 +1,6 @@
 - [x] Import vatly.ai home page and preserve its key visual sections.
 - [x] Restore responsive account/navigation menus, lesson preview, and wave experiment controls.
+- [ ] Import the remaining 18 original Topic 1 lessons, preserving their source content and appearance.
+- [ ] Verify all 19 Topic 1 lesson links resolve locally.
 - [ ] Finish desktop/phone review evidence and record imported-page limitations.
 - [ ] Confirm current build and relevant project tests pass.
