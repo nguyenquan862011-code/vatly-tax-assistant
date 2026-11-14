@@ -1,0 +1,4 @@
+- [x] Import vatly.ai home page and preserve its key visual sections.
+- [x] Restore responsive account/navigation menus, lesson preview, and wave experiment controls.
+- [ ] Finish desktop/phone review evidence and record imported-page limitations.
+- [ ] Confirm current build and relevant project tests pass.
