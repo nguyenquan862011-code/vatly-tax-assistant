@@ -599,6 +599,16 @@ function ImportedHeader() {
     };
   }, [accountOpen, navOpen]);
 
+  const openAccountMenu = () => {
+    setNavOpen(false);
+    setAccountOpen((open) => !open);
+  };
+
+  const openNavigationMenu = () => {
+    setAccountOpen(false);
+    setNavOpen((open) => !open);
+  };
+
   const closeMenus = () => {
     setAccountOpen(false);
     setNavOpen(false);
@@ -655,10 +665,7 @@ function ImportedHeader() {
               aria-expanded={accountOpen}
               aria-controls="account-menu"
               data-state={accountOpen ? "open" : "closed"}
-              onClick={() => {
-                setAccountOpen((open) => !open);
-                setNavOpen(false);
-              }}
+              onClick={openAccountMenu}
             >
               <svg className="size-5 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M18 20a6 6 0 0 0-12 0" />
@@ -685,10 +692,7 @@ function ImportedHeader() {
               aria-expanded={navOpen}
               aria-controls="navigation-menu"
               data-state={navOpen ? "open" : "closed"}
-              onClick={() => {
-                setNavOpen((open) => !open);
-                setAccountOpen(false);
-              }}
+              onClick={openNavigationMenu}
             >
               <svg className="size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M4 5h16" />
