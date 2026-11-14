@@ -49,6 +49,32 @@ function isH3SwallowedErrorBody(body: string): boolean {
 // twice and renders garbled.
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const url = new URL(request.url);
+
+    // Seamless proxy for interactive physics simulations from vatly.ai
+    if (url.pathname.startsWith("/api/mo-phong/")) {
+      const targetUrl = "https://vatly.ai" + url.pathname + url.search;
+      try {
+        const upstream = await fetch(targetUrl, {
+          method: request.method,
+          headers: {
+            "User-Agent": request.headers.get("User-Agent") || "Mozilla/5.0",
+            "Accept": request.headers.get("Accept") || "*/*",
+          },
+        });
+        const headers = new Headers(upstream.headers);
+        headers.set("Access-Control-Allow-Origin", "*");
+        // Keep simulation running cleanly without third-party iframe frame-ancestor blocks
+        headers.delete("X-Frame-Options");
+        return new Response(upstream.body, {
+          status: upstream.status,
+          headers,
+        });
+      } catch (err) {
+        console.error("Simulation proxy error for", targetUrl, err);
+      }
+    }
+
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
