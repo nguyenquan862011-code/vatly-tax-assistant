@@ -82,11 +82,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại" },
+      { name: "description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số." },
+      { name: "author", content: "Trần Đình Nguyên Quân" },
+      { property: "og:title", content: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại" },
+      { property: "og:description", content: "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -117,7 +117,7 @@ declare module "@tanstack/react-router" {
 function RootShell({ children }: { children: ReactNode }) {
   const importedDocument = useImportedMatches({ select: matches => matches.at(-1)?.staticData.importedDocument });
   return (
-    <html lang="en" {...importedDocument?.html}>
+    <html lang="vi" {...importedDocument?.html}>
       <head>
         <style href="site-import-inline" precedence="imported-inline">{"@layer imported-inline;"}</style>
         <HeadContent />

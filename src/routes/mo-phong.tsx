@@ -1,8 +1,10 @@
+import { Logo } from "@/components/logo";
+import { Footer } from "@/components/footer";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/mo-phong.css?raw";
 
 export const Route = createFileRoute("/mo-phong")({
-  head: () => ({ meta: [{ title: "Mô phỏng Vật Lý | VatLy.ai" }] }),
+  head: () => ({ meta: [{ title: "Mô phỏng Vật Lý | TamGiangPhysics" }] }),
   staticData: { importedDocument: { html: { "className": "light", "lang": "vi-VN", "style": { colorScheme: "light" } as import("react").CSSProperties }, body: { "className": "geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable \x66lex \x6din-h-screen \x77-full \x66lex-col \x61ntialiased", "data-site-import-popup-incomplete": "limit" } } },
   component: Index,
 });
@@ -54,6 +56,7 @@ function Index() {
                 </div>
                 <ImportedAsideMuNCTh />
               </div>
+              <Footer />
             </div>
           </main>
         </div>
@@ -74,17 +77,9 @@ function ImportedHeader() {
           </svg>
         </button>
       </span>
-      <a className={"group mr-2 flex shrink-0 items-center gap-2 rounded-md \x66ocus-visible:\x72ing-2 \x66ocus-visible:\x72ing-ring"} aria-label="Vật Lý AI — về trang chủ" href="/">
-        <div className="inline-flex items-center gap-2.5">
-          <span className={"flex shrink-0 items-center justify-center \x62g-[#\x66bfaf6] \x73hadow-xs \x72ing-1 \x72ing-lab-line/\x340 transition-transform duration-200 \x67roup-hover:\x73cale-105 size-8 rounded-lg p-1"}>
-            <img className="size-full object-contain" style={{ color: "transparent" }} alt="" loading="lazy" width="19" height="22" decoding="async" src="/site-assets/ff989603c215dec7-57cb04569c9a4790b0d0a4da1edbd171.png" />
-          </span>
-          <span className="flex flex-col text-left">
-            <span className="block text-foreground text-sm font-semibold tracking-tight">VatLy.ai</span>
-          </span>
-        </div>
+      <a className="group mr-2 flex shrink-0 items-center gap-2 rounded-md focus-visible:ring-2 focus-visible:ring-ring" aria-label="TamGiangPhysics — về trang chủ" href="/">
+        <Logo size="sm" />
       </a>
-      <span className={"hidden h-5 w-px \x62g-border \x6dd:\x62lock"} aria-hidden="true" />
       <nav className="min-w-0 flex-1" aria-label="Vị trí bài học">
         <ol className="flex min-w-0 items-center gap-1 text-xs">
           <li className="text-muted-foreground">Thư viện mô phỏng</li>
@@ -290,7 +285,7 @@ function ImportedAsideGiOTrNh() {
           </div>
         </div>
         <footer className={"\x73pace-y-3 \x62order-t \x62order-sidebar-border p-3"}>
-          <a className={"group relative flex items-center gap-3 overflow-hidden rounded-2xl \x62g-lab-deep p-3 text-lab-on-deep transition-transform \x6futline-none \x68over:\x2dtranslate-y-0.\x35 \x66ocus-visible:\x72ing-2 \x66ocus-visible:\x72ing-lab-lime \x6dotion-reduce:\x74ransform-none"} href={"https://www.vatlysieunham.edu.vn/?utm_source=vatly.ai&utm_medium=referral&utm_campaign=lab"} rel="noopener sponsored" target="_blank">
+          <a className={"group relative flex items-center gap-3 overflow-hidden rounded-2xl \x62g-lab-deep p-3 text-lab-on-deep transition-transform \x6futline-none \x68over:\x2dtranslate-y-0.\x35 \x66ocus-visible:\x72ing-2 \x66ocus-visible:\x72ing-lab-lime \x6dotion-reduce:\x74ransform-none"} href="/tai-lieu">
             <span className={"absolute -top-8 -right-8 size-24 \x61nimate-lab-spin rounded-full \x62order \x62order-dashed \x62order-lab-lime/\x330"} aria-hidden="true" />
             <span className={"flex size-9 shrink-0 items-center justify-center rounded-xl \x62g-lab-lime text-lab-deep"}>
               <svg className="size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -300,8 +295,8 @@ function ImportedAsideGiOTrNh() {
               </svg>
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block text-[10px] tracking-wider text-lab-lime uppercase">Học trực tiếp · Hà Nội</span>
-              <span className="block truncate text-xs font-semibold">Vật Lý Siêu Nhẩm — Vật Lý Phân Tích</span>
+              <span className="block text-[10px] tracking-wider text-lab-lime uppercase">Phương pháp nghiên cứu</span>
+              <span className="block truncate text-xs font-semibold">TamGiangPhysics — Khám phá bản chất</span>
             </span>
             <svg className={"size-4 shrink-0 text-lab-lime transition-transform \x67roup-hover:\x74ranslate-x-0.\x35 \x67roup-hover:\x2dtranslate-y-0.\x35"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M7 7h10v10" />
@@ -751,31 +746,21 @@ function ImportedSectionLTrNh4() {
 
 function ImportedAsideMuNCTh() {
   return (
-    <aside className={"relative overflow-hidden rounded-3xl \x62g-lab-deep p-6 text-lab-on-deep md:p-8"} aria-labelledby="partner-promo-title">
-      <div className={"absolute -top-24 -left-16 size-72 \x61nimate-lab-aurora rounded-full \x62g-lab-green/\x340 \x62lur-3xl"} aria-hidden="true" />
-      <svg className={"absolute -right-10 -bottom-10 hidden size-44 \x74ext-lab-lime/\x370 \x6dd:\x62lock"} viewBox="0 0 200 200" aria-hidden="true">
-        <defs>
-          <path id="_S_1_" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-        </defs>
-        <g className={"\x6frigin-center \x61nimate-lab-spin [transform-box:view-box]"}>
-          <text className={"\x66ill-current \x66ont-mono text-[11px] tracking-[0.14em] uppercase"}>
-            <textPath {...({ href: "#_S_1_" } as any)}>Định hướng đúng · Truyền cảm hứng · Rồi mới dạy học · </textPath>
-          </text>
-        </g>
-        <circle className={"fill-none \x73troke-current"} cx="100" cy="100" r="46" strokeDasharray="2 6" />
-        <text className={"\x66ill-current text-[26px] font-bold tracking-tight"} x="100" y="108" textAnchor="middle">VLSN</text>
-      </svg>
-      <div className="relative max-w-xl">
-        <p className="text-[10px] font-semibold tracking-[0.2em] text-lab-lime uppercase">Đối tác đào tạo · Tài trợ</p>
-        <h2 className="mt-3 text-2xl leading-tight font-semibold tracking-tight md:text-3xl" id="partner-promo-title">Muốn được thầy phân tích trực tiếp?</h2>
-        <p className={"mt-3 text-sm leading-6 \x74ext-lab-on-deep/\x375"}>Học phương pháp <strong className="text-lab-on-deep">Vật Lý Phân Tích</strong> tại Vật Lý Siêu Nhẩm — đi sâu vào bản chất hiện tượng thay vì học vẹt công thức.</p>
-        <ul className="mt-5 grid gap-2 text-sm sm:grid-cols-2">
-          <li className={"flex gap-2 \x74ext-lab-on-deep/\x385"}><svg className="mt-0.5 size-4 shrink-0 text-lab-lime" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Lộ trình cá nhân hóa sau bài kiểm tra đầu vào</li>
-          <li className={"flex gap-2 \x74ext-lab-on-deep/\x385"}><svg className="mt-0.5 size-4 shrink-0 text-lab-lime" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Mất gốc? Kèm riêng miễn phí đến khi theo kịp lớp</li>
-        </ul>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a className={"inline-flex h-11 items-center gap-2 rounded-full \x62g-lab-lime px-5 text-sm font-semibold text-lab-deep transition-transform \x68over:\x2dtranslate-y-0.\x35 \x66ocus-visible:\x72ing-2 \x66ocus-visible:\x72ing-lab-on-deep \x66ocus-visible:\x6futline-none \x6dotion-reduce:\x74ransform-none"} href={"https://www.vatlysieunham.edu.vn/?utm_source=vatly.ai&utm_medium=referral&utm_campaign=lab"} rel="noopener sponsored" target="_blank">Đăng ký tư vấn miễn phí <svg className="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg></a>
-          <a className={"inline-flex h-11 items-center gap-2 rounded-full \x62order \x62order-lab-on-deep/\x320 px-5 text-sm font-medium transition-colors \x68over:\x62g-lab-on-deep/\x310 \x66ocus-visible:\x72ing-2 \x66ocus-visible:\x72ing-lab-lime \x66ocus-visible:\x6futline-none"} href="tel:+84888853399"><svg className="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg> 088 885 3399</a>
+    <aside className="relative overflow-hidden rounded-3xl border border-[#091426] bg-[#050B18] p-8 text-[#F4F8FC] shadow-xl" aria-labelledby="lab-guide-title">
+      <div className="relative max-w-xl space-y-3">
+        <p className="text-[10px] font-semibold tracking-[0.2em] text-[#36D9E8] uppercase">Phòng Thí Nghiệm Số TamGiangPhysics</p>
+        <h2 className="text-xl font-bold tracking-tight text-[#F4F8FC] md:text-2xl" id="lab-guide-title">Học thông qua quan sát và tương tác</h2>
+        <p className="text-xs leading-relaxed text-[#F4F8FC]/70">
+          Toàn bộ 777 bài học và mô phỏng được biên soạn bám sát chương trình giáo dục phổ thông mới, giúp học sinh nhìn thấy chuyển động, sóng và trường lực một cách sống động.
+        </p>
+        <div className="pt-2 flex flex-wrap gap-3">
+          <a href="/tai-lieu" className="inline-flex items-center gap-1.5 rounded-full bg-[#48D597] px-4 py-2 text-xs font-semibold text-[#050B18] hover:bg-[#48D597]/90 transition-colors">
+            <span>Mở Kho tài liệu Vật lý</span>
+            <span>↗</span>
+          </a>
+          <a href="/#phuong-phap" className="inline-flex items-center gap-1.5 rounded-full border border-[#091426] bg-[#091426] px-4 py-2 text-xs font-medium text-[#F4F8FC] hover:border-[#36D9E8]/40 transition-colors">
+            <span>Tìm hiểu phương pháp học</span>
+          </a>
         </div>
       </div>
     </aside>

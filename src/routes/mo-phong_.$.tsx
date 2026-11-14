@@ -10,16 +10,23 @@ export const Route = createFileRoute("/mo-phong_/$")({
   head: ({ params }) => {
     const lesson = getLessonByPath(params._splat || "");
     const title = lesson
-      ? `${lesson.name} — Mô phỏng Vật Lý | VatLy.ai`
-      : "Mô phỏng Vật Lý | VatLy.ai";
+      ? `${lesson.name} — Mô phỏng Vật Lý | TamGiangPhysics`
+      : "Mô phỏng Vật Lý | TamGiangPhysics";
     return {
       meta: [
         { title },
         {
           name: "description",
           content: lesson
-            ? `${lesson.name} - ${lesson.topic} (${lesson.grade}). Nền tảng mô phỏng Vật Lý tương tác VatLy.ai.`
-            : "Mô phỏng Vật Lý tương tác VatLy.ai",
+            ? `${lesson.name} - ${lesson.topic} (${lesson.grade}). Nền tảng học tập & mô phỏng Vật lý tương tác TamGiangPhysics.`
+            : "Nền tảng học tập & mô phỏng Vật lý tương tác TamGiangPhysics",
+        },
+        { property: "og:title", content: title },
+        {
+          property: "og:description",
+          content: lesson
+            ? `${lesson.name} - ${lesson.topic} (${lesson.grade}). Nền tảng học tập & mô phỏng Vật lý tương tác TamGiangPhysics.`
+            : "Nền tảng học tập & mô phỏng Vật lý tương tác TamGiangPhysics",
         },
       ],
     };

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MoPhongRouteImport } from './routes/mo-phong'
+import { Route as TaiLieuRouteImport } from './routes/tai-lieu'
 import { Route as MoPhongSplatRouteImport } from './routes/mo-phong_.$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const MoPhongRoute = MoPhongRouteImport.update({
   path: '/mo-phong',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TaiLieuRoute = TaiLieuRouteImport.update({
+  id: '/tai-lieu',
+  path: '/tai-lieu',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MoPhongSplatRoute = MoPhongSplatRouteImport.update({
   id: '/mo-phong_/$',
   path: '/mo-phong/$',
@@ -32,30 +38,34 @@ const MoPhongSplatRoute = MoPhongSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mo-phong': typeof MoPhongRoute
+  '/tai-lieu': typeof TaiLieuRoute
   '/mo-phong/$': typeof MoPhongSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mo-phong': typeof MoPhongRoute
+  '/tai-lieu': typeof TaiLieuRoute
   '/mo-phong/$': typeof MoPhongSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/mo-phong': typeof MoPhongRoute
+  '/tai-lieu': typeof TaiLieuRoute
   '/mo-phong_/$': typeof MoPhongSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/mo-phong' | '/mo-phong/$'
+  fullPaths: '/' | '/mo-phong' | '/tai-lieu' | '/mo-phong/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/mo-phong' | '/mo-phong/$'
-  id: '__root__' | '/' | '/mo-phong' | '/mo-phong_/$'
+  to: '/' | '/mo-phong' | '/tai-lieu' | '/mo-phong/$'
+  id: '__root__' | '/' | '/mo-phong' | '/tai-lieu' | '/mo-phong_/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MoPhongRoute: typeof MoPhongRoute
+  TaiLieuRoute: typeof TaiLieuRoute
   MoPhongSplatRoute: typeof MoPhongSplatRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoPhongRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tai-lieu': {
+      id: '/tai-lieu'
+      path: '/tai-lieu'
+      fullPath: '/tai-lieu'
+      preLoaderRoute: typeof TaiLieuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mo-phong_/$': {
       id: '/mo-phong_/$'
       path: '/mo-phong/$'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MoPhongRoute: MoPhongRoute,
+  TaiLieuRoute: TaiLieuRoute,
   MoPhongSplatRoute: MoPhongSplatRoute,
 }
 export const routeTree = rootRouteImport

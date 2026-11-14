@@ -314,3 +314,33 @@
   --tracking-widest: .1em;
 }
 /* site-import tokens: end */
+
+/* TamGiangPhysics Scientific Design Tokens & Utilities */
+:root {
+  --deep-navy: #050B18;
+  --midnight-blue: #091426;
+  --emerald-green: #48D597;
+  --neon-cyan: #36D9E8;
+  --soft-white: #F4F8FC;
+}
+
+.glass-card {
+  background: rgba(9, 20, 38, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(54, 217, 232, 0.15);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 24px -4px rgba(72, 213, 151, 0.25);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 24px -4px rgba(54, 217, 232, 0.25);
+}
+
+.text-gradient-science {
+  background: linear-gradient(135deg, #48D597 0%, #36D9E8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
