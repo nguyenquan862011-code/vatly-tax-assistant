@@ -1,0 +1,255 @@
+{
+  "source": "https://vatly.ai/",
+  "preview": "http://localhost:8080/",
+  "observations": [
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "scroll": "top; page scrolled only to each control when verifying",
+      "control": "Hero wave experiment wavelength slider",
+      "trigger": "Change slider one step with ArrowRight",
+      "expected": "Displayed wavelength and wave rings update together",
+      "observed": "Slider 1.6 → 1.8; accompanying value currently remains 1,6 cm",
+      "status": "failed—the value label does not follow the slider",
+      "evidence": "evidence/desktop-wave-controls.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "scroll": "hero remains visible at top",
+      "control": "Hero wave experiment pause/resume",
+      "trigger": "Activate pause icon",
+      "expected": "Pause animation and expose play control",
+      "observed": "Play control visible after pause; aria-pressed=false",
+      "status": "passed",
+      "evidence": "evidence/desktop-wave-controls.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "scroll": "hero remains visible at top",
+      "control": "Wave source keyboard move and reset",
+      "trigger": "ArrowRight on S1 then reset",
+      "expected": "Move source, then restore initial position and wavelength",
+      "observed": "S1 x 9 → 9.3; reset returned x=9 and λ=1.6",
+      "status": "passed",
+      "evidence": "evidence/desktop-wave-controls.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "scroll": "scroll to #giao-trinh",
+      "control": "Sample lesson open",
+      "trigger": "Click “Chạy thử ngay tại đây”",
+      "expected": "Open the sample lesson",
+      "observed": "Loaded Bài 1 – Làm quen với môn Vật lý (Lý thuyết) from vatly.ai in an iframe",
+      "status": "passed",
+      "evidence": "evidence/desktop-sample-lesson.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "scroll": "header / account menu",
+      "control": "Account menu",
+      "trigger": "Click account icon then Escape",
+      "expected": "Show login link; Escape closes and returns focus",
+      "observed": "Login link visible=False; expanded=false",
+      "status": "failed—the menu test ran after the lesson overlay and the login link was not visible",
+      "evidence": "evidence/desktop-top.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "scroll": "header / navigation menu",
+      "control": "Phone navigation",
+      "trigger": "Click navigation button then Escape",
+      "expected": "Show home, section anchors, and lab link",
+      "observed": "not-present",
+      "status": "not present on desktop",
+      "evidence": "evidence/desktop-top.png"
+    },
+    {
+      "route": "/",
+      "viewport": "phone",
+      "scroll": "top; page scrolled only to each control when verifying",
+      "control": "Hero wave experiment wavelength slider",
+      "trigger": "Change slider one step with ArrowRight",
+      "expected": "Displayed wavelength and wave rings update together",
+      "observed": "Slider 1.6 → 1.8; accompanying value currently remains 1,6 cm",
+      "status": "failed—the value label does not follow the slider",
+      "evidence": "evidence/phone-wave-controls.png"
+    },
+    {
+      "route": "/",
+      "viewport": "phone",
+      "scroll": "hero remains visible at top",
+      "control": "Hero wave experiment pause/resume",
+      "trigger": "Activate pause icon",
+      "expected": "Pause animation and expose play control",
+      "observed": "Play control visible after pause; aria-pressed=false",
+      "status": "passed",
+      "evidence": "evidence/phone-wave-controls.png"
+    },
+    {
+      "route": "/",
+      "viewport": "phone",
+      "scroll": "hero remains visible at top",
+      "control": "Wave source keyboard move and reset",
+      "trigger": "ArrowRight on S1 then reset",
+      "expected": "Move source, then restore initial position and wavelength",
+      "observed": "S1 x 9 → 9.3; reset returned x=9 and λ=1.6",
+      "status": "passed",
+      "evidence": "evidence/phone-wave-controls.png"
+    },
+    {
+      "route": "/",
+      "viewport": "phone",
+      "scroll": "scroll to #giao-trinh",
+      "control": "Sample lesson open",
+      "trigger": "Click “Chạy thử ngay tại đây”",
+      "expected": "Open the sample lesson",
+      "observed": "Loaded Bài 1 – Làm quen với môn Vật lý (Lý thuyết) from vatly.ai in an iframe",
+      "status": "passed",
+      "evidence": "evidence/phone-sample-lesson.png"
+    },
+    {
+      "route": "/",
+      "viewport": "phone",
+      "scroll": "header / account menu",
+      "control": "Account menu",
+      "trigger": "Click account icon then Escape",
+      "expected": "Show login link; Escape closes and returns focus",
+      "observed": "Login link visible=False; expanded=false",
+      "status": "failed—the menu test ran after the lesson overlay and the login link was not visible",
+      "evidence": "evidence/phone-top.png"
+    },
+    {
+      "route": "/",
+      "viewport": "phone",
+      "scroll": "header / navigation menu",
+      "control": "Phone navigation",
+      "trigger": "Click navigation button then Escape",
+      "expected": "Show home, section anchors, and lab link",
+      "observed": "{'expanded': 'true', 'links': ['Trang chủ', 'Phương pháp', 'Cách học', 'Ví dụ mô phỏng', 'Học cùng VLSN', 'Vào phòng lab']}",
+      "status": "passed",
+      "evidence": "evidence/phone-top.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop source",
+      "scroll": "sample lesson open",
+      "control": "Lesson section tabs",
+      "trigger": "Click “② Vai trò”",
+      "expected": "Switch to content about physics as a foundation of natural sciences",
+      "observed": "② Vai trò selected; its related text was visible",
+      "status": "passed",
+      "evidence": "evidence/source-lesson-start.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop source",
+      "scroll": "sample lesson open",
+      "control": "Lesson playback",
+      "trigger": "Click “Chạy” and wait 1.8 seconds",
+      "expected": "Time advances and playback button changes to pause",
+      "observed": "Time advanced to 1.8 / 23 s; “Tạm dừng” appeared",
+      "status": "passed",
+      "evidence": "evidence/source-lesson-playing.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop and phone preview",
+      "scroll": "sample lesson open",
+      "control": "Embedded lesson tabs and playback",
+      "trigger": "Test tabs and playback within preview iframe",
+      "expected": "Replay source lesson controls locally; time advances",
+      "observed": "Iframe loaded and displayed content, but interaction/playback was not observed in this pass",
+      "status": "blocked—lesson is cross-origin and its internals could not be safely verified through the preview iframe",
+      "evidence": "evidence/desktop-sample-lesson.png; evidence/phone-sample-lesson.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop and phone",
+      "scroll": "hero / section landmarks",
+      "control": "Imported content sections",
+      "trigger": "Review page landmarks",
+      "expected": "Hero, method, learning approach, lesson examples, partner and CTA sections visible",
+      "observed": "Main landmarks are present on both sizes; desktop top offsets: 877, 1755, 2513, 3593; phone: 1428, 3335, 4771, 5949",
+      "status": "passed for visibility; not a full source-vs-preview scroll replay",
+      "evidence": "evidence/desktop-top.png; evidence/phone-top.png"
+    },
+    {
+      "route": "/",
+      "viewport": "desktop and phone",
+      "scroll": "hero wave image",
+      "control": "Wave simulation canvas",
+      "trigger": "Load page",
+      "expected": "Live wave surface matching source canvas",
+      "observed": "Static imported WebP remains behind interactive overlay; imported snapshot was preserved",
+      "status": "failed—static media fallback",
+      "evidence": "evidence/desktop-wave-controls.png; evidence/phone-wave-controls.png"
+    }
+  ],
+  "assetMapping": [
+    {
+      "local": "public/site-assets/dd4f4dca32d950b5.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/5aeb25ba7e3f9663.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/a00425c77d0ea911.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/09158aa59a48d6c6.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/ff989603c215dec7-57cb04569c9a4790b0d0a4da1edbd171.png",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/5ef3cfa95d28a6d8.ico",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/55cddfc333a8dd9f-707deeb5560a487512df93e1f34da089.png",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/eaec0d6b55678539.png",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/54b1f3378bf19bc3.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/8d1c84f517063105.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/49cecabbc3f76951.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/e4dc89be2cfd17d2.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/33a65ba994027278.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/0214a2ba7de80076.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    },
+    {
+      "local": "public/site-assets/962e6d0ae3f0f1cf.woff2",
+      "source": "Captured and downloaded from vatly.ai during import"
+    }
+  ]
+}
