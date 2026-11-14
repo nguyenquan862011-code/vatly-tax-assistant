@@ -25,4 +25,13 @@ describe("TamGiangPhysics Brand and Physics Logic", () => {
     expect(deltaD).toBeGreaterThan(1.0);
     expect(deltaD).toBeLessThan(3.5);
   });
+
+  it("verifies presence of official Tam Giang logo assets", () => {
+    const fs = require("fs");
+    const path = require("path");
+    const logoPath = path.resolve(__dirname, "../../public/logo-tamgiang.png");
+    const faviconPath = path.resolve(__dirname, "../../public/favicon.ico");
+    expect(fs.existsSync(logoPath)).toBe(true);
+    expect(fs.existsSync(faviconPath)).toBe(true);
+  });
 });
