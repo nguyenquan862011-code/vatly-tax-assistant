@@ -30,6 +30,10 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [activeSlide0, setActiveSlide0] = useState(0);
   const [sampleLessonOpen, setSampleLessonOpen] = useState(false);
+  const [wavePlaying, setWavePlaying] = useState(true);
+  const [wavelength, setWavelength] = useState(1.6);
+  const [sources, setSources] = useState({ first: { x: 9, y: 9 }, second: { x: 15, y: 9 } });
+  const draggingSource = useRef<"first" | "second" | null>(null);
   const carouselContent0 = (<>
 {activeSlide0 === 0 && <Fragment key={0}>
 <div className={"-mx-5 flex \x73nap-x gap-2 overflow-x-auto px-5 pb-2 lg:mx-0 lg:max-h-[38rem] \x6cg:\x66lex-col lg:overflow-y-auto lg:px-0 lg:pr-2"} role="tablist" aria-label="Chuyên đề" aria-orientation="vertical">
