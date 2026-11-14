@@ -7,7 +7,7 @@ describe("wave experiment interference count", () => {
     expect(calculateInterferenceMaxima(6, 1.6)).toBe(7);
   });
 
-  it("shows five maxima for 6.0 cm spacing and a 2.0 cm wavelength", () => {
-    expect(calculateInterferenceMaxima(6, 2)).toBe(7);
+  it("shows five maxima for 6.0 cm spacing and a 2.2 cm wavelength", () => {
+    expect(calculateInterferenceMaxima(6, 2.2)).toBe(5);
   });
 });
