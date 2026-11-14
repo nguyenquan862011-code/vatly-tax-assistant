@@ -353,7 +353,7 @@ function ImportedAsideGiOTrNh() {
 function ImportedSection3BIT() {
   return (
     <section className={"relative flex min-h-0 flex-1 flex-col \x62g-background"} id="simulation-viewer" aria-label="3. Bài tập - Làm quen với môn Vật lý">
-      <img className={"min-h-0 w-full flex-1 \x62order-0 \x62g-background"} style={{ width: "1200px", maxWidth: "100%", height: "auto" }} alt="3. Bài tập - Làm quen với môn Vật lý" src="/site-assets/95b36a528f37993d.png" data-site-import-static-fallback="video" />
+      <iframe className="min-h-[80vh] w-full flex-1 border-0 bg-background" title="3. Bài tập - Làm quen với môn Vật lý" src="https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly" allow="autoplay; fullscreen" />
       <footer className={"flex shrink-0 items-center justify-between \x62order-t px-2 py-1 \x73m:\x68idden"}>
         <div className="flex items-center" aria-label="Điều hướng bài học">
           <span className="inline-flex" data-state="closed">
