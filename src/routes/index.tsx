@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/site.css?raw";
+import { calculateInterferenceMaxima } from "../lib/wave-experiment";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -730,7 +731,7 @@ function ImportedSectionNgHCThu() {
   const [sources, setSources] = useState({ first: { x: 9, y: 9 }, second: { x: 15, y: 9 } });
   const draggingSource = useRef<"first" | "second" | null>(null);
   const sourceDistance = Math.hypot(sources.second.x - sources.first.x, sources.second.y - sources.first.y);
-  const maximaCount = Math.floor(sourceDistance / wavelength) * 2 + 1;
+  const maximaCount = calculateInterferenceMaxima(sourceDistance, wavelength);
   return (
     <section className={"relative overflow-hidden \x62order-b \x62order-lab-line"} aria-labelledby="hero-title">
       <div className="lab-grid absolute inset-0 [mask-image:radial-gradient(80%_70%_at_50%_40%,rgb(0,0,0)_40%,rgba(0,0,0,0)_100%)]" aria-hidden="true" />
