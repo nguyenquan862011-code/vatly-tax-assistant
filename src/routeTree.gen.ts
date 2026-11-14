@@ -16,6 +16,8 @@ import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1
 import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-1-lam-quen-voi-mon-vat-ly_.2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
 import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-1-lam-quen-voi-mon-vat-ly_.3-bai-tap-lam-quen-voi-mon-vat-ly'
 import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-2-an-toan-trong-thuc-hanh-vat-ly_.1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
+import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-2-an-toan-trong-thuc-hanh-vat-ly_.3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
+import { Route as MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRouteImport } from './routes/mo-phong_.lop-10_.co-hoc-phan-1_.chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_.bai-3-sai-so-trong-phep-do_.1-ly-thuyet-sai-so-trong-phep-do'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -67,6 +69,22 @@ const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongT
       getParentRoute: () => rootRouteImport,
     } as any,
   )
+const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute =
+  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRouteImport.update(
+    {
+      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly',
+      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute =
+  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRouteImport.update(
+    {
+      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do',
+      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -76,6 +94,8 @@ export interface FileRoutesByFullPath {
   '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
   '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
   '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
+  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
+  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,6 +105,8 @@ export interface FileRoutesByTo {
   '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
   '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
   '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
+  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
+  '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,6 +117,8 @@ export interface FileRoutesById {
   '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
   '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/3-bai-tap-lam-quen-voi-mon-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
   '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
+  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
+  '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do': typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -106,6 +130,8 @@ export interface FileRouteTypes {
     | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
     | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly'
     | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
+    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
+    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,6 +141,8 @@ export interface FileRouteTypes {
     | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
     | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/3-bai-tap-lam-quen-voi-mon-vat-ly'
     | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
+    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
+    | '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
   id:
     | '__root__'
     | '/'
@@ -124,6 +152,8 @@ export interface FileRouteTypes {
     | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/2-vd2-doi-tuong-nghien-cuu-cua-cac-phan-nganh'
     | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-1-lam-quen-voi-mon-vat-ly_/3-bai-tap-lam-quen-voi-mon-vat-ly'
     | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/1-ly-thuyet-an-toan-trong-thuc-hanh-vat-ly'
+    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
+    | '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -134,6 +164,8 @@ export interface RootRouteChildren {
   MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy2Vd2DoiTuongNghienCuuCuaCacPhanNganhRoute
   MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute
   MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute
+  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute
+  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -187,6 +219,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly': {
+      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-2-an-toan-trong-thuc-hanh-vat-ly_/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
+      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
+      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-2-an-toan-trong-thuc-hanh-vat-ly/3-bai-tap-an-toan-trong-thuc-hanh-vat-ly'
+      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do': {
+      id: '/mo-phong_/lop-10_/co-hoc-phan-1_/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly_/bai-3-sai-so-trong-phep-do_/1-ly-thuyet-sai-so-trong-phep-do'
+      path: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
+      fullPath: '/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-3-sai-so-trong-phep-do/1-ly-thuyet-sai-so-trong-phep-do'
+      preLoaderRoute: typeof MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -203,6 +249,10 @@ const rootRouteChildren: RootRouteChildren = {
     MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai1LamQuenVoiMonVatLy3BaiTapLamQuenVoiMonVatLyRoute,
   MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute:
     MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy1LyThuyetAnToanTrongThucHanhVatLyRoute,
+  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute:
+    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai2AnToanTrongThucHanhVatLy3BaiTapAnToanTrongThucHanhVatLyRoute,
+  MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute:
+    MoPhongLop10CoHocPhan1ChuDe1GioiThieuMucDichHocTapMonVatLyBai3SaiSoTrongPhepDo1LyThuyetSaiSoTrongPhepDoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
