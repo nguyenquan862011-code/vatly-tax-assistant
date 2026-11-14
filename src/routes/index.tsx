@@ -29,6 +29,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [activeSlide0, setActiveSlide0] = useState(0);
+  const [sampleLessonOpen, setSampleLessonOpen] = useState(false);
   const carouselContent0 = (<>
 {activeSlide0 === 0 && <Fragment key={0}>
 <div className={"-mx-5 flex \x73nap-x gap-2 overflow-x-auto px-5 pb-2 lg:mx-0 lg:max-h-[38rem] \x6cg:\x66lex-col lg:overflow-y-auto lg:px-0 lg:pr-2"} role="tablist" aria-label="Chuyên đề" aria-orientation="vertical">
@@ -75,7 +76,16 @@ function Index() {
 </div>
 <div className={"min-w-0 rounded-[1.75rem] \x62order \x62order-lab-line \x62g-lab-surface p-4 \x6dotion-safe:\x61nimate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 sm:p-5"} id="_R_2lbriuplb_-panel" role="tabpanel" aria-labelledby="_R_2lbriuplb_-tab-lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly">
   <div className={"relative aspect-[16/10] overflow-hidden rounded-2xl \x62order \x62order-lab-line \x62g-lab-paper"}>
-    <button className={"group absolute inset-0 flex flex-col items-center justify-center gap-4 overflow-hidden \x62g-lab-deep text-lab-on-deep \x6futline-none \x66ocus-visible:\x72ing-4 \x66ocus-visible:\x72ing-lab-lime \x66ocus-visible:\x72ing-inset"} type="button">
+    {sampleLessonOpen ? (
+      <iframe
+        className="absolute inset-0 size-full border-0 bg-background"
+        src="https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly"
+        title="Bài 1. Làm quen với môn Vật lý — Lý thuyết"
+        sandbox="allow-scripts allow-popups allow-forms allow-pointer-lock"
+        allow="autoplay"
+      />
+    ) : (
+    <button className={"group absolute inset-0 flex flex-col items-center justify-center gap-4 overflow-hidden \x62g-lab-deep text-lab-on-deep \x6futline-none \x66ocus-visible:\x72ing-4 \x66ocus-visible:\x72ing-lab-lime \x66ocus-visible:\x72ing-inset"} type="button" aria-label="Chạy thử ngay tại đây" onClick={() => setSampleLessonOpen(true)}>
       <span className="lab-grid absolute inset-0 opacity-20" aria-hidden="true" />
       <span className={"absolute size-72 \x61nimate-lab-spin rounded-full \x62order \x62order-dashed \x62order-lab-lime/\x325"} aria-hidden="true" />
       <span className={"absolute size-[26rem] \x61nimate-lab-spin-reverse rounded-full \x62order \x62order-lab-lime/\x310"} aria-hidden="true" />
@@ -92,6 +102,7 @@ function Index() {
         <span className="mt-2 block text-lg leading-snug font-semibold">Làm quen với môn Vật lý</span>
       </span>
     </button>
+    )}
   </div>
   <div className="mt-5 flex flex-wrap items-end justify-between gap-4 px-1">
     <div className="min-w-0">
