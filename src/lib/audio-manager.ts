@@ -1,4 +1,4 @@
-import { APP_CONFIG, type AudioTrackConfig } from "./config";
+import { APP_CONFIG, type AudioTrackConfig, type AudioLicenseType } from "./config";
 
 export interface AudioState {
   isPlaying: boolean;
@@ -57,6 +57,44 @@ export class BackgroundAudioManager {
 
   public getUnverifiedTracks(): AudioTrackConfig[] {
     return this.playlist.filter((t) => !t.isAvailable);
+  }
+
+  public getTracksByLicense(licenseType: AudioLicenseType | "all"): AudioTrackConfig[] {
+    if (licenseType === "all") return [...this.playlist];
+    return this.playlist.filter((t) => t.licenseType === licenseType);
+  }
+
+  public filterTracks(options: {
+    status?: "all" | "available" | "unavailable";
+    license?: AudioLicenseType | "all";
+    search?: string;
+    playlist?: AudioTrackConfig[];
+  }): AudioTrackConfig[] {
+    const { status = "all", license = "all", search = "", playlist = this.playlist } = options;
+    const q = search.trim().toLowerCase();
+
+    return playlist.filter((track) => {
+      // Filter by file availability status
+      if (status === "available" && (!track.isAvailable || !track.src)) return false;
+      if (status === "unavailable" && track.isAvailable) return false;
+
+      // Filter by license type
+      if (license !== "all" && track.licenseType !== license) return false;
+
+      // Search keyword filter across title, artist, composer, genre, license
+      if (q) {
+        const titleMatch = track.title.toLowerCase().includes(q);
+        const artistMatch = track.artist.toLowerCase().includes(q);
+        const composerMatch = track.composer?.toLowerCase().includes(q) ?? false;
+        const genreMatch = track.genre.toLowerCase().includes(q);
+        const licenseMatch = track.license.toLowerCase().includes(q);
+        if (!titleMatch && !artistMatch && !composerMatch && !genreMatch && !licenseMatch) {
+          return false;
+        }
+      }
+
+      return true;
+    });
   }
 
   private initFromStorage() {

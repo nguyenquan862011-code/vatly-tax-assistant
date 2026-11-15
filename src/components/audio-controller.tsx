@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import {
   Volume2,
   VolumeX,
@@ -17,8 +17,12 @@ import {
   ShieldCheck,
   X,
   Sliders,
+  Search,
+  Filter,
+  RotateCcw,
 } from "lucide-react";
 import { audioManager, type AudioState } from "@/lib/audio-manager";
+import type { AudioLicenseType } from "@/lib/config";
 
 interface AudioControllerProps {
   className?: string;
@@ -35,6 +39,12 @@ export function AudioController({ className = "" }: AudioControllerProps) {
   const [audioState, setAudioState] = useState<AudioState>(audioManager.getState());
   const [showPlayerModal, setShowPlayerModal] = useState(false);
   const [activeTab, setActiveTab] = useState<"controls" | "playlist" | "licenses">("controls");
+
+  // Filter and search states
+  const [statusFilter, setStatusFilter] = useState<"all" | "available" | "unavailable">("all");
+  const [licenseFilter, setLicenseFilter] = useState<"all" | AudioLicenseType>("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -70,11 +80,48 @@ export function AudioController({ className = "" }: AudioControllerProps) {
     audioManager.seek(targetTime);
   };
 
+  const resetFilters = () => {
+    setStatusFilter("all");
+    setLicenseFilter("all");
+    setSearchQuery("");
+  };
+
   const isPlaying = audioState.isPlaying;
   const volumePercent = Math.round(audioState.volume * 100);
 
-  const availableTracks = audioState.playlist.filter((t) => t.isAvailable && t.src);
-  const unverifiedTracks = audioState.playlist.filter((t) => !t.isAvailable);
+  const availableTracks = useMemo(
+    () => audioState.playlist.filter((t) => t.isAvailable && Boolean(t.src)),
+    [audioState.playlist],
+  );
+  const unverifiedTracks = useMemo(
+    () => audioState.playlist.filter((t) => !t.isAvailable),
+    [audioState.playlist],
+  );
+
+  const ccByCount = useMemo(
+    () => audioState.playlist.filter((t) => t.licenseType === "cc-by-3.0").length,
+    [audioState.playlist],
+  );
+  const publicDomainCount = useMemo(
+    () => audioState.playlist.filter((t) => t.licenseType === "public-domain").length,
+    [audioState.playlist],
+  );
+  const unverifiedCount = useMemo(
+    () => audioState.playlist.filter((t) => t.licenseType === "unverified").length,
+    [audioState.playlist],
+  );
+
+  const filteredTracks = useMemo(() => {
+    return audioManager.filterTracks({
+      playlist: audioState.playlist,
+      status: statusFilter,
+      license: licenseFilter,
+      search: searchQuery,
+    });
+  }, [audioState.playlist, statusFilter, licenseFilter, searchQuery]);
+
+  const isFiltered =
+    statusFilter !== "all" || licenseFilter !== "all" || searchQuery.trim().length > 0;
 
   return (
     <div ref={containerRef} className={`relative inline-flex items-center ${className}`}>
@@ -108,45 +155,88 @@ export function AudioController({ className = "" }: AudioControllerProps) {
             <Play className="size-3 text-[#EDF5ED]/70 fill-current" />
           )}
 
-          <span className="hidden sm:inline-block max-w-[130px] truncate font-mono text-[11px] tracking-tight">
-            {isPlaying ? (
-              <span className="text-[#C8ED78] font-medium">{audioState.currentTrack.title}</span>
-            ) : (
-              <span className="text-[#EDF5ED]/70">Nhạc nền Lab</span>
-            )}
+          <span className="max-w-[120px] truncate font-medium text-[11px] text-[#EDF5ED]/90">
+            {audioState.currentTrack.title}
           </span>
         </button>
 
-        {/* Studio Modal Toggle Button */}
+        {/* Status indicator tag */}
+        <span
+          className={`px-1 py-0.2 text-[9px] font-mono rounded ${
+            audioState.currentTrack.isAvailable
+              ? "text-[#C8ED78] bg-[#075C40]/50"
+              : "text-amber-300 bg-amber-900/40"
+          }`}
+        >
+          {audioState.currentTrack.isAvailable ? "CC/PD" : "Chờ tệp"}
+        </span>
+
+        {/* Quick Mute Toggle */}
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            setShowPlayerModal(!showPlayerModal);
+            audioManager.toggleMute();
           }}
-          className="flex size-5 items-center justify-center rounded text-[#EDF5ED]/60 hover:text-white transition-colors"
-          title="Mở bảng điều khiển nhạc & danh sách phát"
-          aria-label="Mở trình phát nhạc"
+          className="text-[#A5B7A8] hover:text-white transition-colors"
+          title={audioState.isMuted ? "Bật tiếng" : "Tắt tiếng"}
+          aria-label="Tắt hoặc bật tiếng nhanh"
         >
           {audioState.isMuted || audioState.volume === 0 ? (
             <VolumeX className="size-3 text-red-400" />
           ) : (
-            <Volume2 className="size-3" />
+            <Volume2 className="size-3 text-[#72CF91]" />
           )}
+        </button>
+
+        {/* Expand / Settings Button */}
+        <button
+          type="button"
+          onClick={() => setShowPlayerModal(!showPlayerModal)}
+          className="ml-0.5 flex size-5 items-center justify-center rounded text-[#A5B7A8] hover:bg-white/10 hover:text-white transition-colors"
+          title="Mở Studio âm thanh & Bộ lọc Playlist"
+          aria-label="Mở Studio âm thanh và bộ lọc playlist"
+        >
+          <Sliders className="size-3 text-[#C8ED78]" />
         </button>
       </div>
 
-      {/* Floating Audio Studio Drawer / Popover */}
+      {/* Autoplay blocked banner notice */}
+      {audioState.autoplayBlocked && (
+        <div className="absolute top-full mt-1.5 right-0 z-50 w-64 rounded-lg bg-[#15271E] border border-amber-500/40 p-2 text-xs text-amber-200 shadow-xl backdrop-blur-md">
+          <div className="flex items-start gap-1.5">
+            <AlertCircle className="size-4 shrink-0 text-amber-400 mt-0.5" />
+            <div className="flex-1">
+              <p className="font-semibold text-amber-100">Âm thanh chưa tự phát</p>
+              <p className="text-[11px] text-amber-200/80 mt-0.5">
+                Chính sách trình duyệt yêu cầu tương tác. Nhấn nút bên dưới để bật nhạc nền.
+              </p>
+              <button
+                type="button"
+                onClick={() => audioManager.play()}
+                className="mt-2 inline-flex items-center gap-1 rounded bg-[#16845A] px-2 py-1 text-[11px] font-medium text-white hover:bg-[#38A875] transition-colors"
+              >
+                <Play className="size-2.5 fill-current" />
+                <span>Bật âm thanh ngay</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* EXPANDED POPUP STUDIO & PLAYLIST DIALOG */}
       {showPlayerModal && (
-        <div className="absolute right-0 top-full mt-2 z-50 w-84 sm:w-96 rounded-2xl border border-[#2B4033] bg-[#0B1511]/95 p-4 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-1 duration-150 text-[#EDF5ED]">
+        <div className="absolute right-0 top-full mt-2 z-50 w-96 rounded-2xl bg-[#0B1511]/95 border border-[#1B3025] p-3.5 shadow-2xl backdrop-blur-xl text-[#EDF5ED] transition-all">
           {/* Header */}
-          <div className="flex items-center justify-between pb-3 border-b border-[#1B3025]">
+          <div className="flex items-center justify-between pb-2 border-b border-[#1B3025]">
             <div className="flex items-center gap-2">
-              <div className="flex size-7 items-center justify-center rounded-lg bg-[#16845A]/20 text-[#72CF91] border border-[#38A875]/30">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-[#16845A]/20 border border-[#38A875]/30 text-[#C8ED78]">
                 <Music className="size-3.5" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-white">Âm thanh phòng Lab</p>
+                <h3 className="text-xs font-semibold text-white tracking-wide">
+                  TamGiang Audio Studio
+                </h3>
                 <p className="text-[10px] text-[#A5B7A8]">Chỉ sử dụng tệp có giấy phép mở hợp lệ</p>
               </div>
             </div>
@@ -410,22 +500,174 @@ export function AudioController({ className = "" }: AudioControllerProps) {
             </div>
           )}
 
-          {/* TAB 2: PLAYLIST VIEW */}
+          {/* TAB 2: PLAYLIST VIEW WITH ADVANCED FILTERING */}
           {activeTab === "playlist" && (
-            <div className="mt-3 max-h-72 overflow-y-auto space-y-3 pr-1">
-              {/* Group 1: Verified Available Tracks */}
-              <div>
-                <div className="flex items-center justify-between px-1 mb-1.5">
-                  <span className="text-[10px] font-mono text-[#72CF91] uppercase tracking-wider font-semibold flex items-center gap-1">
-                    <CheckCircle2 className="size-3 text-[#72CF91]" />
-                    Đã tích hợp tệp mở ({availableTracks.length})
-                  </span>
-                  <span className="text-[9px] text-[#A5B7A8]">Có tệp MP3 & Giấy phép</span>
-                </div>
+            <div className="mt-3 space-y-2.5">
+              {/* Search Bar */}
+              <div className="relative">
+                <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-[#A5B7A8]" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Tìm theo tên bài, tác giả, thể loại..."
+                  className="w-full pl-8 pr-7 py-1.5 rounded-lg bg-[#08110D] border border-[#1B3025] text-xs text-white placeholder-[#A5B7A8]/60 focus:outline-none focus:border-[#38A875] transition-colors"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-[#A5B7A8] hover:text-white"
+                    aria-label="Xóa từ khóa tìm kiếm"
+                  >
+                    <X className="size-3" />
+                  </button>
+                )}
+              </div>
 
-                <div className="space-y-1.5">
-                  {availableTracks.map((track) => {
+              {/* Status Filter Row */}
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[10px] text-[#A5B7A8]">
+                  <span className="font-medium flex items-center gap-1 text-[#C8ED78]">
+                    <Filter className="size-2.5" />
+                    <span>Trạng thái tệp:</span>
+                  </span>
+                  {isFiltered && (
+                    <button
+                      type="button"
+                      onClick={resetFilters}
+                      className="text-[#72CF91] hover:text-[#C8ED78] hover:underline text-[10px] flex items-center gap-0.5"
+                    >
+                      <RotateCcw className="size-2.5" />
+                      <span>Đặt lại lọc</span>
+                    </button>
+                  )}
+                </div>
+                <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none text-[10px]">
+                  <button
+                    type="button"
+                    onClick={() => setStatusFilter("all")}
+                    className={`px-2 py-0.5 rounded-md font-medium shrink-0 transition-colors ${
+                      statusFilter === "all"
+                        ? "bg-[#16845A] text-white shadow-sm"
+                        : "bg-[#15271E]/60 text-[#A5B7A8] hover:text-white border border-[#1B3025]"
+                    }`}
+                  >
+                    Tất cả ({audioState.playlist.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setStatusFilter("available")}
+                    className={`px-2 py-0.5 rounded-md font-medium shrink-0 flex items-center gap-1 transition-colors ${
+                      statusFilter === "available"
+                        ? "bg-[#16845A] text-white shadow-sm"
+                        : "bg-[#15271E]/60 text-[#72CF91] hover:text-white border border-[#1B3025]"
+                    }`}
+                  >
+                    <CheckCircle2 className="size-2.5" />
+                    <span>Có tệp mở ({availableTracks.length})</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setStatusFilter("unavailable")}
+                    className={`px-2 py-0.5 rounded-md font-medium shrink-0 flex items-center gap-1 transition-colors ${
+                      statusFilter === "unavailable"
+                        ? "bg-amber-700/80 text-white shadow-sm"
+                        : "bg-[#15271E]/60 text-amber-300 hover:text-white border border-[#1B3025]"
+                    }`}
+                  >
+                    <AlertCircle className="size-2.5" />
+                    <span>Chưa có tệp ({unverifiedTracks.length})</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* License Filter Row */}
+              <div className="space-y-1">
+                <div className="text-[10px] text-[#A5B7A8] font-medium">
+                  <span>Giấy phép bản quyền:</span>
+                </div>
+                <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none text-[10px]">
+                  <button
+                    type="button"
+                    onClick={() => setLicenseFilter("all")}
+                    className={`px-2 py-0.5 rounded-md font-medium shrink-0 transition-colors ${
+                      licenseFilter === "all"
+                        ? "bg-[#16845A] text-white shadow-sm"
+                        : "bg-[#15271E]/60 text-[#A5B7A8] hover:text-white border border-[#1B3025]"
+                    }`}
+                  >
+                    Mọi giấy phép
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLicenseFilter("cc-by-3.0")}
+                    className={`px-2 py-0.5 rounded-md font-medium shrink-0 transition-colors ${
+                      licenseFilter === "cc-by-3.0"
+                        ? "bg-[#16845A] text-white shadow-sm"
+                        : "bg-[#15271E]/60 text-[#72CF91] hover:text-white border border-[#1B3025]"
+                    }`}
+                  >
+                    CC BY 3.0 ({ccByCount})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLicenseFilter("public-domain")}
+                    className={`px-2 py-0.5 rounded-md font-medium shrink-0 transition-colors ${
+                      licenseFilter === "public-domain"
+                        ? "bg-[#16845A] text-white shadow-sm"
+                        : "bg-[#15271E]/60 text-[#C8ED78] hover:text-white border border-[#1B3025]"
+                    }`}
+                  >
+                    Public Domain ({publicDomainCount})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLicenseFilter("unverified")}
+                    className={`px-2 py-0.5 rounded-md font-medium shrink-0 transition-colors ${
+                      licenseFilter === "unverified"
+                        ? "bg-amber-700/80 text-white shadow-sm"
+                        : "bg-[#15271E]/60 text-amber-300 hover:text-white border border-[#1B3025]"
+                    }`}
+                  >
+                    Chưa xác minh ({unverifiedCount})
+                  </button>
+                </div>
+              </div>
+
+              {/* Filter result counter */}
+              <div className="flex items-center justify-between px-1 text-[10px] text-[#A5B7A8]">
+                <span>
+                  Kết quả: <strong className="text-white">{filteredTracks.length}</strong> bài hát
+                </span>
+                {isFiltered && (
+                  <span className="text-[#C8ED78] font-mono text-[9px]">Đang lọc</span>
+                )}
+              </div>
+
+              {/* Scrollable Tracks List */}
+              <div className="max-h-60 overflow-y-auto space-y-1.5 pr-1">
+                {filteredTracks.length === 0 ? (
+                  <div className="rounded-xl bg-[#08110D] border border-[#1B3025] p-4 text-center">
+                    <AlertCircle className="size-5 text-[#A5B7A8] mx-auto mb-1.5" />
+                    <p className="text-xs text-white font-medium">Không tìm thấy bài hát</p>
+                    <p className="text-[10px] text-[#A5B7A8] mt-0.5">
+                      Thử điều chỉnh từ khóa tìm kiếm hoặc bấm đặt lại bộ lọc.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={resetFilters}
+                      className="mt-2.5 inline-flex items-center gap-1 text-[11px] font-medium px-2.5 py-1 rounded-md bg-[#16845A] text-white hover:bg-[#38A875] transition-colors"
+                    >
+                      <RotateCcw className="size-3" />
+                      <span>Xem toàn bộ playlist</span>
+                    </button>
+                  </div>
+                ) : (
+                  filteredTracks.map((track) => {
                     const isSelected = track.id === audioState.currentTrack.id;
+                    const hasValidFile = track.isAvailable && Boolean(track.src);
+
                     return (
                       <button
                         key={track.id}
@@ -433,90 +675,67 @@ export function AudioController({ className = "" }: AudioControllerProps) {
                         onClick={() => audioManager.selectTrack(track.id)}
                         className={`w-full flex items-center justify-between rounded-lg p-2 text-left transition-all ${
                           isSelected
-                            ? "bg-[#16845A]/25 border border-[#38A875]/50 text-white"
-                            : "bg-[#15271E]/60 hover:bg-[#15271E] border border-transparent text-[#EDF5ED]/90"
+                            ? hasValidFile
+                              ? "bg-[#16845A]/25 border border-[#38A875]/60 text-white"
+                              : "bg-amber-950/30 border border-amber-600/50 text-amber-100"
+                            : "bg-[#15271E]/50 hover:bg-[#15271E] border border-transparent text-[#EDF5ED]/90"
                         }`}
                       >
                         <div className="min-w-0 flex-1 pr-2">
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex flex-wrap items-center gap-1.5">
                             <span className="rounded bg-[#0B1511] px-1.5 py-0.2 text-[9px] font-mono text-[#C8ED78]">
                               {track.genre}
                             </span>
-                            <span className="rounded bg-[#075C40]/40 px-1 py-0.2 text-[8px] font-mono text-[#72CF91] border border-[#38A875]/30">
+                            <span
+                              className={`rounded px-1 py-0.2 text-[8px] font-mono border ${
+                                track.licenseType === "public-domain"
+                                  ? "bg-[#075C40]/40 text-[#72CF91] border-[#38A875]/30"
+                                  : track.licenseType === "cc-by-3.0"
+                                    ? "bg-[#16845A]/30 text-[#C8ED78] border-[#38A875]/40"
+                                    : "bg-amber-900/30 text-amber-300 border-amber-600/30"
+                              }`}
+                            >
                               {track.licenseType === "public-domain"
                                 ? "Public Domain"
-                                : "CC BY 3.0"}
+                                : track.licenseType === "cc-by-3.0"
+                                  ? "CC BY 3.0"
+                                  : "Chưa xác minh"}
                             </span>
                             <p className="text-xs font-medium truncate">{track.title}</p>
                           </div>
                           <p className="text-[10px] text-[#A5B7A8] truncate mt-0.5">
+                            {track.composer ? `${track.composer} • ` : ""}
                             {track.artist}
+                            {!hasValidFile && (
+                              <span className="text-amber-400/90 ml-1">
+                                (Chưa có tệp bản quyền)
+                              </span>
+                            )}
                           </p>
                         </div>
 
                         <div className="shrink-0 flex items-center gap-1 text-[10px]">
-                          {isSelected && isPlaying ? (
-                            <span className="flex items-center gap-1 text-[#C8ED78] font-semibold font-mono">
-                              <span className="size-1.5 rounded-full bg-[#C8ED78] animate-ping" />
-                              Đang phát
-                            </span>
+                          {hasValidFile ? (
+                            isSelected && isPlaying ? (
+                              <span className="flex items-center gap-1 text-[#C8ED78] font-semibold font-mono">
+                                <span className="size-1.5 rounded-full bg-[#C8ED78] animate-ping" />
+                                Đang phát
+                              </span>
+                            ) : (
+                              <span className="text-[#72CF91] font-medium bg-[#075C40]/30 px-1.5 py-0.5 rounded border border-[#38A875]/30">
+                                Phát bài
+                              </span>
+                            )
                           ) : (
-                            <span className="text-[#72CF91] font-medium">Phát bài</span>
+                            <span className="text-amber-400/80 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">
+                              Chưa có tệp
+                            </span>
                           )}
                         </div>
                       </button>
                     );
-                  })}
-                </div>
-              </div>
-
-              {/* Group 2: Unverified / Pending License Tracks */}
-              <div>
-                <div className="flex items-center justify-between px-1 mb-1.5 pt-1 border-t border-[#1B3025]">
-                  <span className="text-[10px] font-mono text-amber-400 uppercase tracking-wider font-semibold flex items-center gap-1">
-                    <AlertCircle className="size-3 text-amber-400" />
-                    Chưa có tệp ({unverifiedTracks.length})
-                  </span>
-                  <span className="text-[9px] text-[#A5B7A8]">Chờ thẩm định giấy phép mở</span>
-                </div>
-
-                <div className="space-y-1.5">
-                  {unverifiedTracks.map((track) => {
-                    const isSelected = track.id === audioState.currentTrack.id;
-                    return (
-                      <button
-                        key={track.id}
-                        type="button"
-                        onClick={() => audioManager.selectTrack(track.id)}
-                        className={`w-full flex items-center justify-between rounded-lg p-2 text-left transition-all ${
-                          isSelected
-                            ? "bg-amber-950/20 border border-amber-600/40 text-amber-100"
-                            : "bg-[#15271E]/30 hover:bg-[#15271E]/50 border border-transparent text-[#A5B7A8]"
-                        }`}
-                      >
-                        <div className="min-w-0 flex-1 pr-2">
-                          <div className="flex items-center gap-1.5">
-                            <span className="rounded bg-[#0B1511] px-1.5 py-0.2 text-[9px] font-mono text-[#A5B7A8]">
-                              {track.genre}
-                            </span>
-                            <p className="text-xs font-medium truncate text-[#EDF5ED]/80">
-                              {track.title}
-                            </p>
-                          </div>
-                          <p className="text-[10px] text-[#A5B7A8]/70 truncate mt-0.5">
-                            {track.artist} • {track.note || "Chưa có tệp bản quyền"}
-                          </p>
-                        </div>
-
-                        <div className="shrink-0 flex items-center text-[10px]">
-                          <span className="text-amber-400/80 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">
-                            Chưa có tệp
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                  })
+                )}
               </div>
             </div>
           )}
@@ -559,59 +778,74 @@ export function AudioController({ className = "" }: AudioControllerProps) {
                           {track.artist}
                         </p>
                       </div>
-                      <span className="rounded bg-[#16845A]/30 text-[#C8ED78] px-1.5 py-0.5 text-[9px] font-mono border border-[#38A875]/30 shrink-0">
+                      <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-[#16845A]/30 text-[#C8ED78] border border-[#38A875]/40 shrink-0">
                         {track.licenseType === "public-domain" ? "Public Domain" : "CC BY 3.0"}
                       </span>
                     </div>
 
-                    <div className="text-[10px] text-[#EDF5ED]/90 space-y-0.5">
+                    <div className="text-[10px] space-y-1 text-[#A5B7A8]">
                       <p>
-                        <strong className="text-[#A5B7A8]">Giấy phép:</strong>{" "}
-                        {track.licenseUrl ? (
+                        <strong className="text-[#EDF5ED]/90">Giấy phép:</strong> {track.license}
+                        {track.licenseUrl && (
                           <a
                             href={track.licenseUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#72CF91] underline hover:text-[#C8ED78]"
+                            className="inline-flex items-center gap-0.5 text-[#72CF91] hover:underline ml-1"
                           >
-                            {track.license}
+                            <span>Xem điều khoản</span>
+                            <ExternalLink className="size-2.5" />
                           </a>
-                        ) : (
-                          track.license
                         )}
                       </p>
                       <p>
-                        <strong className="text-[#A5B7A8]">Nguồn dữ liệu:</strong>{" "}
-                        {track.sourceUrl ? (
+                        <strong className="text-[#EDF5ED]/90">Nguồn lưu trữ:</strong>{" "}
+                        {track.sourceName}
+                        {track.sourceUrl && (
                           <a
                             href={track.sourceUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#72CF91] underline hover:text-[#C8ED78] inline-flex items-center gap-0.5"
+                            className="inline-flex items-center gap-0.5 text-[#72CF91] hover:underline ml-1"
                           >
-                            <span>{track.sourceName}</span>
+                            <span>Tài liệu nguồn</span>
                             <ExternalLink className="size-2.5" />
                           </a>
-                        ) : (
-                          track.sourceName
                         )}
                       </p>
                       {track.attribution && (
-                        <p className="text-[9px] font-mono text-[#A5B7A8] bg-[#0B1511] p-1.5 rounded border border-[#1B3025]">
+                        <p className="p-1 rounded bg-[#0B1511] font-mono text-[9px] text-[#C8ED78]/90 border border-[#1B3025]">
                           {track.attribution}
                         </p>
                       )}
+                      {track.note && <p className="italic text-[9px]">{track.note}</p>}
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* Unverified explanation note */}
-              <div className="rounded-lg bg-[#15271E]/30 border border-[#1B3025] p-2 text-[10px] text-[#A5B7A8] leading-relaxed">
-                <span className="font-semibold text-amber-300">Lưu ý về các bài chưa có tệp:</span>{" "}
-                Các thể loại còn lại (Space Ambient, Lo-fi, Zen Nature, Calm Electronic, Kenny G)
-                đang trong giai đoạn tuyển chọn bản ghi âm CC0/CC-BY và hoàn tất thỏa thuận bản
-                quyền. Nền tảng sẽ cập nhật tệp ngay khi thẩm định tính pháp lý thành công.
+              {/* Unverified / Pending Catalog */}
+              <div className="space-y-2 pt-2 border-t border-[#1B3025]">
+                <p className="text-[10px] font-mono uppercase tracking-wider text-amber-400 px-1 font-semibold flex items-center gap-1">
+                  <AlertCircle className="size-3" />
+                  Danh mục chờ thẩm định bản quyền ({unverifiedTracks.length} bài)
+                </p>
+
+                {unverifiedTracks.map((track) => (
+                  <div
+                    key={track.id}
+                    className="rounded-lg bg-[#15271E]/30 border border-[#1B3025] p-2 text-[10px] space-y-1"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-white">{track.title}</span>
+                      <span className="text-amber-400 bg-amber-500/10 px-1 py-0.2 rounded text-[8px] font-mono border border-amber-500/20">
+                        Chưa có tệp
+                      </span>
+                    </div>
+                    <p className="text-[#A5B7A8]">Nghệ sĩ: {track.artist}</p>
+                    <p className="text-amber-300/80">{track.note}</p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -621,9 +855,6 @@ export function AudioController({ className = "" }: AudioControllerProps) {
   );
 }
 
-/**
- * Friendly unblock pill when autoplay is prevented by browser
- */
 export function AutoplayPromptBanner() {
   const [audioState, setAudioState] = useState<AudioState>(audioManager.getState());
   const [dismissed, setDismissed] = useState(false);

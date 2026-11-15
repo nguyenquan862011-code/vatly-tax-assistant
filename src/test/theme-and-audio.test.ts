@@ -167,6 +167,76 @@ describe("TamGiangPhysics Design System & Audio System", () => {
       expect(unverified.every((t) => !t.isAvailable)).toBe(true);
     });
 
+    it("filters tracks accurately by status (available vs unavailable)", () => {
+      const allTracks = manager.filterTracks({ status: "all" });
+      const availableOnly = manager.filterTracks({ status: "available" });
+      const unavailableOnly = manager.filterTracks({ status: "unavailable" });
+
+      expect(allTracks.length).toBe(APP_CONFIG.backgroundAudio.playlist.length);
+      expect(availableOnly.length).toBeGreaterThanOrEqual(3);
+      expect(availableOnly.every((t) => t.isAvailable && Boolean(t.src))).toBe(true);
+
+      expect(unavailableOnly.length).toBeGreaterThanOrEqual(4);
+      expect(unavailableOnly.every((t) => !t.isAvailable)).toBe(true);
+      expect(availableOnly.length + unavailableOnly.length).toBe(allTracks.length);
+    });
+
+    it("filters tracks accurately by license type and license helper methods", () => {
+      const ccByTracks = manager.getTracksByLicense("cc-by-3.0");
+      const pdTracks = manager.getTracksByLicense("public-domain");
+      const unverifiedTracks = manager.getTracksByLicense("unverified");
+
+      expect(ccByTracks.length).toBe(2);
+      expect(ccByTracks.map((t) => t.title)).toContain("Gymnopédie No. 1");
+      expect(ccByTracks.map((t) => t.title)).toContain(
+        "Cello Suite No. 1 in G - Prelude (BWV 1007)",
+      );
+
+      expect(pdTracks.length).toBe(1);
+      expect(pdTracks[0].title).toContain("Nocturne in E-flat major");
+
+      expect(unverifiedTracks.length).toBeGreaterThanOrEqual(4);
+      expect(unverifiedTracks.every((t) => t.licenseType === "unverified")).toBe(true);
+    });
+
+    it("supports keyword search across track title, artist, composer, and genre", () => {
+      const satieSearch = manager.filterTracks({ search: "Satie" });
+      expect(satieSearch.length).toBe(1);
+      expect(satieSearch[0].id).toBe("track-satie-gymnopedie-1");
+
+      const chopinSearch = manager.filterTracks({ search: "Frédéric" });
+      expect(chopinSearch.length).toBe(1);
+      expect(chopinSearch[0].id).toBe("track-chopin-nocturne-op9no2");
+
+      const bachSearch = manager.filterTracks({ search: "Cello" });
+      expect(bachSearch.length).toBe(1);
+      expect(bachSearch[0].id).toBe("track-bach-cello-suite-1");
+
+      const focusSearch = manager.filterTracks({ search: "Deep Focus" });
+      expect(focusSearch.length).toBeGreaterThanOrEqual(1);
+
+      const nonExistentSearch = manager.filterTracks({ search: "NonExistentQueryXYZ123" });
+      expect(nonExistentSearch.length).toBe(0);
+    });
+
+    it("combines status, license, and search filters correctly", () => {
+      // Available + CC BY 3.0 + search 'Bach'
+      const combined = manager.filterTracks({
+        status: "available",
+        license: "cc-by-3.0",
+        search: "Bach",
+      });
+      expect(combined.length).toBe(1);
+      expect(combined[0].id).toBe("track-bach-cello-suite-1");
+
+      // Unavailable + CC BY 3.0 should be empty because CC BY tracks are available
+      const emptyCombined = manager.filterTracks({
+        status: "unavailable",
+        license: "cc-by-3.0",
+      });
+      expect(emptyCombined.length).toBe(0);
+    });
+
     it("allows manual pause and resume at any time", () => {
       manager.pause();
       expect(manager.getState().isPlaying).toBe(false);
