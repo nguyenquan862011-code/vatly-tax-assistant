@@ -9,7 +9,7 @@ describe("TamGiangPhysics Design System & Audio System", () => {
     const cssPath = path.resolve(__dirname, "../styles.css");
     const cssContent = fs.readFileSync(cssPath, "utf-8").toLowerCase();
 
-    // Exact Light Mode tokens required by prompt
+    // Exact Light Mode tokens required by design spec
     expect(cssContent).toContain("#f7f8f2"); // Light primary background
     expect(cssContent).toContain("#eef3ec"); // Light secondary background
     expect(cssContent).toContain("#ffffff"); // Light card background
@@ -22,7 +22,7 @@ describe("TamGiangPhysics Design System & Audio System", () => {
     expect(cssContent).toContain("#65756b"); // Light secondary text
     expect(cssContent).toContain("#dce5da"); // Light border
 
-    // Exact Dark Mode tokens required by prompt
+    // Exact Dark Mode tokens required by design spec
     expect(cssContent).toContain("#0b1511"); // Dark primary background
     expect(cssContent).toContain("#101f18"); // Dark secondary background
     expect(cssContent).toContain("#15271e"); // Dark card background
@@ -44,22 +44,61 @@ describe("TamGiangPhysics Design System & Audio System", () => {
     expect(cssContent).toContain("filter: none !important");
   });
 
-  it("verifies background music file exists and matches the provided 'The Moment' audio", () => {
-    const audioPath = path.resolve(__dirname, "../../public/audio/background-music.mp3");
-    expect(fs.existsSync(audioPath)).toBe(true);
+  it("verifies verified open-license audio files exist in public/audio directory", () => {
+    const audioDir = path.resolve(__dirname, "../../public/audio");
+    expect(fs.existsSync(audioDir)).toBe(true);
 
-    const stats = fs.statSync(audioPath);
-    // 5.6MB file (at least 5MB)
-    expect(stats.size).toBeGreaterThan(5 * 1024 * 1024);
+    // Verify all available tracks have actual files on disk
+    const availableTracks = APP_CONFIG.backgroundAudio.playlist.filter((t) => t.isAvailable);
+    expect(availableTracks.length).toBeGreaterThanOrEqual(3);
 
-    expect(APP_CONFIG.backgroundAudio.src).toBe("/audio/background-music.mp3");
-    expect(APP_CONFIG.backgroundAudio.trackName).toBe("The Moment");
+    for (const track of availableTracks) {
+      expect(track.src).toBeTruthy();
+      const filePath = path.resolve(audioDir, path.basename(track.src));
+      expect(fs.existsSync(filePath), `File for ${track.title} should exist`).toBe(true);
+      const stats = fs.statSync(filePath);
+      expect(stats.size).toBeGreaterThan(1024 * 1024); // > 1MB valid audio file
+    }
+
+    // Default background audio file is present
+    const defaultFile = path.resolve(audioDir, "background-music.mp3");
+    expect(fs.existsSync(defaultFile)).toBe(true);
   });
 
-  it("verifies multi-track playlist contains all required scientific audio genres", () => {
+  it("verifies transparent copyright and license compliance for all tracks", () => {
     const playlist = APP_CONFIG.backgroundAudio.playlist;
     expect(playlist.length).toBeGreaterThanOrEqual(7);
 
+    // Available tracks MUST have valid open licenses and attribution
+    const availableTracks = playlist.filter((t) => t.isAvailable);
+    for (const track of availableTracks) {
+      expect(["cc-by-3.0", "public-domain"]).toContain(track.licenseType);
+      expect(track.license).toBeTruthy();
+      expect(track.licenseUrl).toBeTruthy();
+      expect(track.sourceName).toBeTruthy();
+      expect(track.sourceUrl).toBeTruthy();
+      expect(track.attribution).toBeTruthy();
+      expect(track.src).toBeTruthy();
+    }
+
+    // Unverified tracks MUST be marked as unavailable (isAvailable: false) without fake files
+    const unverifiedTracks = playlist.filter((t) => !t.isAvailable);
+    expect(unverifiedTracks.length).toBeGreaterThanOrEqual(4);
+    for (const track of unverifiedTracks) {
+      expect(track.licenseType).toBe("unverified");
+      expect(track.isAvailable).toBe(false);
+      expect(track.note).toBeTruthy();
+      expect(track.note).toContain("Chưa có tệp");
+    }
+
+    // The Moment is kept in unverified status because of commercial copyright
+    const theMomentTrack = playlist.find((t) => t.id === "track-chill-moment");
+    expect(theMomentTrack).toBeDefined();
+    expect(theMomentTrack?.isAvailable).toBe(false);
+  });
+
+  it("verifies multi-track playlist covers diverse scientific focus genres", () => {
+    const playlist = APP_CONFIG.backgroundAudio.playlist;
     const genres = playlist.map((t) => t.genre);
     expect(genres).toContain("Chill");
     expect(genres).toContain("Ambient");
@@ -68,14 +107,9 @@ describe("TamGiangPhysics Design System & Audio System", () => {
     expect(genres).toContain("Deep Focus");
     expect(genres).toContain("Space Ambient");
     expect(genres).toContain("Calm Electronic");
-
-    // The Moment is active and available
-    const activeTrack = playlist.find((t) => t.id === "track-chill-moment");
-    expect(activeTrack).toBeDefined();
-    expect(activeTrack?.isAvailable).toBe(true);
   });
 
-  describe("BackgroundAudioManager Route and Lab Logic", () => {
+  describe("BackgroundAudioManager Route, Playlist and License Logic", () => {
     let manager: BackgroundAudioManager;
 
     beforeEach(() => {
@@ -84,39 +118,53 @@ describe("TamGiangPhysics Design System & Audio System", () => {
     });
 
     it("correctly identifies lab routes vs standard pages", () => {
-      // Lab routes
       expect(manager.isLabRoute("/mo-phong")).toBe(true);
       expect(manager.isLabRoute("/mo-phong/")).toBe(true);
       expect(manager.isLabRoute("/mo-phong/lop-10/chuyen-dong")).toBe(true);
       expect(manager.isLabRoute("/bai-hoc/con-lac-don")).toBe(true);
 
-      // Non-lab routes
       expect(manager.isLabRoute("/")).toBe(false);
       expect(manager.isLabRoute("/tai-lieu")).toBe(false);
       expect(manager.isLabRoute("/gioi-thieu")).toBe(false);
     });
 
     it("allows music to keep playing seamlessly when navigating into and out of laboratory", async () => {
-      // User enables audio on homepage
       await manager.play();
       const state1 = manager.getState();
       expect(state1.isEnabled).toBe(true);
       expect(state1.isPlaying).toBe(true);
 
-      // Navigate to lab route: music is NOT locked, user can continue listening
       manager.onRouteChanged("/mo-phong/lop-12/song-anh-sang");
       const stateInLab = manager.getState();
       expect(stateInLab.isInLab).toBe(true);
-      expect(stateInLab.isPlaying).toBe(true); // DOES NOT force pause!
+      expect(stateInLab.isPlaying).toBe(true);
 
-      // User can switch tracks inside lab
       manager.next();
       expect(manager.getState().currentTrack).toBeDefined();
 
-      // Returning to homepage maintains playback state
       manager.onRouteChanged("/");
       expect(manager.getState().isInLab).toBe(false);
       expect(manager.getState().isPlaying).toBe(true);
+    });
+
+    it("handles unverified tracks safely without crashing or playing non-existent files", () => {
+      // Select an unverified track
+      manager.selectTrack("track-chill-moment");
+      const state = manager.getState();
+      expect(state.currentTrack.id).toBe("track-chill-moment");
+      expect(state.currentTrack.isAvailable).toBe(false);
+      expect(state.trackNotice).toBeTruthy();
+      expect(state.trackNotice).toContain("chưa có tệp");
+    });
+
+    it("correctly partitions available vs unverified tracks", () => {
+      const available = manager.getAvailableTracks();
+      const unverified = manager.getUnverifiedTracks();
+
+      expect(available.length).toBeGreaterThanOrEqual(3);
+      expect(unverified.length).toBeGreaterThanOrEqual(4);
+      expect(available.every((t) => t.isAvailable)).toBe(true);
+      expect(unverified.every((t) => !t.isAvailable)).toBe(true);
     });
 
     it("allows manual pause and resume at any time", () => {

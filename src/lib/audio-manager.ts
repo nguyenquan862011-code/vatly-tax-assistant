@@ -51,6 +51,14 @@ export class BackgroundAudioManager {
     }
   }
 
+  public getAvailableTracks(): AudioTrackConfig[] {
+    return this.playlist.filter((t) => t.isAvailable && Boolean(t.src));
+  }
+
+  public getUnverifiedTracks(): AudioTrackConfig[] {
+    return this.playlist.filter((t) => !t.isAvailable);
+  }
+
   private initFromStorage() {
     if (typeof window === "undefined" || this.isInitialized) return;
     this.isInitialized = true;
@@ -102,9 +110,13 @@ export class BackgroundAudioManager {
         const audio = new Audio();
         audio.preload = "auto";
         audio.volume = this.state.isMuted ? 0 : this.state.volume;
-        audio.src = this.state.currentTrack.isAvailable
-          ? this.state.currentTrack.src
-          : this.playlist[0].src;
+
+        const initialSrc =
+          this.state.currentTrack.isAvailable && this.state.currentTrack.src
+            ? this.state.currentTrack.src
+            : this.getAvailableTracks()[0]?.src || APP_CONFIG.backgroundAudio.src;
+
+        audio.src = initialSrc;
 
         audio.addEventListener("playing", () => {
           this.state.isPlaying = true;
@@ -204,8 +216,7 @@ export class BackgroundAudioManager {
 
   /**
    * Handle route navigation:
-   * IMPORTANT: Does NOT auto-pause music when entering Lab!
-   * The user is in full control to play, pause, or switch songs anytime.
+   * Keeps music playing seamlessly when entering Lab.
    */
   public onRouteChanged(pathname: string) {
     if (typeof window !== "undefined") {
@@ -225,13 +236,19 @@ export class BackgroundAudioManager {
     const audio = this.getAudio();
     if (!audio) return false;
 
-    // If active track is not available, provide notice and stream fallback track seamlessly
-    if (!this.state.currentTrack.isAvailable) {
-      this.state.trackNotice = `Tệp "${this.state.currentTrack.title}" đang cập nhật. Phát bài "${this.playlist[0].title}".`;
-      audio.src = this.playlist[0].src;
+    const available = this.getAvailableTracks();
+    const fallback = available[0] || APP_CONFIG.backgroundAudio.playlist[0];
+
+    // If active track is unverified/has no file, provide clear notice and play verified fallback
+    if (!this.state.currentTrack.isAvailable || !this.state.currentTrack.src) {
+      this.state.trackNotice = `Bài "${this.state.currentTrack.title}" chưa có tệp được xác minh bản quyền. Đang phát bài có bản quyền mở: "${fallback.title}".`;
+      if (fallback.src) {
+        audio.src = fallback.src;
+      }
     } else {
       this.state.trackNotice = null;
-      if (audio.src !== window.location.origin + this.state.currentTrack.src) {
+      const expectedUrl = window.location.origin + this.state.currentTrack.src;
+      if (audio.src !== expectedUrl && audio.src !== this.state.currentTrack.src) {
         audio.src = this.state.currentTrack.src;
       }
     }
@@ -312,16 +329,25 @@ export class BackgroundAudioManager {
       console.warn("[TamGiang Audio] Storage write skipped:", err);
     }
 
-    if (this.audio) {
-      const targetSrc = this.state.currentTrack.isAvailable
-        ? this.state.currentTrack.src
-        : this.playlist[0].src;
-      this.audio.src = targetSrc;
-      this.audio.currentTime = 0;
-      if (!this.state.currentTrack.isAvailable) {
-        this.state.trackNotice = `Tệp "${this.state.currentTrack.title}" đang cập nhật bản quyền. Phát bài "${this.playlist[0].title}".`;
+    const available = this.getAvailableTracks();
+    const fallback = available[0] || APP_CONFIG.backgroundAudio.playlist[0];
+
+    if (!this.state.currentTrack.isAvailable || !this.state.currentTrack.src) {
+      this.state.trackNotice = `Bài "${this.state.currentTrack.title}" chưa có tệp được xác minh giấy phép bản quyền. Vui lòng chọn bài đã có tệp được cấp phép mở.`;
+    } else {
+      this.state.trackNotice = null;
+    }
+
+    const audio = this.getAudio();
+    if (audio) {
+      if (!this.state.currentTrack.isAvailable || !this.state.currentTrack.src) {
+        if (fallback.src) {
+          audio.src = fallback.src;
+          audio.currentTime = 0;
+        }
       } else {
-        this.state.trackNotice = null;
+        audio.src = this.state.currentTrack.src;
+        audio.currentTime = 0;
       }
 
       if (this.state.isEnabled || this.state.isPlaying) {
@@ -335,12 +361,14 @@ export class BackgroundAudioManager {
   }
 
   /**
-   * Next track (supports shuffle mode)
+   * Next track (cycles through tracks, prefers verified tracks)
    */
   public next() {
     if (this.state.isShuffle) {
-      const nextIdx = Math.floor(Math.random() * this.playlist.length);
-      this.selectTrack(this.playlist[nextIdx].id);
+      const available = this.getAvailableTracks();
+      const pool = available.length > 0 ? available : this.playlist;
+      const nextIdx = Math.floor(Math.random() * pool.length);
+      this.selectTrack(pool[nextIdx].id);
     } else {
       const nextIdx = (this.currentTrackIndex + 1) % this.playlist.length;
       this.selectTrack(this.playlist[nextIdx].id);
