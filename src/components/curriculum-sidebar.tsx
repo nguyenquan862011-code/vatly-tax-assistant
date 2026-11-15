@@ -58,7 +58,7 @@ export function CurriculumSidebar({ currentPath, isOpen, onToggle }: CurriculumS
   const currentLesson = curriculum.lessons[currentPath];
   const [searchQuery, setSearchQuery] = useState("");
   const [activeGradeSlug, setActiveGradeSlug] = useState<string>(
-    currentLesson?.gradeSlug || "lop-10"
+    currentLesson?.gradeSlug || "lop-10",
   );
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   const activeItemRef = useRef<HTMLAnchorElement | null>(null);
@@ -95,7 +95,7 @@ export function CurriculumSidebar({ currentPath, isOpen, onToggle }: CurriculumS
       (l) =>
         l.name.toLowerCase().includes(q) ||
         l.lesson.toLowerCase().includes(q) ||
-        l.topic.toLowerCase().includes(q)
+        l.topic.toLowerCase().includes(q),
     );
   }, [searchQuery]);
 
@@ -243,7 +243,10 @@ export function CurriculumSidebar({ currentPath, isOpen, onToggle }: CurriculumS
                         (currentLesson ? currentLesson.topicSlug === chude.slug : false);
 
                       return (
-                        <div key={chude.slug} className="rounded-lg border border-sidebar-border/60 bg-sidebar-accent/20">
+                        <div
+                          key={chude.slug}
+                          className="rounded-lg border border-sidebar-border/60 bg-sidebar-accent/20"
+                        >
                           {/* Chủ đề toggle */}
                           <button
                             onClick={() => toggleSection(chude.slug)}
@@ -266,7 +269,10 @@ export function CurriculumSidebar({ currentPath, isOpen, onToggle }: CurriculumS
                                   (currentLesson?.lessonSlug === bai.slug || false);
 
                                 return (
-                                  <div key={bai.slug} className="rounded-md bg-background/50 border border-sidebar-border/40">
+                                  <div
+                                    key={bai.slug}
+                                    className="rounded-md bg-background/50 border border-sidebar-border/40"
+                                  >
                                     <button
                                       onClick={() => toggleSection(bai.slug)}
                                       className="flex w-full items-center justify-between px-2 py-1.5 text-left text-[11px] font-medium text-foreground/90 hover:bg-sidebar-accent/30 rounded-md"
@@ -282,14 +288,13 @@ export function CurriculumSidebar({ currentPath, isOpen, onToggle }: CurriculumS
                                     {isLessonOpen && (
                                       <div className="space-y-0.5 px-1 pb-1">
                                         {bai.children?.map((item) => {
-                                          const slugPath =
-                                            item.slugPath || [
-                                              activeGradeNode.slug,
-                                              part.slug,
-                                              chude.slug,
-                                              bai.slug,
-                                              item.slug,
-                                            ];
+                                          const slugPath = item.slugPath || [
+                                            activeGradeNode.slug,
+                                            part.slug,
+                                            chude.slug,
+                                            bai.slug,
+                                            item.slug,
+                                          ];
                                           const itemFullPath = slugPath.join("/");
                                           const isCurrent = itemFullPath === currentPath;
                                           const itemMeta = curriculum.lessons[itemFullPath];

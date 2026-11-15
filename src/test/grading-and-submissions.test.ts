@@ -81,7 +81,9 @@ describe("Lưu trữ Bài làm & Lịch sử Kết quả (Submission Service)", 
 describe("Cấu hình Kho tài liệu Google Drive & Số lượng Bài học", () => {
   it("chứa liên kết Google Drive chính thức với ID thư mục chính xác", () => {
     expect(APP_CONFIG.googleDriveFolderUrl).toContain("1-80QRozdGMChyMQTfzu7IJoj5jSosztG");
-    expect(APP_CONFIG.googleDriveFolderUrl).toMatch(/^https:\/\/drive\.google\.com\/drive\/folders\//);
+    expect(APP_CONFIG.googleDriveFolderUrl).toMatch(
+      /^https:\/\/drive\.google\.com\/drive\/folders\//,
+    );
   });
 
   it("xác nhận tổng số bài học chính xác là 777 bài", () => {

@@ -69,120 +69,120 @@
   --radius: 0.625rem;
 
   /* TamGiang Science Light Mode tokens (Section 2.A) */
-  --surface-primary: #F7F8F2;
-  --surface-secondary: #EEF3EC;
-  --surface-card: #FFFFFF;
-  --surface-highlight: #E5F0E5;
-  --brand-deep: #075C40;
-  --brand-main: #16845A;
-  --brand-soft: #63B77A;
-  --brand-lime: #C8ED78;
-  --text-primary: #172C23;
-  --text-muted: #65756B;
-  --border-subtle: #DCE5DA;
+  --surface-primary: #f7f8f2;
+  --surface-secondary: #eef3ec;
+  --surface-card: #ffffff;
+  --surface-highlight: #e5f0e5;
+  --brand-deep: #075c40;
+  --brand-main: #16845a;
+  --brand-soft: #63b77a;
+  --brand-lime: #c8ed78;
+  --text-primary: #172c23;
+  --text-muted: #65756b;
+  --border-subtle: #dce5da;
 
   /* Header in Light Mode: xanh đen rất đậm kết hợp chữ sáng */
-  --header-bg: #091A13;
+  --header-bg: #091a13;
   --header-border: #153325;
-  --header-text: #EDF5ED;
+  --header-text: #edf5ed;
 
   /* Standard shadcn semantic variables for Light Mode */
-  --background: #F7F8F2;
-  --foreground: #172C23;
-  --card: #FFFFFF;
-  --card-foreground: #172C23;
-  --popover: #FFFFFF;
-  --popover-foreground: #172C23;
-  --primary: #16845A;
-  --primary-foreground: #FFFFFF;
-  --secondary: #EEF3EC;
-  --secondary-foreground: #172C23;
-  --muted: #EEF3EC;
-  --muted-foreground: #65756B;
-  --accent: #E5F0E5;
-  --accent-foreground: #075C40;
-  --destructive: #DC2626;
-  --destructive-foreground: #FFFFFF;
-  --border: #DCE5DA;
-  --input: #DCE5DA;
-  --ring: #16845A;
+  --background: #f7f8f2;
+  --foreground: #172c23;
+  --card: #ffffff;
+  --card-foreground: #172c23;
+  --popover: #ffffff;
+  --popover-foreground: #172c23;
+  --primary: #16845a;
+  --primary-foreground: #ffffff;
+  --secondary: #eef3ec;
+  --secondary-foreground: #172c23;
+  --muted: #eef3ec;
+  --muted-foreground: #65756b;
+  --accent: #e5f0e5;
+  --accent-foreground: #075c40;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #dce5da;
+  --input: #dce5da;
+  --ring: #16845a;
 
-  --sidebar: #EEF3EC;
-  --sidebar-foreground: #172C23;
-  --sidebar-primary: #16845A;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #E5F0E5;
-  --sidebar-accent-foreground: #075C40;
-  --sidebar-border: #DCE5DA;
-  --sidebar-ring: #16845A;
+  --sidebar: #eef3ec;
+  --sidebar-foreground: #172c23;
+  --sidebar-primary: #16845a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e5f0e5;
+  --sidebar-accent-foreground: #075c40;
+  --sidebar-border: #dce5da;
+  --sidebar-ring: #16845a;
 
   /* Legacy compatibility aliases */
-  --lab-deep: #075C40;
-  --lab-green: #16845A;
-  --lab-lime: #C8ED78;
-  --lab-paper: #F7F8F2;
-  --lab-surface: #FFFFFF;
-  --lab-line: #DCE5DA;
-  --lab-ink: #172C23;
+  --lab-deep: #075c40;
+  --lab-green: #16845a;
+  --lab-lime: #c8ed78;
+  --lab-paper: #f7f8f2;
+  --lab-surface: #ffffff;
+  --lab-line: #dce5da;
+  --lab-ink: #172c23;
 }
 
 .dark {
   /* TamGiang Science Dark Mode tokens (Section 2.B) */
-  --surface-primary: #0B1511;
-  --surface-secondary: #101F18;
-  --surface-card: #15271E;
-  --surface-highlight: #1B3025;
-  --brand-deep: #075C40;
-  --brand-main: #38A875;
-  --brand-soft: #72CF91;
-  --brand-lime: #C8ED78;
-  --text-primary: #EDF5ED;
-  --text-muted: #A5B7A8;
-  --border-subtle: #2B4033;
+  --surface-primary: #0b1511;
+  --surface-secondary: #101f18;
+  --surface-card: #15271e;
+  --surface-highlight: #1b3025;
+  --brand-deep: #075c40;
+  --brand-main: #38a875;
+  --brand-soft: #72cf91;
+  --brand-lime: #c8ed78;
+  --text-primary: #edf5ed;
+  --text-muted: #a5b7a8;
+  --border-subtle: #2b4033;
 
   /* Header in Dark Mode: xanh đen sâu */
-  --header-bg: #06120D;
-  --header-border: #12261C;
-  --header-text: #EDF5ED;
+  --header-bg: #06120d;
+  --header-border: #12261c;
+  --header-text: #edf5ed;
 
   /* Standard shadcn semantic variables for Dark Mode */
-  --background: #0B1511;
-  --foreground: #EDF5ED;
-  --card: #15271E;
-  --card-foreground: #EDF5ED;
-  --popover: #15271E;
-  --popover-foreground: #EDF5ED;
-  --primary: #38A875;
-  --primary-foreground: #0B1511;
-  --secondary: #101F18;
-  --secondary-foreground: #EDF5ED;
-  --muted: #101F18;
-  --muted-foreground: #A5B7A8;
-  --accent: #1B3025;
-  --accent-foreground: #72CF91;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: #2B4033;
-  --input: #2B4033;
-  --ring: #38A875;
+  --background: #0b1511;
+  --foreground: #edf5ed;
+  --card: #15271e;
+  --card-foreground: #edf5ed;
+  --popover: #15271e;
+  --popover-foreground: #edf5ed;
+  --primary: #38a875;
+  --primary-foreground: #0b1511;
+  --secondary: #101f18;
+  --secondary-foreground: #edf5ed;
+  --muted: #101f18;
+  --muted-foreground: #a5b7a8;
+  --accent: #1b3025;
+  --accent-foreground: #72cf91;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #2b4033;
+  --input: #2b4033;
+  --ring: #38a875;
 
-  --sidebar: #101F18;
-  --sidebar-foreground: #EDF5ED;
-  --sidebar-primary: #38A875;
-  --sidebar-primary-foreground: #0B1511;
-  --sidebar-accent: #1B3025;
-  --sidebar-accent-foreground: #72CF91;
-  --sidebar-border: #2B4033;
-  --sidebar-ring: #38A875;
+  --sidebar: #101f18;
+  --sidebar-foreground: #edf5ed;
+  --sidebar-primary: #38a875;
+  --sidebar-primary-foreground: #0b1511;
+  --sidebar-accent: #1b3025;
+  --sidebar-accent-foreground: #72cf91;
+  --sidebar-border: #2b4033;
+  --sidebar-ring: #38a875;
 
   /* Legacy compatibility aliases */
-  --lab-deep: #075C40;
-  --lab-green: #38A875;
-  --lab-lime: #C8ED78;
-  --lab-paper: #0B1511;
-  --lab-surface: #15271E;
-  --lab-line: #2B4033;
-  --lab-ink: #EDF5ED;
+  --lab-deep: #075c40;
+  --lab-green: #38a875;
+  --lab-lime: #c8ed78;
+  --lab-paper: #0b1511;
+  --lab-surface: #15271e;
+  --lab-line: #2b4033;
+  --lab-ink: #edf5ed;
 }
 
 @layer base {
@@ -193,7 +193,9 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
 }
 
@@ -201,7 +203,9 @@
 .science-card {
   background-color: var(--color-card);
   border: 1px solid var(--color-border);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.05),
+    0 1px 2px -1px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 }
 
@@ -233,7 +237,7 @@ iframe {
 }
 
 .dark .text-gradient-science {
-  background: linear-gradient(135deg, #72CF91 0%, #C8ED78 100%);
+  background: linear-gradient(135deg, #72cf91 0%, #c8ed78 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

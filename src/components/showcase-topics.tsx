@@ -23,8 +23,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 19,
     title: "GIỚI THIỆU MỤC ĐÍCH HỌC TẬP MÔN VẬT LÝ",
     sampleLessonName: "Làm quen với môn Vật lý",
-    sampleLessonPath: "lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly",
+    sampleLessonPath:
+      "lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly",
     theory: 3,
     example: 10,
     exercise: 3,
@@ -36,8 +38,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 137,
     title: "MÔ TẢ CHUYỂN ĐỘNG",
     sampleLessonName: "Độ dịch chuyển - Quãng đường đi được",
-    sampleLessonPath: "lop-10/co-hoc-phan-1/chu-de-2-mo-ta-chuyen-dong/bai-1-do-dich-chuyen-quang-duong-di-duoc/1-ly-thuyet-do-dich-chuyen-quang-duong-di-duoc",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-2-mo-ta-chuyen-dong/bai-1-do-dich-chuyen-quang-duong-di-duoc/1-ly-thuyet-do-dich-chuyen-quang-duong-di-duoc",
+    sampleLessonPath:
+      "lop-10/co-hoc-phan-1/chu-de-2-mo-ta-chuyen-dong/bai-1-do-dich-chuyen-quang-duong-di-duoc/1-ly-thuyet-do-dich-chuyen-quang-duong-di-duoc",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-2-mo-ta-chuyen-dong/bai-1-do-dich-chuyen-quang-duong-di-duoc/1-ly-thuyet-do-dich-chuyen-quang-duong-di-duoc",
     theory: 6,
     example: 40,
     exercise: 9,
@@ -49,8 +53,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 89,
     title: "LỰC VÀ CHUYỂN ĐỘNG",
     sampleLessonName: "Tổng hợp và phân tích lực",
-    sampleLessonPath: "lop-10/co-hoc-phan-1/chu-de-3-luc-va-chuyen-dong/bai-1-tong-hop-va-phan-tich-luc/1-ly-thuyet-tong-hop-va-phan-tich-luc",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-3-luc-va-chuyen-dong/bai-1-tong-hop-va-phan-tich-luc/1-ly-thuyet-tong-hop-va-phan-tich-luc",
+    sampleLessonPath:
+      "lop-10/co-hoc-phan-1/chu-de-3-luc-va-chuyen-dong/bai-1-tong-hop-va-phan-tich-luc/1-ly-thuyet-tong-hop-va-phan-tich-luc",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-3-luc-va-chuyen-dong/bai-1-tong-hop-va-phan-tich-luc/1-ly-thuyet-tong-hop-va-phan-tich-luc",
     theory: 4,
     example: 52,
     exercise: 6,
@@ -63,7 +69,8 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     title: "SÓNG CƠ",
     sampleLessonName: "Mô tả sóng",
     sampleLessonPath: "lop-11/song/chu-de-1-song-co/bai-1-mo-ta-song/1-ly-thuyet-mo-ta-song",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-1-song-co/bai-1-mo-ta-song/1-ly-thuyet-mo-ta-song",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-1-song-co/bai-1-mo-ta-song/1-ly-thuyet-mo-ta-song",
     theory: 3,
     example: 18,
     exercise: 5,
@@ -75,8 +82,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 5,
     title: "SÓNG ĐIỆN TỪ",
     sampleLessonName: "Sóng điện từ",
-    sampleLessonPath: "lop-11/song/chu-de-2-song-dien-tu/bai-1-song-dien-tu/1-ly-thuyet-song-dien-tu",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-2-song-dien-tu/bai-1-song-dien-tu/1-ly-thuyet-song-dien-tu",
+    sampleLessonPath:
+      "lop-11/song/chu-de-2-song-dien-tu/bai-1-song-dien-tu/1-ly-thuyet-song-dien-tu",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-2-song-dien-tu/bai-1-song-dien-tu/1-ly-thuyet-song-dien-tu",
     theory: 1,
     example: 0,
     exercise: 1,
@@ -88,8 +97,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 71,
     title: "GIAO THOA SÓNG",
     sampleLessonName: "Giao thoa sóng cơ",
-    sampleLessonPath: "lop-11/song/chu-de-3-giao-thoa-song/bai-1-giao-thoa-song-co/1-ly-thuyet-giao-thoa-song-co",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-3-giao-thoa-song/bai-1-giao-thoa-song-co/1-ly-thuyet-giao-thoa-song-co",
+    sampleLessonPath:
+      "lop-11/song/chu-de-3-giao-thoa-song/bai-1-giao-thoa-song-co/1-ly-thuyet-giao-thoa-song-co",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-3-giao-thoa-song/bai-1-giao-thoa-song-co/1-ly-thuyet-giao-thoa-song-co",
     theory: 4,
     example: 41,
     exercise: 6,
@@ -102,7 +113,8 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     title: "SÓNG DỪNG",
     sampleLessonName: "Sóng dừng",
     sampleLessonPath: "lop-11/song/chu-de-4-song-dung/bai-1-song-dung/1-ly-thuyet-song-dung",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-4-song-dung/bai-1-song-dung/1-ly-thuyet-song-dung",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-11/song/chu-de-4-song-dung/bai-1-song-dung/1-ly-thuyet-song-dung",
     theory: 1,
     example: 29,
     exercise: 2,
@@ -114,8 +126,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 159,
     title: "CHẤT KHÍ",
     sampleLessonName: "Thuyết động học phân tử khí lí tưởng",
-    sampleLessonPath: "lop-12/chat-khi/chu-de-1-chat-khi/bai-1-thuyet-dong-hoc-phan-tu-khi-ly-tuong/1-ly-thuyet-thuyet-dong-hoc-phan-tu-khi-ly-tuong",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-12/chat-khi/chu-de-1-chat-khi/bai-1-thuyet-dong-hoc-phan-tu-khi-ly-tuong/1-ly-thuyet-thuyet-dong-hoc-phan-tu-khi-ly-tuong",
+    sampleLessonPath:
+      "lop-12/chat-khi/chu-de-1-chat-khi/bai-1-thuyet-dong-hoc-phan-tu-khi-ly-tuong/1-ly-thuyet-thuyet-dong-hoc-phan-tu-khi-ly-tuong",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-12/chat-khi/chu-de-1-chat-khi/bai-1-thuyet-dong-hoc-phan-tu-khi-ly-tuong/1-ly-thuyet-thuyet-dong-hoc-phan-tu-khi-ly-tuong",
     theory: 12,
     example: 53,
     exercise: 13,
@@ -127,8 +141,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 80,
     title: "NHIỆT HỌC",
     sampleLessonName: "Thang nhiệt độ - Nhiệt kế",
-    sampleLessonPath: "lop-12/nhiet-hoc/chu-de-1-nhiet-hoc/bai-1-thang-nhiet-do-nhiet-ke/1-ly-thuyet-thang-nhiet-do-nhiet-ke",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-12/nhiet-hoc/chu-de-1-nhiet-hoc/bai-1-thang-nhiet-do-nhiet-ke/1-ly-thuyet-thang-nhiet-do-nhiet-ke",
+    sampleLessonPath:
+      "lop-12/nhiet-hoc/chu-de-1-nhiet-hoc/bai-1-thang-nhiet-do-nhiet-ke/1-ly-thuyet-thang-nhiet-do-nhiet-ke",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-12/nhiet-hoc/chu-de-1-nhiet-hoc/bai-1-thang-nhiet-do-nhiet-ke/1-ly-thuyet-thang-nhiet-do-nhiet-ke",
     theory: 5,
     example: 9,
     exercise: 7,
@@ -140,8 +156,10 @@ export const SHOWCASE_TOPICS: ShowcaseTopic[] = [
     count: 131,
     title: "TỪ TRƯỜNG",
     sampleLessonName: "Từ trường - Cảm ứng từ",
-    sampleLessonPath: "lop-12/tu-truong/chu-de-1-tu-truong/bai-1-tu-truong-cam-ung-tu/1-ly-thuyet-tu-truong-cam-ung-tu",
-    simulationUrl: "https://vatly.ai/api/mo-phong/lop-12/tu-truong/chu-de-1-tu-truong/bai-1-tu-truong-cam-ung-tu/1-ly-thuyet-tu-truong-cam-ung-tu",
+    sampleLessonPath:
+      "lop-12/tu-truong/chu-de-1-tu-truong/bai-1-tu-truong-cam-ung-tu/1-ly-thuyet-tu-truong-cam-ung-tu",
+    simulationUrl:
+      "https://vatly.ai/api/mo-phong/lop-12/tu-truong/chu-de-1-tu-truong/bai-1-tu-truong-cam-ung-tu/1-ly-thuyet-tu-truong-cam-ung-tu",
     theory: 13,
     example: 67,
     exercise: 15,
@@ -195,7 +213,9 @@ export function ShowcaseTopics() {
             >
               <span className="flex items-center justify-between font-mono text-[10px] tracking-wider text-lab-subtle uppercase">
                 {topic.badge}
-                <span className={isSelected ? "text-lab-green font-semibold" : ""}>{topic.count}</span>
+                <span className={isSelected ? "text-lab-green font-semibold" : ""}>
+                  {topic.count}
+                </span>
               </span>
               <span
                 className={`mt-1 block text-sm font-semibold transition-colors ${
@@ -265,7 +285,10 @@ export function ShowcaseTopics() {
                 className="absolute size-[26rem] animate-lab-spin-reverse rounded-full border border-lab-lime/10"
               />
               <span className="relative flex size-20 items-center justify-center">
-                <span aria-hidden="true" className="absolute inset-0 animate-lab-pulse rounded-full bg-lab-lime/40" />
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 animate-lab-pulse rounded-full bg-lab-lime/40"
+                />
                 <span className="relative flex size-16 items-center justify-center rounded-full bg-lab-lime text-lab-deep shadow-2xl transition-transform group-hover:scale-110 motion-reduce:transform-none">
                   <Play className="ml-1 size-7 fill-current" />
                 </span>

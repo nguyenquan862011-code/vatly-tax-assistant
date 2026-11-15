@@ -68,7 +68,12 @@ const DRIVE_CATEGORIES: DriveCategory[] = [
     code: "LT-THPT",
     description:
       "Hệ thống hóa bản chất các hiện tượng vật lý, định nghĩa, định luật và giải thích ứng dụng thực tế. Soạn thảo chuẩn theo chương trình giáo dục phổ thông.",
-    topics: ["Cơ học & Động lực học", "Dao động & Sóng cơ", "Điện trường & Từ trường", "Quang học & Lăng kính"],
+    topics: [
+      "Cơ học & Động lực học",
+      "Dao động & Sóng cơ",
+      "Điện trường & Từ trường",
+      "Quang học & Lăng kính",
+    ],
     status: "active",
     grade: "all",
     gradeLabel: "Toàn cấp THPT",
@@ -80,7 +85,12 @@ const DRIVE_CATEGORIES: DriveCategory[] = [
     code: "VL-K10",
     description:
       "Chuyên đề Cơ học, Chuyển động thẳng, Chuyển động ném, Ba định luật Newton, Moment lực, Năng lượng và Động lượng.",
-    topics: ["Sai số & Phép đo vật lý", "Chuyển động biến đổi đều", "Động lực học Newton", "Định luật bảo toàn cơ năng"],
+    topics: [
+      "Sai số & Phép đo vật lý",
+      "Chuyển động biến đổi đều",
+      "Động lực học Newton",
+      "Định luật bảo toàn cơ năng",
+    ],
     status: "active",
     grade: "10",
     gradeLabel: "Khối 10",
@@ -92,7 +102,12 @@ const DRIVE_CATEGORIES: DriveCategory[] = [
     code: "VL-K11",
     description:
       "Dao động điều hòa, Sóng cơ và Sóng âm, Giao thoa sóng ánh sáng, Điện trường tĩnh, Dòng điện không đổi và Từ trường.",
-    topics: ["Con lắc đơn & Con lắc lò xo", "Giao thoa & Sóng dừng", "Khúc xạ & Tán sắc lăng kính", "Điện trường & Tụ điện"],
+    topics: [
+      "Con lắc đơn & Con lắc lò xo",
+      "Giao thoa & Sóng dừng",
+      "Khúc xạ & Tán sắc lăng kính",
+      "Điện trường & Tụ điện",
+    ],
     status: "active",
     grade: "11",
     gradeLabel: "Khối 11",
@@ -104,7 +119,12 @@ const DRIVE_CATEGORIES: DriveCategory[] = [
     code: "VL-K12",
     description:
       "Vật lý nhiệt, Khí lý tưởng, Từ trường, Hiện tượng cảm ứng điện từ, Vật lý hạt nhân và Phóng xạ.",
-    topics: ["Nhiệt động lực học", "Mô hình động học phân tử", "Cảm ứng điện từ & Suất điện động", "Năng lượng hạt nhân & Phóng xạ"],
+    topics: [
+      "Nhiệt động lực học",
+      "Mô hình động học phân tử",
+      "Cảm ứng điện từ & Suất điện động",
+      "Năng lượng hạt nhân & Phóng xạ",
+    ],
     status: "active",
     grade: "12",
     gradeLabel: "Khối 12",
@@ -116,7 +136,12 @@ const DRIVE_CATEGORIES: DriveCategory[] = [
     code: "DT-THPT",
     description:
       "Tuyển tập đề kiểm tra giữa kỳ, cuối kỳ, đề thi thử Tốt nghiệp THPT và đề thi học sinh giỏi các năm có hướng dẫn giải chi tiết.",
-    topics: ["Đề thi Tốt nghiệp THPT", "Đề kiểm tra học kỳ 1 & 2", "Bộ câu hỏi trắc nghiệm đúng/sai", "Bài tập định lượng có giải"],
+    topics: [
+      "Đề thi Tốt nghiệp THPT",
+      "Đề kiểm tra học kỳ 1 & 2",
+      "Bộ câu hỏi trắc nghiệm đúng/sai",
+      "Bài tập định lượng có giải",
+    ],
     status: "active",
     grade: "all",
     gradeLabel: "Ôn thi & Luyện đề",
@@ -163,11 +188,14 @@ function TaiLieuPage() {
             </h1>
 
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#16845A] dark:text-[#72CF91] font-semibold sm:text-lg">
-              Kho tài liệu tổng hợp kiến thức, lý thuyết và công thức Vật lí THPT phục vụ quá trình học tập và ôn luyện.
+              Kho tài liệu tổng hợp kiến thức, lý thuyết và công thức Vật lí THPT phục vụ quá trình
+              học tập và ôn luyện.
             </p>
 
             <p className="mx-auto max-w-xl text-xs leading-relaxed text-muted-foreground">
-              Tri thức được hệ thống hóa – Kiến thức được kết nối – Tư duy được khai mở. Toàn bộ tài liệu chính thức được lưu trữ tập trung trên Google Drive của TamGiangPhysics, truy cập công khai và tải về nhanh chóng.
+              Tri thức được hệ thống hóa – Kiến thức được kết nối – Tư duy được khai mở. Toàn bộ tài
+              liệu chính thức được lưu trữ tập trung trên Google Drive của TamGiangPhysics, truy cập
+              công khai và tải về nhanh chóng.
             </p>
 
             {/* Prominent Google Drive CTA Button */}
@@ -189,7 +217,9 @@ function TaiLieuPage() {
                 className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
               >
                 <Eye className="size-4 text-[#16845A] dark:text-[#72CF91]" />
-                <span>{showEmbedPreview ? "Ẩn khung xem trực tiếp" : "Xem trực tiếp trên trang"}</span>
+                <span>
+                  {showEmbedPreview ? "Ẩn khung xem trực tiếp" : "Xem trực tiếp trên trang"}
+                </span>
               </button>
             </div>
 
@@ -197,7 +227,8 @@ function TaiLieuPage() {
             <div className="mx-auto flex max-w-md items-center justify-center gap-2 text-[11px] text-muted-foreground">
               <ShieldCheck className="size-3.5 text-[#16845A] dark:text-[#72CF91]" />
               <span>
-                Quyền truy cập: <strong>Anyone with the link – Viewer</strong> (Xem và tải về miễn phí)
+                Quyền truy cập: <strong>Anyone with the link – Viewer</strong> (Xem và tải về miễn
+                phí)
               </span>
             </div>
 
@@ -366,7 +397,10 @@ function TaiLieuPage() {
               <span>Cơ chế cập nhật tài liệu qua Google Drive</span>
             </div>
             <p className="text-xs leading-relaxed text-muted-foreground max-w-3xl">
-              Kho tài liệu TamGiangPhysics hiện được kết nối trực tiếp với thư mục Google Drive chính thức được cung cấp. Mọi tài liệu mới được tải lên thư mục này sẽ hiển thị ngay cho học sinh khi mở liên kết Drive. Website không sử dụng đường dẫn tệp giả hoặc nút tải giả.
+              Kho tài liệu TamGiangPhysics hiện được kết nối trực tiếp với thư mục Google Drive
+              chính thức được cung cấp. Mọi tài liệu mới được tải lên thư mục này sẽ hiển thị ngay
+              cho học sinh khi mở liên kết Drive. Website không sử dụng đường dẫn tệp giả hoặc nút
+              tải giả.
             </p>
             <div className="pt-2">
               <a

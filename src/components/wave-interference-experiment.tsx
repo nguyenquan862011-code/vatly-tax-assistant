@@ -44,7 +44,10 @@ export function WaveInterferenceExperiment() {
   const maxInterferenceCount = 2 * P + 1;
 
   // Maxima offsets along the center-line
-  const maximaOffsets = Array.from({ length: maxInterferenceCount }, (_, i) => (wavelength / 2) * (i - P));
+  const maximaOffsets = Array.from(
+    { length: maxInterferenceCount },
+    (_, i) => (wavelength / 2) * (i - P),
+  );
 
   // Midpoint & unit direction
   const midX = (sources.s1.x + sources.s2.x) / 2;
@@ -389,8 +392,8 @@ export function WaveInterferenceExperiment() {
                   probeInfo.verdict === "max"
                     ? "fill-lab-lime stroke-lab-deep"
                     : probeInfo.verdict === "min"
-                    ? "fill-lab-deep stroke-lab-lime"
-                    : "fill-white/80 stroke-lab-deep"
+                      ? "fill-lab-deep stroke-lab-lime"
+                      : "fill-white/80 stroke-lab-deep"
                 }
                 strokeWidth="0.12"
               />
@@ -483,15 +486,18 @@ export function WaveInterferenceExperiment() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-lab-subtle font-mono text-[11px]">
             <span>
-              Khoảng cách <strong className="text-lab-ink font-semibold">{formatNum(sourceDist)} cm</strong>
+              Khoảng cách{" "}
+              <strong className="text-lab-ink font-semibold">{formatNum(sourceDist)} cm</strong>
             </span>
             <span>•</span>
             <span>
-              Bước sóng λ = <strong className="text-lab-ink font-semibold">{formatNum(wavelength)} cm</strong>
+              Bước sóng λ ={" "}
+              <strong className="text-lab-ink font-semibold">{formatNum(wavelength)} cm</strong>
             </span>
             <span>•</span>
             <span>
-              Cực đại trên đoạn: <strong className="text-lab-green font-bold">{maxInterferenceCount}</strong>
+              Cực đại trên đoạn:{" "}
+              <strong className="text-lab-green font-bold">{maxInterferenceCount}</strong>
             </span>
           </div>
 
@@ -500,7 +506,11 @@ export function WaveInterferenceExperiment() {
               onClick={() => setIsAnimating((a) => !a)}
               className="inline-flex h-7 items-center gap-1 rounded-md border border-lab-line bg-lab-surface px-2.5 text-[11px] font-medium text-lab-ink hover:bg-lab-line/40 transition-colors"
             >
-              {isAnimating ? <Pause className="size-3 text-amber-500" /> : <Play className="size-3 text-lab-green" />}
+              {isAnimating ? (
+                <Pause className="size-3 text-amber-500" />
+              ) : (
+                <Play className="size-3 text-lab-green" />
+              )}
               {isAnimating ? "Tạm dừng" : "Tiếp tục"}
             </button>
             <button
@@ -520,17 +530,17 @@ export function WaveInterferenceExperiment() {
             <span>
               Điểm M:{" "}
               <span className="font-mono text-lab-ink font-semibold">
-                d₂ − d₁ = {formatNum(Math.abs(probeInfo.diff), 2)} cm ({formatNum(Math.abs(probeInfo.ratio), 2)}λ)
+                d₂ − d₁ = {formatNum(Math.abs(probeInfo.diff), 2)} cm (
+                {formatNum(Math.abs(probeInfo.ratio), 2)}λ)
               </span>{" "}
               →{" "}
               {probeInfo.verdict === "max" ? (
                 <strong className="font-bold text-lab-green">
-                  Cực đại giao thoa {probeInfo.order === 0 ? "trung tâm (k = 0)" : `bậc ${Math.abs(probeInfo.order)}`}
+                  Cực đại giao thoa{" "}
+                  {probeInfo.order === 0 ? "trung tâm (k = 0)" : `bậc ${Math.abs(probeInfo.order)}`}
                 </strong>
               ) : probeInfo.verdict === "min" ? (
-                <strong className="font-bold text-amber-500">
-                  Cực tiểu giao thoa (đứng yên)
-                </strong>
+                <strong className="font-bold text-amber-500">Cực tiểu giao thoa (đứng yên)</strong>
               ) : (
                 <span className="text-lab-ink">Vị trí dao động với biên độ trung gian</span>
               )}
@@ -550,7 +560,9 @@ export function WaveInterferenceExperiment() {
         <div>
           <div className="flex items-center justify-between text-xs">
             <span className="font-medium text-lab-ink">Khoảng cách hai nguồn S₁ - S₂</span>
-            <span className="font-mono font-semibold text-lab-green">{formatNum(sourceDist)} cm</span>
+            <span className="font-mono font-semibold text-lab-green">
+              {formatNum(sourceDist)} cm
+            </span>
           </div>
           <input
             type="range"
@@ -571,7 +583,9 @@ export function WaveInterferenceExperiment() {
         <div>
           <div className="flex items-center justify-between text-xs">
             <span className="font-medium text-lab-ink">Bước sóng λ</span>
-            <span className="font-mono font-semibold text-lab-green">{formatNum(wavelength)} cm</span>
+            <span className="font-mono font-semibold text-lab-green">
+              {formatNum(wavelength)} cm
+            </span>
           </div>
           <input
             type="range"

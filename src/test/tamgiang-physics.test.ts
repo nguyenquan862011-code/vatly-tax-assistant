@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import fs from "fs";
+import path from "path";
 
 describe("TamGiangPhysics Brand and Physics Logic", () => {
   it("verifies Cauchy prism dispersion physics", () => {
@@ -27,8 +29,6 @@ describe("TamGiangPhysics Brand and Physics Logic", () => {
   });
 
   it("verifies presence of official Tam Giang logo assets", () => {
-    const fs = require("fs");
-    const path = require("path");
     const logoPath = path.resolve(__dirname, "../../public/logo-tamgiang.png");
     const faviconPath = path.resolve(__dirname, "../../public/favicon.ico");
     expect(fs.existsSync(logoPath)).toBe(true);

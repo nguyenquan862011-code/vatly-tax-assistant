@@ -54,6 +54,6 @@ export function searchLessons(query: string): LessonMeta[] {
     (l) =>
       l.name.toLowerCase().includes(q) ||
       l.lesson.toLowerCase().includes(q) ||
-      l.topic.toLowerCase().includes(q)
+      l.topic.toLowerCase().includes(q),
   );
 }

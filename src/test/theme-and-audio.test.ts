@@ -7,31 +7,31 @@ import { BackgroundAudioManager } from "@/lib/audio-manager";
 describe("TamGiangPhysics Design System & Audio System", () => {
   it("verifies exact Light Mode and Dark Mode color tokens in styles.css", () => {
     const cssPath = path.resolve(__dirname, "../styles.css");
-    const cssContent = fs.readFileSync(cssPath, "utf-8");
+    const cssContent = fs.readFileSync(cssPath, "utf-8").toLowerCase();
 
     // Exact Light Mode tokens required by prompt
-    expect(cssContent).toContain("#F7F8F2"); // Light primary background
-    expect(cssContent).toContain("#EEF3EC"); // Light secondary background
-    expect(cssContent).toContain("#FFFFFF"); // Light card background
-    expect(cssContent).toContain("#E5F0E5"); // Light highlight area
-    expect(cssContent).toContain("#075C40"); // Dark brand green
-    expect(cssContent).toContain("#16845A"); // Light main green
-    expect(cssContent).toContain("#63B77A"); // Light soft green
-    expect(cssContent).toContain("#C8ED78"); // Lime accent
-    expect(cssContent).toContain("#172C23"); // Light primary text
-    expect(cssContent).toContain("#65756B"); // Light secondary text
-    expect(cssContent).toContain("#DCE5DA"); // Light border
+    expect(cssContent).toContain("#f7f8f2"); // Light primary background
+    expect(cssContent).toContain("#eef3ec"); // Light secondary background
+    expect(cssContent).toContain("#ffffff"); // Light card background
+    expect(cssContent).toContain("#e5f0e5"); // Light highlight area
+    expect(cssContent).toContain("#075c40"); // Dark brand green
+    expect(cssContent).toContain("#16845a"); // Light main green
+    expect(cssContent).toContain("#63b77a"); // Light soft green
+    expect(cssContent).toContain("#c8ed78"); // Lime accent
+    expect(cssContent).toContain("#172c23"); // Light primary text
+    expect(cssContent).toContain("#65756b"); // Light secondary text
+    expect(cssContent).toContain("#dce5da"); // Light border
 
     // Exact Dark Mode tokens required by prompt
-    expect(cssContent).toContain("#0B1511"); // Dark primary background
-    expect(cssContent).toContain("#101F18"); // Dark secondary background
-    expect(cssContent).toContain("#15271E"); // Dark card background
-    expect(cssContent).toContain("#1B3025"); // Dark highlight card
-    expect(cssContent).toContain("#38A875"); // Dark main green
-    expect(cssContent).toContain("#72CF91"); // Dark bright green
-    expect(cssContent).toContain("#EDF5ED"); // Dark primary text
-    expect(cssContent).toContain("#A5B7A8"); // Dark secondary text
-    expect(cssContent).toContain("#2B4033"); // Dark border
+    expect(cssContent).toContain("#0b1511"); // Dark primary background
+    expect(cssContent).toContain("#101f18"); // Dark secondary background
+    expect(cssContent).toContain("#15271e"); // Dark card background
+    expect(cssContent).toContain("#1b3025"); // Dark highlight card
+    expect(cssContent).toContain("#38a875"); // Dark main green
+    expect(cssContent).toContain("#72cf91"); // Dark bright green
+    expect(cssContent).toContain("#edf5ed"); // Dark primary text
+    expect(cssContent).toContain("#a5b7a8"); // Dark secondary text
+    expect(cssContent).toContain("#2b4033"); // Dark border
   });
 
   it("verifies physical spectrum and raw physics preservation rules in CSS", () => {
@@ -56,6 +56,25 @@ describe("TamGiangPhysics Design System & Audio System", () => {
     expect(APP_CONFIG.backgroundAudio.trackName).toBe("The Moment");
   });
 
+  it("verifies multi-track playlist contains all required scientific audio genres", () => {
+    const playlist = APP_CONFIG.backgroundAudio.playlist;
+    expect(playlist.length).toBeGreaterThanOrEqual(7);
+
+    const genres = playlist.map((t) => t.genre);
+    expect(genres).toContain("Chill");
+    expect(genres).toContain("Ambient");
+    expect(genres).toContain("Lo-fi Study");
+    expect(genres).toContain("Soft Piano");
+    expect(genres).toContain("Deep Focus");
+    expect(genres).toContain("Space Ambient");
+    expect(genres).toContain("Calm Electronic");
+
+    // The Moment is active and available
+    const activeTrack = playlist.find((t) => t.id === "track-chill-moment");
+    expect(activeTrack).toBeDefined();
+    expect(activeTrack?.isAvailable).toBe(true);
+  });
+
   describe("BackgroundAudioManager Route and Lab Logic", () => {
     let manager: BackgroundAudioManager;
 
@@ -77,43 +96,34 @@ describe("TamGiangPhysics Design System & Audio System", () => {
       expect(manager.isLabRoute("/gioi-thieu")).toBe(false);
     });
 
-    it("pauses automatically when navigating to a lab route and resumes when returning if enabled", async () => {
+    it("allows music to keep playing seamlessly when navigating into and out of laboratory", async () => {
       // User enables audio on homepage
       await manager.play();
       const state1 = manager.getState();
       expect(state1.isEnabled).toBe(true);
       expect(state1.isPlaying).toBe(true);
 
-      // Navigate to lab route: audio MUST pause immediately
+      // Navigate to lab route: music is NOT locked, user can continue listening
       manager.onRouteChanged("/mo-phong/lop-12/song-anh-sang");
       const stateInLab = manager.getState();
-      expect(stateInLab.isPlaying).toBe(false);
-      expect(stateInLab.isPausedByLab).toBe(true);
+      expect(stateInLab.isInLab).toBe(true);
+      expect(stateInLab.isPlaying).toBe(true); // DOES NOT force pause!
 
-      // Navigating deeper into another lab keeps it silent
-      manager.onRouteChanged("/mo-phong/lop-12/giao-thoa");
-      expect(manager.getState().isPlaying).toBe(false);
+      // User can switch tracks inside lab
+      manager.next();
+      expect(manager.getState().currentTrack).toBeDefined();
 
-      // Returning to homepage resumes audio automatically
+      // Returning to homepage maintains playback state
       manager.onRouteChanged("/");
-      const stateHome = manager.getState();
-      expect(stateHome.isPlaying).toBe(true);
-      expect(stateHome.isPausedByLab).toBe(false);
+      expect(manager.getState().isInLab).toBe(false);
+      expect(manager.getState().isPlaying).toBe(true);
     });
 
-    it("does NOT auto-resume when returning from lab if user manually turned off audio", () => {
-      // User explicitly turned off audio
+    it("allows manual pause and resume at any time", () => {
       manager.pause();
-      expect(manager.getState().isEnabled).toBe(false);
-
-      // Enter lab
-      manager.onRouteChanged("/mo-phong");
-      expect(manager.getState().isPlaying).toBe(false);
-
-      // Return to homepage: remains off!
-      manager.onRouteChanged("/");
       expect(manager.getState().isPlaying).toBe(false);
       expect(manager.getState().isEnabled).toBe(false);
+      expect(localStorage.getItem(APP_CONFIG.backgroundAudio.storageKeyEnabled)).toBe("false");
     });
 
     it("persists volume and enabled state in localStorage", async () => {

@@ -89,7 +89,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "TamGiangPhysics: Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số.",
       },
       { name: "author", content: "Trần Đình Nguyên Quân" },
-      { property: "og:title", content: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại" },
+      {
+        property: "og:title",
+        content: "TamGiangPhysics — Nền tảng học tập & mô phỏng Vật lý hiện đại",
+      },
       {
         property: "og:description",
         content:
@@ -150,7 +153,10 @@ function RootShell({ children }: { children: ReactNode }) {
         </style>
         <HeadContent />
       </head>
-      <body {...importedDocument?.body} className="min-h-screen bg-background text-foreground antialiased selection:bg-[#16845A]/20 selection:text-[#075C40] dark:selection:bg-[#38A875]/30 dark:selection:text-[#72CF91]">
+      <body
+        {...importedDocument?.body}
+        className="min-h-screen bg-background text-foreground antialiased selection:bg-[#16845A]/20 selection:text-[#075C40] dark:selection:bg-[#38A875]/30 dark:selection:text-[#72CF91]"
+      >
         {children}
         <Scripts />
       </body>
@@ -174,11 +180,15 @@ function RootComponent() {
         const isExplicitlyDisabled =
           localStorage.getItem(APP_CONFIG.backgroundAudio.storageKeyEnabled) === "false";
         if (!isExplicitlyDisabled) {
-          audioManager.play().catch(() => {});
+          audioManager.play().catch((err) => {
+            console.debug("[TamGiang Audio] Initial autoplay blocked by browser policy:", err);
+          });
         }
-      } catch {}
+      } catch (err) {
+        console.warn("[TamGiang Audio] Storage read notice:", err);
+      }
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

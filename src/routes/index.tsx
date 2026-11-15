@@ -129,7 +129,9 @@ function Index() {
 
                 {/* Description */}
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base max-w-xl">
-                  TamGiangPhysics mang đến trải nghiệm tiếp cận Vật lý thông qua quan sát hiện tượng, tự tay thay đổi thông số thực nghiệm và mô phỏng trực quan. Học sinh chuyển hóa từ học vẹt sang thấu hiểu bản chất định luật.
+                  TamGiangPhysics mang đến trải nghiệm tiếp cận Vật lý thông qua quan sát hiện
+                  tượng, tự tay thay đổi thông số thực nghiệm và mô phỏng trực quan. Học sinh chuyển
+                  hóa từ học vẹt sang thấu hiểu bản chất định luật.
                 </p>
 
                 {/* Action Buttons */}
@@ -186,7 +188,10 @@ function Index() {
         </section>
 
         {/* Featured Laboratory Experiments Section */}
-        <section id="mo-phong-tieu-bieu" className="border-b border-border bg-background px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <section
+          id="mo-phong-tieu-bieu"
+          className="border-b border-border bg-background px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+        >
           <div className="mx-auto max-w-7xl">
             <div className="max-w-2xl space-y-2">
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#16845A] dark:text-[#72CF91]">
@@ -196,7 +201,8 @@ function Index() {
                 MÔ PHỎNG VẬT LÝ TIÊU BIỂU
               </h2>
               <p className="text-sm text-muted-foreground">
-                Tương tác trực tiếp với các đại lượng vật lý, quan sát đồ thị biến thiên thời gian thực.
+                Tương tác trực tiếp với các đại lượng vật lý, quan sát đồ thị biến thiên thời gian
+                thực.
               </p>
             </div>
 
@@ -228,7 +234,9 @@ function Index() {
                     </div>
 
                     <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
-                      <span className="font-mono text-[11px] text-muted-foreground">Phòng Lab THPT</span>
+                      <span className="font-mono text-[11px] text-muted-foreground">
+                        Phòng Lab THPT
+                      </span>
                       <a
                         href={exp.href}
                         className="inline-flex items-center gap-1 text-xs font-semibold text-[#16845A] dark:text-[#72CF91] group-hover:translate-x-0.5 transition-transform hover:underline"
@@ -245,7 +253,10 @@ function Index() {
         </section>
 
         {/* 3-Step Scientific Learning Methodology */}
-        <section id="phuong-phap" className="border-b border-border bg-secondary/50 px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <section
+          id="phuong-phap"
+          className="border-b border-border bg-secondary/50 px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+        >
           <div className="mx-auto max-w-7xl">
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#16845A] dark:text-[#72CF91]">
@@ -267,7 +278,8 @@ function Index() {
                 </div>
                 <h3 className="text-base font-bold text-foreground">1. Quan sát hiện tượng</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  Bắt đầu bài học bằng việc chứng kiến hiện tượng vật lý chuyển động sống động qua mô phỏng, đặt câu hỏi "Vì sao nó lại diễn ra như vậy?".
+                  Bắt đầu bài học bằng việc chứng kiến hiện tượng vật lý chuyển động sống động qua
+                  mô phỏng, đặt câu hỏi "Vì sao nó lại diễn ra như vậy?".
                 </p>
                 <div className="pt-2 flex items-center gap-2 text-[11px] font-medium text-[#16845A] dark:text-[#72CF91]">
                   <CheckCircle2 className="size-3.5" />
@@ -282,7 +294,8 @@ function Index() {
                 </div>
                 <h3 className="text-base font-bold text-foreground">2. Tương tác thông số</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  Tự tay kéo thanh trượt góc tới, khối lượng, điện tích, chiều dài dây để thấy sự thay đổi tức thì của đồ thị và quỹ đạo.
+                  Tự tay kéo thanh trượt góc tới, khối lượng, điện tích, chiều dài dây để thấy sự
+                  thay đổi tức thì của đồ thị và quỹ đạo.
                 </p>
                 <div className="pt-2 flex items-center gap-2 text-[11px] font-medium text-[#075C40] dark:text-[#C8ED78]">
                   <CheckCircle2 className="size-3.5" />
@@ -297,7 +310,8 @@ function Index() {
                 </div>
                 <h3 className="text-base font-bold text-foreground">3. Khắc sâu bản chất</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  Tổng kết định luật, phân tích công thức toán học và làm các bài tập củng cố trắc nghiệm ngay trong phòng thí nghiệm.
+                  Tổng kết định luật, phân tích công thức toán học và làm các bài tập củng cố trắc
+                  nghiệm ngay trong phòng thí nghiệm.
                 </p>
                 <div className="pt-2 flex items-center gap-2 text-[11px] font-medium text-[#16845A] dark:text-[#72CF91]">
                   <CheckCircle2 className="size-3.5" />
@@ -329,7 +343,9 @@ function Index() {
                     Kho tài liệu, đề thi và sơ đồ tư duy chuẩn hóa
                   </h3>
                   <p className="text-sm leading-relaxed text-muted-foreground max-w-2xl">
-                    Toàn bộ tài liệu ôn luyện được đồng bộ qua Google Drive chính thức, bao gồm lý thuyết trọng tâm, bài tập có lời giải chi tiết và công thức giải nhanh cho cả 3 khối lớp 10, 11 và 12.
+                    Toàn bộ tài liệu ôn luyện được đồng bộ qua Google Drive chính thức, bao gồm lý
+                    thuyết trọng tâm, bài tập có lời giải chi tiết và công thức giải nhanh cho cả 3
+                    khối lớp 10, 11 và 12.
                   </p>
                   <div className="flex flex-wrap items-center gap-3 pt-2">
                     <a
@@ -359,7 +375,9 @@ function Index() {
                     </div>
                     <div className="flex items-center justify-between pb-0.5">
                       <span>Quyền truy cập:</span>
-                      <span className="font-mono font-medium text-[#16845A] dark:text-[#72CF91]">Miễn phí</span>
+                      <span className="font-mono font-medium text-[#16845A] dark:text-[#72CF91]">
+                        Miễn phí
+                      </span>
                     </div>
                   </div>
                 </div>

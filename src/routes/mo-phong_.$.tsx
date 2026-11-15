@@ -95,10 +95,7 @@ function DynamicLessonRoute() {
           onToggle={() => setIsSidebarOpen((v) => !v)}
         />
         <main className="flex min-h-0 min-w-0 flex-1 flex-col" id="simulation-content">
-          <SimulationViewer
-            lesson={lesson}
-            onToggleSidebar={() => setIsSidebarOpen((v) => !v)}
-          />
+          <SimulationViewer lesson={lesson} onToggleSidebar={() => setIsSidebarOpen((v) => !v)} />
         </main>
       </div>
     </div>

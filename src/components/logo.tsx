@@ -44,16 +44,18 @@ export function Logo({
         <div className="flex flex-col leading-none">
           <div className={`font-semibold tracking-tight ${currentSize.text} text-inherit`}>
             <span>TamGiang</span>
-            <span className="text-[#38A875] dark:text-[#72CF91] font-bold ml-0.5">
-              Physics
-            </span>
+            <span className="text-[#38A875] dark:text-[#72CF91] font-bold ml-0.5">Physics</span>
           </div>
           {showTagline ? (
-            <span className={`font-mono tracking-wider text-[#63B77A] dark:text-[#72CF91] uppercase mt-1 ${currentSize.sub}`}>
+            <span
+              className={`font-mono tracking-wider text-[#63B77A] dark:text-[#72CF91] uppercase mt-1 ${currentSize.sub}`}
+            >
               THPT Tam Giang · Digital Science Lab
             </span>
           ) : (
-            <span className={`text-inherit opacity-65 text-[10px] mt-0.5 font-medium tracking-tight`}>
+            <span
+              className={`text-inherit opacity-65 text-[10px] mt-0.5 font-medium tracking-tight`}
+            >
               Trường THPT Tam Giang
             </span>
           )}

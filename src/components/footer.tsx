@@ -1,5 +1,15 @@
 import { Logo } from "@/components/logo";
-import { Mail, ArrowUpRight, Compass, BookOpen, Layers } from "lucide-react";
+import {
+  Mail,
+  ArrowUpRight,
+  Compass,
+  BookOpen,
+  Layers,
+  History,
+  Award,
+  Sliders,
+  Calculator,
+} from "lucide-react";
 import { APP_CONFIG } from "@/lib/config";
 
 export function Footer() {
@@ -16,7 +26,8 @@ export function Footer() {
               <Logo size="md" showTagline />
             </a>
             <p className="max-w-md text-xs leading-relaxed text-[#EDF5ED]/75">
-              Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí nghiệm kỹ thuật số. Nhìn thấy để hiểu sâu bản chất thế giới tự nhiên.
+              Nền tảng học tập và khám phá Vật lý trực quan, hiện đại mang phong cách phòng thí
+              nghiệm kỹ thuật số. Nhìn thấy để hiểu sâu bản chất thế giới tự nhiên.
             </p>
             <div className="flex flex-wrap items-center gap-2 pt-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-[#38A875]/30 bg-[#16845A]/15 px-2.5 py-1 text-[11px] font-medium text-[#72CF91]">
@@ -24,7 +35,10 @@ export function Footer() {
                 Phòng Lab Số 777+ Mô phỏng
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-[#C8ED78]/30 bg-[#C8ED78]/10 px-2.5 py-1 text-[11px] font-medium text-[#C8ED78]">
-                Kho tài liệu chuẩn hóa THPT
+                30 Thí nghiệm Kinh điển
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white">
+                Thử thách VDC & Thiết kế Lab
               </span>
             </div>
           </div>
@@ -32,7 +46,7 @@ export function Footer() {
           {/* Quick links */}
           <div className="space-y-3 md:col-span-3">
             <h4 className="font-mono text-xs uppercase tracking-wider text-[#72CF91]">
-              Khám phá
+              Hệ sinh thái
             </h4>
             <ul className="space-y-2 text-xs text-[#EDF5ED]/80">
               <li>
@@ -41,8 +55,45 @@ export function Footer() {
                   className="inline-flex items-center gap-1.5 transition-colors hover:text-[#C8ED78]"
                 >
                   <Compass className="size-3.5 text-[#38A875]" />
-                  Phòng thí nghiệm số
+                  Phòng thí nghiệm số 777 bài
                   <ArrowUpRight className="size-3 opacity-60" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/thi-nghiem-kinh-dien"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#C8ED78]"
+                >
+                  <History className="size-3.5 text-[#38A875]" />
+                  30 Thí nghiệm Kinh điển
+                  <ArrowUpRight className="size-3 opacity-60" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/vdc"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#C8ED78]"
+                >
+                  <Award className="size-3.5 text-[#38A875]" />
+                  Thử thách Vận dụng cao (VDC)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/thiet-ke-thi-nghiem"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#C8ED78]"
+                >
+                  <Sliders className="size-3.5 text-[#38A875]" />
+                  Thiết kế thí nghiệm & Sai số
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/cong-thuc"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#C8ED78]"
+                >
+                  <Calculator className="size-3.5 text-[#38A875]" />
+                  Sổ tay công thức & Thứ nguyên
                 </a>
               </li>
               <li>
@@ -51,17 +102,7 @@ export function Footer() {
                   className="inline-flex items-center gap-1.5 transition-colors hover:text-[#C8ED78]"
                 >
                   <BookOpen className="size-3.5 text-[#38A875]" />
-                  Kho tài liệu Vật lý
-                  <ArrowUpRight className="size-3 opacity-60" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#phuong-phap"
-                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#C8ED78]"
-                >
-                  <Layers className="size-3.5 text-[#38A875]" />
-                  Phương pháp học tập 3 bước
+                  Kho tài liệu Google Drive
                 </a>
               </li>
             </ul>
@@ -74,7 +115,10 @@ export function Footer() {
               ĐỒNG HÀNH & PHÁT TRIỂN
             </h4>
             <p className="text-xs leading-relaxed text-[#EDF5ED]/80">
-              Mình là Quân — người phát triển TamGiangPhysics với mong muốn giúp việc học Vật lý trở nên trực quan và dễ hiểu hơn. Nền tảng vẫn đang được hoàn thiện từng ngày, rất mong nhận được góp ý, báo lỗi hoặc ý tưởng tính năng mới từ bạn để website ngày càng tốt hơn!
+              Mình là Quân — người phát triển TamGiangPhysics với mong muốn giúp việc học Vật lý trở
+              nên trực quan và dễ hiểu hơn. Nền tảng vẫn đang được hoàn thiện từng ngày, rất mong
+              nhận được góp ý, báo lỗi hoặc ý tưởng tính năng mới từ bạn để website ngày càng tốt
+              hơn!
             </p>
             <div className="pt-1">
               <a

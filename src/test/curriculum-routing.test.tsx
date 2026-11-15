@@ -9,19 +9,19 @@ describe("Curriculum data & dynamic routing", () => {
 
   it("correctly retrieves a Grade 10 lesson", () => {
     const lesson = getLessonByPath(
-      "lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly"
+      "lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly",
     );
     expect(lesson).toBeDefined();
     expect(lesson?.grade).toBe("Lớp 10");
     expect(lesson?.simulationUrl).toBe(
-      "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly"
+      "https://vatly.ai/api/mo-phong/lop-10/co-hoc-phan-1/chu-de-1-gioi-thieu-muc-dich-hoc-tap-mon-vat-ly/bai-1-lam-quen-voi-mon-vat-ly/1-ly-thuyet-lam-quen-voi-mon-vat-ly",
     );
     expect(lesson?.nextLessonPath).toBeDefined();
   });
 
   it("correctly retrieves a Grade 11 lesson (previously missing)", () => {
     const lesson = getLessonByPath(
-      "lop-11/song/chu-de-1-song-co/bai-1-mo-ta-song/1-ly-thuyet-mo-ta-song"
+      "lop-11/song/chu-de-1-song-co/bai-1-mo-ta-song/1-ly-thuyet-mo-ta-song",
     );
     expect(lesson).toBeDefined();
     expect(lesson?.grade).toBe("Lớp 11");
@@ -30,7 +30,7 @@ describe("Curriculum data & dynamic routing", () => {
 
   it("correctly retrieves a Grade 12 lesson (previously missing)", () => {
     const lesson = getLessonByPath(
-      "lop-12/chat-khi/chu-de-1-chat-khi/bai-1-thuyet-dong-hoc-phan-tu-khi-ly-tuong/1-ly-thuyet-thuyet-dong-hoc-phan-tu-khi-ly-tuong"
+      "lop-12/chat-khi/chu-de-1-chat-khi/bai-1-thuyet-dong-hoc-phan-tu-khi-ly-tuong/1-ly-thuyet-thuyet-dong-hoc-phan-tu-khi-ly-tuong",
     );
     expect(lesson).toBeDefined();
     expect(lesson?.grade).toBe("Lớp 12");

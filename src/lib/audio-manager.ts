@@ -1,13 +1,20 @@
-import { APP_CONFIG } from "./config";
+import { APP_CONFIG, type AudioTrackConfig } from "./config";
 
 export interface AudioState {
   isPlaying: boolean;
   isEnabled: boolean; // user's explicit preference
   volume: number; // 0 to 1
+  isMuted: boolean;
   autoplayBlocked: boolean;
   isInLab: boolean;
-  isPausedByLab: boolean;
   isLoaded: boolean;
+  currentTrack: AudioTrackConfig;
+  playlist: AudioTrackConfig[];
+  currentTime: number;
+  duration: number;
+  repeatMode: "off" | "all" | "one";
+  isShuffle: boolean;
+  trackNotice?: string | null;
 }
 
 type AudioListener = (state: AudioState) => void;
@@ -15,16 +22,27 @@ type AudioListener = (state: AudioState) => void;
 export class BackgroundAudioManager {
   private audio: HTMLAudioElement | null = null;
   private listeners: Set<AudioListener> = new Set();
+  private playlist: AudioTrackConfig[] = APP_CONFIG.backgroundAudio.playlist;
+  private currentTrackIndex: number = 0;
+  private previousVolume: number = APP_CONFIG.backgroundAudio.defaultVolume;
+
   private state: AudioState = {
     isPlaying: false,
-    isEnabled: true, // Default to true on initial site visit, can be toggled
+    isEnabled: true,
     volume: APP_CONFIG.backgroundAudio.defaultVolume,
+    isMuted: false,
     autoplayBlocked: false,
     isInLab: false,
-    isPausedByLab: false,
     isLoaded: false,
+    currentTrack: APP_CONFIG.backgroundAudio.playlist[0],
+    playlist: APP_CONFIG.backgroundAudio.playlist,
+    currentTime: 0,
+    duration: 0,
+    repeatMode: "all",
+    isShuffle: false,
+    trackNotice: null,
   };
-  private pausedByLab: boolean = false;
+
   private isInitialized: boolean = false;
 
   constructor() {
@@ -48,10 +66,31 @@ export class BackgroundAudioManager {
         const parsed = parseFloat(storedVolume);
         if (!isNaN(parsed) && parsed >= 0 && parsed <= 1) {
           this.state.volume = parsed;
+          if (parsed > 0) this.previousVolume = parsed;
+          this.state.isMuted = parsed === 0;
         }
       }
-    } catch {
-      // localStorage may fail in private mode
+
+      const storedTrackId = localStorage.getItem(APP_CONFIG.backgroundAudio.storageKeyTrack);
+      if (storedTrackId) {
+        const idx = this.playlist.findIndex((t) => t.id === storedTrackId);
+        if (idx !== -1) {
+          this.currentTrackIndex = idx;
+          this.state.currentTrack = this.playlist[idx];
+        }
+      }
+
+      const storedRepeat = localStorage.getItem(APP_CONFIG.backgroundAudio.storageKeyRepeat);
+      if (storedRepeat === "off" || storedRepeat === "all" || storedRepeat === "one") {
+        this.state.repeatMode = storedRepeat;
+      }
+
+      const storedShuffle = localStorage.getItem(APP_CONFIG.backgroundAudio.storageKeyShuffle);
+      if (storedShuffle !== null) {
+        this.state.isShuffle = storedShuffle === "true";
+      }
+    } catch (err) {
+      console.warn("[TamGiang Audio] Storage access warning:", err);
     }
   }
 
@@ -60,10 +99,12 @@ export class BackgroundAudioManager {
 
     if (!this.audio) {
       try {
-        const audio = new Audio(APP_CONFIG.backgroundAudio.src);
-        audio.loop = true;
+        const audio = new Audio();
         audio.preload = "auto";
-        audio.volume = this.state.volume;
+        audio.volume = this.state.isMuted ? 0 : this.state.volume;
+        audio.src = this.state.currentTrack.isAvailable
+          ? this.state.currentTrack.src
+          : this.playlist[0].src;
 
         audio.addEventListener("playing", () => {
           this.state.isPlaying = true;
@@ -76,13 +117,26 @@ export class BackgroundAudioManager {
           this.notify();
         });
 
-        audio.addEventListener("canplaythrough", () => {
+        audio.addEventListener("timeupdate", () => {
+          this.state.currentTime = audio.currentTime || 0;
+          this.state.duration = audio.duration || 0;
+          this.notify();
+        });
+
+        audio.addEventListener("loadedmetadata", () => {
+          this.state.duration = audio.duration || 0;
           this.state.isLoaded = true;
           this.notify();
         });
 
+        audio.addEventListener("ended", () => {
+          this.handleTrackEnded();
+        });
+
         audio.addEventListener("error", (e) => {
-          console.warn("[TamGiang Audio] Error loading audio file:", e);
+          console.warn("[TamGiang Audio] Audio stream notice:", e);
+          this.state.isLoaded = false;
+          this.notify();
         });
 
         this.audio = audio;
@@ -94,11 +148,27 @@ export class BackgroundAudioManager {
     return this.audio;
   }
 
+  private handleTrackEnded() {
+    if (this.state.repeatMode === "one") {
+      if (this.audio) {
+        this.audio.currentTime = 0;
+        this.audio.play().catch((err) => console.warn(err));
+      }
+    } else if (this.state.repeatMode === "all") {
+      this.next();
+    } else {
+      // repeat off: stop at end of playlist
+      if (this.currentTrackIndex < this.playlist.length - 1) {
+        this.next();
+      } else {
+        this.state.isPlaying = false;
+        this.notify();
+      }
+    }
+  }
+
   public getState(): AudioState {
-    return {
-      ...this.state,
-      isPausedByLab: this.pausedByLab,
-    };
+    return { ...this.state };
   }
 
   public subscribe(listener: AudioListener): () => void {
@@ -127,74 +197,63 @@ export class BackgroundAudioManager {
       lower.startsWith("/mo-phong") ||
       lower.startsWith("/bai-hoc") ||
       lower.includes("mo-phong") ||
-      lower.includes("bai-hoc")
+      lower.includes("bai-hoc") ||
+      lower.includes("lab")
     );
   }
 
   /**
-   * Handle navigation change across TanStack Router
+   * Handle route navigation:
+   * IMPORTANT: Does NOT auto-pause music when entering Lab!
+   * The user is in full control to play, pause, or switch songs anytime.
    */
   public onRouteChanged(pathname: string) {
     if (typeof window !== "undefined") {
-      this.getAudio(); // ensure audio initialized
+      this.getAudio();
     }
-    const isLab = this.isLabRoute(pathname);
-    this.state.isInLab = isLab;
-
-    if (isLab) {
-      // Entered laboratory / simulation route: MUST STOP IMMEDIATELY
-      if (this.state.isPlaying || (this.audio && !this.audio.paused)) {
-        this.pausedByLab = true;
-        if (this.audio) {
-          this.audio.pause();
-        }
-        this.state.isPlaying = false;
-      }
-      this.notify();
-    } else {
-      // Leaving lab route back to standard pages (homepage, materials, etc.)
-      if (this.pausedByLab && this.state.isEnabled) {
-        this.pausedByLab = false;
-        // Resume playback gently if user had enabled it
-        this.play().catch(() => {
-          // In case browser requires interaction
-        });
-      } else {
-        this.notify();
-      }
-    }
+    const inLab = this.isLabRoute(pathname);
+    this.state.isInLab = inLab;
+    this.notify();
   }
 
   /**
-   * Attempt playback on initial visit or user action
+   * Attempt playback
    */
   public async play(): Promise<boolean> {
     if (typeof window === "undefined") return false;
-    if (this.state.isInLab) {
-      // Never play inside lab
-      return false;
-    }
 
     const audio = this.getAudio();
     if (!audio) return false;
 
+    // If active track is not available, provide notice and stream fallback track seamlessly
+    if (!this.state.currentTrack.isAvailable) {
+      this.state.trackNotice = `Tệp "${this.state.currentTrack.title}" đang cập nhật. Phát bài "${this.playlist[0].title}".`;
+      audio.src = this.playlist[0].src;
+    } else {
+      this.state.trackNotice = null;
+      if (audio.src !== window.location.origin + this.state.currentTrack.src) {
+        audio.src = this.state.currentTrack.src;
+      }
+    }
+
     this.state.isPlaying = true;
     this.state.isEnabled = true;
     this.state.autoplayBlocked = false;
-    this.pausedByLab = false;
+
     try {
       localStorage.setItem(APP_CONFIG.backgroundAudio.storageKeyEnabled, "true");
-    } catch {}
+    } catch (err) {
+      console.warn("[TamGiang Audio] Storage write skipped:", err);
+    }
     this.notify();
 
     try {
-      audio.volume = this.state.volume;
+      audio.volume = this.state.isMuted ? 0 : this.state.volume;
       await audio.play();
       return true;
     } catch (err: unknown) {
-      const error = err as { name?: string; message?: string };
-      if (error && error.name === "NotAllowedError") {
-        // Browser blocked autoplay
+      const error = err as { name?: string };
+      if (error?.name === "NotAllowedError") {
         this.state.autoplayBlocked = true;
         this.state.isPlaying = false;
         this.notify();
@@ -217,10 +276,12 @@ export class BackgroundAudioManager {
     }
     this.state.isPlaying = false;
     this.state.isEnabled = false;
-    this.pausedByLab = false;
+
     try {
       localStorage.setItem(APP_CONFIG.backgroundAudio.storageKeyEnabled, "false");
-    } catch {}
+    } catch (err) {
+      console.warn("[TamGiang Audio] Storage write skipped:", err);
+    }
     this.notify();
   }
 
@@ -236,18 +297,143 @@ export class BackgroundAudioManager {
   }
 
   /**
+   * Select a specific track by index or ID
+   */
+  public selectTrack(trackId: string) {
+    const idx = this.playlist.findIndex((t) => t.id === trackId);
+    if (idx === -1) return;
+
+    this.currentTrackIndex = idx;
+    this.state.currentTrack = this.playlist[idx];
+
+    try {
+      localStorage.setItem(APP_CONFIG.backgroundAudio.storageKeyTrack, trackId);
+    } catch (err) {
+      console.warn("[TamGiang Audio] Storage write skipped:", err);
+    }
+
+    if (this.audio) {
+      const targetSrc = this.state.currentTrack.isAvailable
+        ? this.state.currentTrack.src
+        : this.playlist[0].src;
+      this.audio.src = targetSrc;
+      this.audio.currentTime = 0;
+      if (!this.state.currentTrack.isAvailable) {
+        this.state.trackNotice = `Tệp "${this.state.currentTrack.title}" đang cập nhật bản quyền. Phát bài "${this.playlist[0].title}".`;
+      } else {
+        this.state.trackNotice = null;
+      }
+
+      if (this.state.isEnabled || this.state.isPlaying) {
+        this.play().catch((err) => console.warn(err));
+      } else {
+        this.notify();
+      }
+    } else {
+      this.notify();
+    }
+  }
+
+  /**
+   * Next track (supports shuffle mode)
+   */
+  public next() {
+    if (this.state.isShuffle) {
+      const nextIdx = Math.floor(Math.random() * this.playlist.length);
+      this.selectTrack(this.playlist[nextIdx].id);
+    } else {
+      const nextIdx = (this.currentTrackIndex + 1) % this.playlist.length;
+      this.selectTrack(this.playlist[nextIdx].id);
+    }
+  }
+
+  /**
+   * Previous track
+   */
+  public previous() {
+    if (this.audio && this.audio.currentTime > 3) {
+      this.audio.currentTime = 0;
+      return;
+    }
+    const prevIdx = (this.currentTrackIndex - 1 + this.playlist.length) % this.playlist.length;
+    this.selectTrack(this.playlist[prevIdx].id);
+  }
+
+  /**
+   * Toggle shuffle mode
+   */
+  public toggleShuffle() {
+    this.state.isShuffle = !this.state.isShuffle;
+    try {
+      localStorage.setItem(
+        APP_CONFIG.backgroundAudio.storageKeyShuffle,
+        this.state.isShuffle.toString(),
+      );
+    } catch (err) {
+      console.warn(err);
+    }
+    this.notify();
+  }
+
+  /**
+   * Cycle repeat mode (off -> all -> one -> off)
+   */
+  public cycleRepeatMode() {
+    const modes: Array<"off" | "all" | "one"> = ["off", "all", "one"];
+    const current = modes.indexOf(this.state.repeatMode);
+    const next = modes[(current + 1) % modes.length];
+    this.state.repeatMode = next;
+    try {
+      localStorage.setItem(APP_CONFIG.backgroundAudio.storageKeyRepeat, next);
+    } catch (err) {
+      console.warn(err);
+    }
+    this.notify();
+  }
+
+  /**
+   * Seek audio position in seconds
+   */
+  public seek(timeInSeconds: number) {
+    if (!this.audio) return;
+    const clamped = Math.max(0, Math.min(this.state.duration || 0, timeInSeconds));
+    this.audio.currentTime = clamped;
+    this.state.currentTime = clamped;
+    this.notify();
+  }
+
+  /**
    * Set volume [0.0 - 1.0]
    */
   public setVolume(vol: number) {
     const clamped = Math.max(0, Math.min(1, vol));
     this.state.volume = clamped;
+    this.state.isMuted = clamped === 0;
+    if (clamped > 0) {
+      this.previousVolume = clamped;
+    }
     if (this.audio) {
       this.audio.volume = clamped;
     }
     try {
       localStorage.setItem(APP_CONFIG.backgroundAudio.storageKeyVolume, clamped.toString());
-    } catch {}
+    } catch (err) {
+      console.warn(err);
+    }
     this.notify();
+  }
+
+  /**
+   * Toggle mute
+   */
+  public toggleMute() {
+    if (this.state.isMuted || this.state.volume === 0) {
+      const restoreVol = this.previousVolume > 0 ? this.previousVolume : 0.25;
+      this.setVolume(restoreVol);
+    } else {
+      this.previousVolume = this.state.volume;
+      this.setVolume(0);
+    }
   }
 }
 

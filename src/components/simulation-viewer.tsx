@@ -12,11 +12,12 @@ import {
   Trophy,
   History,
   X,
-  Clock,
-  HelpCircle,
   FileCheck,
   AlertCircle,
   Trash2,
+  HelpCircle,
+  RefreshCw,
+  Share2,
 } from "lucide-react";
 import type { LessonMeta } from "@/data/curriculum";
 import {
@@ -35,6 +36,8 @@ interface SimulationViewerProps {
 export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerProps) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [loadTimedOut, setLoadTimedOut] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -43,15 +46,25 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
   const [submissions, setSubmissions] = useState<StoredSubmission[]>([]);
   const [activeResult, setActiveResult] = useState<StoredSubmission | null>(null);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
 
   // Load history on mount and lesson change
   useEffect(() => {
     setSubmissions(getSubmissionsHistory(lesson.fullPath));
   }, [lesson.fullPath]);
 
-  // Reset loading when lesson changes or reloads
+  // Reset loading and error when lesson changes or reloads
   useEffect(() => {
     setIsLoading(true);
+    setHasError(false);
+    setLoadTimedOut(false);
+
+    // Watchdog timer: If iframe doesn't load within 12s, offer fallback
+    const timer = setTimeout(() => {
+      setLoadTimedOut(true);
+    }, 12000);
+
+    return () => clearTimeout(timer);
   }, [lesson.fullPath, reloadKey]);
 
   // Fullscreen change listener
@@ -85,10 +98,13 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
         onToggleSidebar?.();
       } else if (e.key === "r" || e.key === "R") {
         e.preventDefault();
-        setReloadKey((k) => k + 1);
+        handleRetry();
       } else if (e.key === "f" || e.key === "F") {
         e.preventDefault();
         toggleFullscreen();
+      } else if (e.key === "?") {
+        e.preventDefault();
+        setShowHelpModal((v) => !v);
       }
     };
 
@@ -128,6 +144,13 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
     }
   };
 
+  const handleRetry = () => {
+    setHasError(false);
+    setLoadTimedOut(false);
+    setIsLoading(true);
+    setReloadKey((k) => k + 1);
+  };
+
   const proxiedSimulationUrl = `/api/mo-phong/${encodeURIComponent(lesson.simulationUrl)}`;
   const latestAttempt = submissions[0];
 
@@ -140,26 +163,96 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
     >
       {/* Simulation Iframe viewport */}
       <div className="relative min-h-0 flex-1 overflow-hidden">
-        {isLoading && (
+        {/* Loading overlay with subtle spinner */}
+        {isLoading && !hasError && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#070E0B]/90 backdrop-blur-sm">
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-3 text-center px-4 max-w-sm">
               <Loader2 className="size-8 animate-spin text-[#38A875]" />
-              <p className="font-mono text-xs text-[#EDF5ED]/70">
-                Đang khởi tạo mô phỏng Vật lý...
+              <p className="font-mono text-xs text-[#EDF5ED]/80">
+                Đang khởi tạo buồng thí nghiệm Vật lý số...
               </p>
+              <p className="text-[11px] text-[#A5B7A8]">
+                {lesson.name} · {lesson.grade}
+              </p>
+
+              {loadTimedOut && (
+                <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-200 animate-in fade-in">
+                  <p className="mb-2">Nguồn mô phỏng phản hồi chậm hoặc đang bảo trì máy chủ.</p>
+                  <div className="flex items-center justify-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleRetry}
+                      className="rounded-lg bg-amber-500/20 px-2.5 py-1 text-xs font-medium text-amber-200 hover:bg-amber-500/30"
+                    >
+                      Thử tải lại
+                    </button>
+                    <a
+                      href={lesson.simulationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-lg bg-[#16845A] px-2.5 py-1 text-xs font-medium text-white hover:bg-[#38A875]"
+                    >
+                      Mở trong tab mới <ExternalLink className="size-3" />
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
 
-        <iframe
-          key={`${lesson.fullPath}-${reloadKey}`}
-          src={proxiedSimulationUrl}
-          title={lesson.name}
-          onLoad={() => setIsLoading(false)}
-          className="size-full border-0"
-          sandbox="allow-scripts allow-popups allow-forms allow-pointer-lock allow-same-origin allow-modals allow-downloads"
-          allow="fullscreen; autoplay"
-        />
+        {/* Error Fallback Viewport */}
+        {hasError ? (
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#070E0B] p-6 text-center">
+            <div className="max-w-md rounded-2xl border border-red-500/30 bg-red-500/10 p-6 space-y-4">
+              <AlertCircle className="mx-auto size-10 text-red-400" />
+              <div>
+                <h3 className="text-base font-bold text-white">
+                  Không thể tải mô phỏng trong khung nhúng
+                </h3>
+                <p className="mt-1 text-xs text-[#EDF5ED]/80">
+                  Chính sách bảo mật (X-Frame-Options / CSP) hoặc đường truyền từ máy chủ nguồn tạm
+                  thời bị gián đoạn.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={handleRetry}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20"
+                >
+                  <RefreshCw className="size-3.5" /> Thử lại
+                </button>
+                <a
+                  href={lesson.simulationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#16845A] px-3.5 py-1.5 text-xs font-medium text-white hover:bg-[#38A875]"
+                >
+                  <ExternalLink className="size-3.5" /> Mở trực tiếp bài học
+                </a>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <iframe
+            key={`${lesson.fullPath}-${reloadKey}`}
+            src={proxiedSimulationUrl}
+            title={lesson.name}
+            onLoad={() => {
+              setIsLoading(false);
+              setLoadTimedOut(false);
+            }}
+            onError={() => {
+              setIsLoading(false);
+              setHasError(true);
+            }}
+            className="size-full border-0"
+            sandbox="allow-scripts allow-popups allow-forms allow-pointer-lock allow-same-origin allow-modals allow-downloads"
+            allow="fullscreen; autoplay"
+          />
+        )}
       </div>
 
       {/* Bottom control toolbar */}
@@ -207,7 +300,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
           )}
 
           <span className="hidden md:inline text-[11px] text-white/40 pl-2">
-            Phím tắt: <kbd className="rounded bg-white/10 px-1 py-0.5 text-[10px] font-mono">[</kbd>{" "}
+            Phím: <kbd className="rounded bg-white/10 px-1 py-0.5 text-[10px] font-mono">[</kbd>{" "}
             <kbd className="rounded bg-white/10 px-1 py-0.5 text-[10px] font-mono">]</kbd>
           </span>
         </div>
@@ -230,7 +323,7 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
           )}
         </div>
 
-        {/* Right: Actions (History, Reload, Fullscreen, Open external) */}
+        {/* Right: Actions (History, Help, Reload, Fullscreen, Open external) */}
         <div className="flex items-center gap-1">
           <button
             type="button"
@@ -248,15 +341,27 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
           </button>
 
           <button
-            onClick={() => setReloadKey((k) => k + 1)}
+            type="button"
+            onClick={() => setShowHelpModal(true)}
+            className="flex size-8 items-center justify-center rounded-md text-white/60 hover:bg-white/10 hover:text-white transition-colors"
+            title="Phím tắt & Hướng dẫn (Phím ?)"
+            aria-label="Hướng dẫn phím tắt"
+          >
+            <HelpCircle className="size-3.5" />
+          </button>
+
+          <button
+            type="button"
+            onClick={handleRetry}
             className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[#EDF5ED]/80 hover:bg-white/10 hover:text-white transition-colors"
-            title="Tải lại (Phím R)"
+            title="Tải lại mô phỏng (Phím R)"
           >
             <RotateCcw className="size-3.5" />
             <span className="hidden sm:inline text-xs">Tải lại</span>
           </button>
 
           <button
+            type="button"
             onClick={toggleFullscreen}
             className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[#EDF5ED]/80 hover:bg-white/10 hover:text-white transition-colors"
             title={isFullscreen ? "Thu nhỏ (Phím F)" : "Toàn màn hình (Phím F)"}
@@ -278,6 +383,64 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
           </a>
         </div>
       </footer>
+
+      {/* Keyboard Shortcuts Help Modal */}
+      {showHelpModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
+          <div className="w-full max-w-md rounded-2xl border border-[#38A875]/40 bg-[#0B1511] p-6 text-[#EDF5ED] shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between border-b border-[#2B4033] pb-3">
+              <div className="flex items-center gap-2 text-[#72CF91]">
+                <HelpCircle className="size-5" />
+                <h3 className="text-base font-bold text-white">Phím tắt phòng Lab</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowHelpModal(false)}
+                className="text-white/60 hover:text-white p-1"
+              >
+                <X className="size-5" />
+              </button>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <div className="flex items-center justify-between py-1.5 border-b border-white/5">
+                <span className="text-[#A5B7A8]">Chuyển sang bài trước</span>
+                <kbd className="rounded bg-white/10 px-2 py-0.5 font-mono text-[#C8ED78]">[</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1.5 border-b border-white/5">
+                <span className="text-[#A5B7A8]">Chuyển sang bài sau</span>
+                <kbd className="rounded bg-white/10 px-2 py-0.5 font-mono text-[#C8ED78]">]</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1.5 border-b border-white/5">
+                <span className="text-[#A5B7A8]">Đóng/Mở thanh giáo trình</span>
+                <kbd className="rounded bg-white/10 px-2 py-0.5 font-mono text-[#C8ED78]">B</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1.5 border-b border-white/5">
+                <span className="text-[#A5B7A8]">Tải lại mô phỏng hiện tại</span>
+                <kbd className="rounded bg-white/10 px-2 py-0.5 font-mono text-[#C8ED78]">R</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1.5 border-b border-white/5">
+                <span className="text-[#A5B7A8]">Toàn màn hình / Thu nhỏ</span>
+                <kbd className="rounded bg-white/10 px-2 py-0.5 font-mono text-[#C8ED78]">F</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1.5">
+                <span className="text-[#A5B7A8]">Hiện bảng phím tắt này</span>
+                <kbd className="rounded bg-white/10 px-2 py-0.5 font-mono text-[#C8ED78]">?</kbd>
+              </div>
+            </div>
+
+            <div className="border-t border-[#2B4033] pt-3 text-right">
+              <button
+                type="button"
+                onClick={() => setShowHelpModal(false)}
+                className="rounded-lg bg-[#16845A] px-4 py-1.5 text-xs font-medium text-white hover:bg-[#38A875]"
+              >
+                Đã hiểu
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Submission Success & Result Modal */}
       {activeResult && (
@@ -418,9 +581,12 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
             {submissions.length === 0 ? (
               <div className="rounded-xl border border-[#2B4033] bg-[#15271E]/50 p-8 text-center space-y-2">
                 <FileCheck className="mx-auto size-8 text-[#72CF91]/40" />
-                <p className="text-sm font-semibold text-white">Chưa có bài nộp nào cho bài học này</p>
+                <p className="text-sm font-semibold text-white">
+                  Chưa có bài nộp nào cho bài học này
+                </p>
                 <p className="text-xs text-[#A5B7A8]">
-                  Hãy hoàn thành các câu hỏi trong mô phỏng bài tập và nhấn &ldquo;Nộp bài&rdquo; để lưu kết quả.
+                  Hãy hoàn thành các câu hỏi trong mô phỏng bài tập và nhấn &ldquo;Nộp bài&rdquo; để
+                  lưu kết quả.
                 </p>
               </div>
             ) : (
@@ -449,7 +615,8 @@ export function SimulationViewer({ lesson, onToggleSidebar }: SimulationViewerPr
                         </span>
                       </div>
                       <p className="text-xs text-[#EDF5ED]/70">
-                        Đúng {sub.correctCount} / {sub.totalQuestions} câu · Thời gian làm: {sub.timeSpent}
+                        Đúng {sub.correctCount} / {sub.totalQuestions} câu · Thời gian làm:{" "}
+                        {sub.timeSpent}
                       </p>
                     </div>
 

@@ -262,7 +262,11 @@ export function PrismDispersionExperiment() {
             ctx.save();
             ctx.font = "10px JetBrains Mono, monospace";
             ctx.fillStyle = item.color;
-            ctx.fillText(`${item.name} (${item.n.toFixed(3)})`, targetPoint.x - 10, targetPoint.y + 4);
+            ctx.fillText(
+              `${item.name} (${item.n.toFixed(3)})`,
+              targetPoint.x - 10,
+              targetPoint.y + 4,
+            );
             ctx.restore();
           }
         });
@@ -278,7 +282,7 @@ export function PrismDispersionExperiment() {
           ctx.fillText("Lăng kính A = 60°", pTop.x - 48, pTop.y - 12);
 
           ctx.fillStyle = "#C8ED78";
-          ctx.fillText("Quang phổ tán sắc", width * 0.70, cy - 60);
+          ctx.fillText("Quang phổ tán sắc", width * 0.7, cy - 60);
           ctx.restore();
         }
       }
@@ -298,7 +302,9 @@ export function PrismDispersionExperiment() {
   const redPhys = calculatePrismPhysics(1.512, angleDeg);
   const violetPhys = calculatePrismPhysics(1.543, angleDeg);
   const dispersionAngle =
-    redPhys && violetPhys ? Math.abs(violetPhys.deviationDeg - redPhys.deviationDeg).toFixed(2) : "0.00";
+    redPhys && violetPhys
+      ? Math.abs(violetPhys.deviationDeg - redPhys.deviationDeg).toFixed(2)
+      : "0.00";
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-lg transition-colors">
@@ -362,7 +368,9 @@ export function PrismDispersionExperiment() {
           </div>
           <div className="rounded-lg border border-white/10 bg-black/70 px-2.5 py-1 backdrop-blur-md">
             <span className="font-mono text-[10px] text-white/60">Góc tán sắc (ΔD): </span>
-            <span className="font-mono text-xs font-semibold text-[#72CF91]">~{dispersionAngle}°</span>
+            <span className="font-mono text-xs font-semibold text-[#72CF91]">
+              ~{dispersionAngle}°
+            </span>
           </div>
           <div className="hidden sm:block rounded-lg border border-white/10 bg-black/70 px-2.5 py-1 backdrop-blur-md">
             <span className="font-mono text-[10px] text-white/60">Thủy tinh Crown: </span>
@@ -378,7 +386,9 @@ export function PrismDispersionExperiment() {
             <Sliders className="size-3.5 text-[#16845A] dark:text-[#38A875]" />
             Điều chỉnh góc tới chùm sáng (i₁):
           </span>
-          <span className="font-mono font-bold text-[#16845A] dark:text-[#72CF91]">{angleDeg}°</span>
+          <span className="font-mono font-bold text-[#16845A] dark:text-[#72CF91]">
+            {angleDeg}°
+          </span>
         </div>
 
         <input
@@ -409,16 +419,22 @@ export function PrismDispersionExperiment() {
             <Info className="size-3.5 text-[#16845A] dark:text-[#38A875]" />
             Bản chất vật lý: Vì sao ánh sáng trắng bị tách màu?
           </span>
-          <span className="text-[11px] text-muted-foreground">{showExplanation ? "Ẩn bớt" : "Xem chi tiết"}</span>
+          <span className="text-[11px] text-muted-foreground">
+            {showExplanation ? "Ẩn bớt" : "Xem chi tiết"}
+          </span>
         </button>
 
         {showExplanation && (
           <div className="mt-2 space-y-2 rounded-lg border border-border bg-secondary p-3 text-xs leading-relaxed text-muted-foreground animate-in fade-in">
             <p>
-              • <strong className="text-foreground">Chiết suất phụ thuộc bước sóng:</strong> Với cùng một môi trường trong suốt (thủy tinh Crown), chiết suất biến thiên tăng dần từ ánh sáng Đỏ (bước sóng dài nhất, n = 1.512) đến Tím (bước sóng ngắn nhất, n = 1.543).
+              • <strong className="text-foreground">Chiết suất phụ thuộc bước sóng:</strong> Với
+              cùng một môi trường trong suốt (thủy tinh Crown), chiết suất biến thiên tăng dần từ
+              ánh sáng Đỏ (bước sóng dài nhất, n = 1.512) đến Tím (bước sóng ngắn nhất, n = 1.543).
             </p>
             <p>
-              • <strong className="text-foreground">Góc lệch D:</strong> Theo công thức lăng kính D = i₁ + i₂ - A, vì n(tím) &gt; n(đỏ) nên tia Tím bị lệch nhiều nhất về phía đáy lăng kính, tia Đỏ bị lệch ít nhất, tạo nên dải màu cầu vồng liên tục.
+              • <strong className="text-foreground">Góc lệch D:</strong> Theo công thức lăng kính D
+              = i₁ + i₂ - A, vì n(tím) &gt; n(đỏ) nên tia Tím bị lệch nhiều nhất về phía đáy lăng
+              kính, tia Đỏ bị lệch ít nhất, tạo nên dải màu cầu vồng liên tục.
             </p>
           </div>
         )}

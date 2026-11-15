@@ -67,7 +67,9 @@ export function ThemeToggle({ className = "", variant = "header" }: ThemeToggleP
           ? "border-white/10 bg-white/5 text-[#EDF5ED]/90 hover:bg-white/10 hover:text-white hover:border-[#38A875]/40"
           : "border-border bg-card text-foreground hover:bg-muted"
       } ${className}`}
-      title={isDark ? "Chuyển sang giao diện Sáng (Light Mode)" : "Chuyển sang giao diện Tối (Dark Mode)"}
+      title={
+        isDark ? "Chuyển sang giao diện Sáng (Light Mode)" : "Chuyển sang giao diện Tối (Dark Mode)"
+      }
       aria-label={isDark ? "Kích hoạt Light Mode" : "Kích hoạt Dark Mode"}
     >
       <span className="sr-only">{isDark ? "Giao diện sáng" : "Giao diện tối"}</span>

@@ -58,7 +58,10 @@ export function LessonHeader({ lesson, onToggleSidebar, isSidebarOpen }: LessonH
                 <ChevronRight className="size-3 text-[#EDF5ED]/40" />
               </li>
               <li className="flex min-w-0 items-center gap-1.5 font-medium text-[#EDF5ED]">
-                <span className="truncate text-xs sm:text-sm font-semibold text-[#72CF91]" title={lesson.name}>
+                <span
+                  className="truncate text-xs sm:text-sm font-semibold text-[#72CF91]"
+                  title={lesson.name}
+                >
                   {lesson.name}
                 </span>
               </li>
